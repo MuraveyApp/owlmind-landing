@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OwlMind — Autonomous AI Coding Agent</title>
+    <meta name="description" content="OwlMind is an autonomous AI agent that diagnoses and fixes real bugs in production code. Scores top results on SWE-bench.">
+    <meta property="og:title" content="OwlMind — Autonomous AI Coding Agent">
+    <meta property="og:description" content="AI agent that solves real GitHub issues automatically. Planner/Worker/Judge architecture with audit trail.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://owlmind.dev">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OwlMind — Autonomous AI Coding Agent">
+    <meta name="twitter:description" content="AI agent that solves real GitHub issues automatically.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#129417;</text></svg>">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a25;
+            --text: #e4e4e7;
+            --text-dim: #8b8b9e;
+            --accent: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.15);
+            --green: #22c55e;
+            --border: #1e1e2e;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* Nav */
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 20px; font-weight: 700; color: var(--text); text-decoration: none; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 28px; align-items: center; }
+        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text); }
+
+        /* Hero */
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+        }
+        .badge {
+            display: inline-block;
+            background: var(--accent-glow);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+        h1 {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+        h1 .gradient {
+            background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        .cta-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+        .btn-primary:hover { background: #5558e6; transform: translateY(-1px); }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover { border-color: var(--text-dim); }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 60px 0;
+        }
+        .stat {
+            background: var(--bg-card);
+            padding: 32px 20px;
+            text-align: center;
+        }
+        .stat-number { font-size: 36px; font-weight: 800; color: var(--text); }
+        .stat-number .accent { color: var(--accent); }
+        .stat-label { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+        /* Features */
+        .features { padding: 80px 0; }
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .section-sub {
+            text-align: center;
+            color: var(--text-dim);
+            margin-bottom: 48px;
+            font-size: 16px;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px;
+            transition: all 0.2s;
+        }
+        .feature-card:hover { background: var(--bg-card-hover); border-color: rgba(99, 102, 241, 0.2); }
+        .feature-icon { font-size: 28px; margin-bottom: 14px; }
+        .feature-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .feature-card p { font-size: 14px; color: var(--text-dim); line-height: 1.5; }
+
+        /* How it works */
+        .how-it-works { padding: 80px 0; }
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .step {
+            text-align: center;
+            padding: 32px 20px;
+        }
+        .step-number {
+            width: 48px; height: 48px;
+            background: var(--accent-glow);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px;
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 18px;
+        }
+        .step h3 { font-size: 16px; margin-bottom: 8px; }
+        .step p { font-size: 14px; color: var(--text-dim); }
+
+        /* Code block */
+        .demo { padding: 60px 0; }
+        .code-block {
+            background: #0d1117;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            overflow-x: auto;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        .code-block .comment { color: #6e7681; }
+        .code-block .cmd { color: var(--green); }
+        .code-block .output { color: var(--text-dim); }
+        .code-block .highlight { color: #f0883e; }
+
+        /* Use cases */
+        .use-cases { padding: 80px 0; }
+        .case-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .case-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px;
+        }
+        .case-card h3 { font-size: 16px; margin-bottom: 8px; }
+        .case-card p { font-size: 14px; color: var(--text-dim); }
+        .case-tag {
+            display: inline-block;
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--green);
+            font-size: 12px;
+            padding: 3px 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        /* Waitlist */
+        .waitlist {
+            padding: 100px 0;
+            text-align: center;
+        }
+        .waitlist h2 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+        .waitlist p { color: var(--text-dim); margin-bottom: 32px; }
+        .email-form {
+            display: flex;
+            gap: 10px;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+        .email-form input {
+            flex: 1;
+            padding: 14px 18px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 15px;
+            outline: none;
+        }
+        .email-form input:focus { border-color: var(--accent); }
+        .email-form .btn { white-space: nowrap; }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 13px;
+        }
+        footer a { color: var(--text-dim); text-decoration: none; }
+        footer a:hover { color: var(--text); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .feature-grid, .steps { grid-template-columns: 1fr; }
+            .case-grid { grid-template-columns: 1fr; }
+            .email-form { flex-direction: column; }
+            .nav-links { gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="/" class="logo"><span>Owl</span>Mind</a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how">How it works</a>
+                <a href="#cases">Use cases</a>
+                <a href="https://docs.owlmind.dev" target="_blank">Docs</a>
+                <a href="#waitlist" class="btn btn-primary" style="padding: 8px 20px; font-size: 13px;">Get Early Access</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="badge">SWE-bench Lite — Top AI Agent</div>
+            <h1>AI agent that fixes<br><span class="gradient">real bugs in real code</span></h1>
+            <p class="subtitle">OwlMind autonomously diagnoses and resolves GitHub issues in production codebases. Planner, Worker, Judge — fully automated.</p>
+            <div class="cta-group">
+                <a href="#waitlist" class="btn btn-primary">Join Waitlist</a>
+                <a href="https://docs.owlmind.dev" class="btn btn-secondary">Read the Docs</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number"><span class="accent">773</span>+</div>
+                <div class="stat-label">GitHub issues solved</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number"><span class="accent">80</span>%</div>
+                <div class="stat-label">SWE-bench preflight</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number"><span class="accent">12</span></div>
+                <div class="stat-label">Repos supported</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number"><span class="accent">5</span></div>
+                <div class="stat-label">LLM providers</div>
+            </div>
+        </div>
+    </div>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Built for real engineering</h2>
+            <p class="section-sub">Not a toy demo. OwlMind solves real issues in Django, Flask, pytest, scikit-learn, and more.</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">&#129504;</div>
+                    <h3>Planner / Worker / Judge</h3>
+                    <p>Three-stage cycle: plan the fix, execute it, verify the result. Automatic retry on failure with feedback.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128274;</div>
+                    <h3>Audit Trail</h3>
+                    <p>SHA-256 hash-chained event log. Every action recorded, tamper-proof. Enterprise compliance ready.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#9881;&#65039;</div>
+                    <h3>Multi-LLM Router</h3>
+                    <p>Claude, GPT-4, DeepSeek, Gemini, Ollama. Automatic fallback, per-task routing, cost optimization.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128176;</div>
+                    <h3>Budget Governor</h3>
+                    <p>Per-run, per-day, per-hour limits. Never overspend. Token tracking and cost alerts built in.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128230;</div>
+                    <h3>Skill Packs</h3>
+                    <p>11 built-in packs: code review, test writer, security audit, DevOps, API builder, and more.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128640;</div>
+                    <h3>Self-Hosted</h3>
+                    <p>Your code never leaves your server. Run on-premise with local LLMs. Air-gapped deployment supported.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works" id="how">
+        <div class="container">
+            <h2 class="section-title">How it works</h2>
+            <p class="section-sub">Drop in an issue. Get a fix. Three steps.</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Point to the issue</h3>
+                    <p>Give OwlMind a GitHub issue URL or describe the bug. It clones the repo and analyzes the codebase.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Agent fixes it</h3>
+                    <p>Planner creates a strategy. Worker reads code, writes the patch. Judge verifies tests pass.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Review and ship</h3>
+                    <p>You review the diff, run tests, and submit the PR. Full audit trail included.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="demo">
+        <div class="container">
+            <div class="code-block">
+                <span class="comment"># Give OwlMind a real GitHub issue</span><br>
+                <span class="cmd">$ owlmind run --goal "Fix #6890: cookie parsing bug" --workspace ./requests</span><br><br>
+                <span class="output">&#9670; Planner: Analyzing issue... found root cause in cookies.py:349</span><br>
+                <span class="output">&#9670; Worker: Removing non-standard quote-stripping logic</span><br>
+                <span class="output">&#9670; Worker: Adding regression test</span><br>
+                <span class="output">&#9670; Judge: Running tests... 847 passed, 0 failed</span><br>
+                <span class="output">&#9670; Judge: Verdict: <span class="highlight">APPROVED</span></span><br><br>
+                <span class="comment"># Done. 1 file changed, 12 insertions, 5 deletions.</span><br>
+                <span class="comment"># Time: 8 minutes. Cost: $0.12</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="use-cases" id="cases">
+        <div class="container">
+            <h2 class="section-title">What teams use OwlMind for</h2>
+            <p class="section-sub">From bug fixes to security audits.</p>
+            <div class="case-grid">
+                <div class="case-card">
+                    <div class="case-tag">Bug Fixing</div>
+                    <h3>Resolve stale GitHub issues</h3>
+                    <p>Point OwlMind at issues that have been open for months. It reads the discussion, analyzes the code, and generates a tested fix.</p>
+                </div>
+                <div class="case-card">
+                    <div class="case-tag">CI/CD</div>
+                    <h3>Auto-fix failed CI</h3>
+                    <p>CI pipeline failed? OwlMind reads the error, finds the root cause, and creates a PR with the fix. Integrates with GitHub Actions.</p>
+                </div>
+                <div class="case-card">
+                    <div class="case-tag">Code Review</div>
+                    <h3>AI-powered PR review</h3>
+                    <p>Catch bugs, security issues, and style violations before they reach production. Runs as a GitHub check on every PR.</p>
+                </div>
+                <div class="case-card">
+                    <div class="case-tag">Security</div>
+                    <h3>Automated security audit</h3>
+                    <p>Scan your codebase for OWASP Top 10 vulnerabilities, hardcoded secrets, and dependency issues. Get actionable fix suggestions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="waitlist" id="waitlist">
+        <div class="container">
+            <h2>Get early access</h2>
+            <p>OwlMind is in private beta. Join the waitlist to be first in line.</p>
+            <form class="email-form" action="https://formspree.io/f/your-form-id" method="POST">
+                <input type="email" name="email" placeholder="you@company.com" required>
+                <button type="submit" class="btn btn-primary">Join Waitlist</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>OwlMind &copy; 2026 &nbsp;&middot;&nbsp; <a href="https://docs.owlmind.dev">Docs</a> &nbsp;&middot;&nbsp; <a href="mailto:abiwiner520@gmail.com">Contact</a></p>
+        </div>
+    </footer>
+</body>
+</html>
