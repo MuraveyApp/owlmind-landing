@@ -395,16 +395,30 @@
 
     <section class="demo">
         <div class="container">
-            <div class="code-block">
-                <span class="comment"># Give OwlMind a real GitHub issue</span><br>
-                <span class="cmd">$ owlmind run --goal "Fix #6890: cookie parsing bug" --workspace ./requests</span><br><br>
-                <span class="output">&#9670; Planner: Analyzing issue... found root cause in cookies.py:349</span><br>
-                <span class="output">&#9670; Worker: Removing non-standard quote-stripping logic</span><br>
-                <span class="output">&#9670; Worker: Adding regression test</span><br>
-                <span class="output">&#9670; Judge: Running tests... 847 passed, 0 failed</span><br>
-                <span class="output">&#9670; Judge: Verdict: <span class="highlight">APPROVED</span></span><br><br>
-                <span class="comment"># Done. 1 file changed, 12 insertions, 5 deletions.</span><br>
-                <span class="comment"># Time: 8 minutes. Cost: $0.12</span>
+            <h2 class="section-title" style="margin-bottom: 24px;">Two ways to use OwlMind</h2>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                <div>
+                    <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--accent);">GitHub Action (automatic)</h3>
+                    <div class="code-block" style="font-size: 13px;">
+                        <span class="comment"># .github/workflows/owlmind.yml</span><br>
+                        <span class="cmd">name: OwlMind Auto-Fix</span><br>
+                        <span class="cmd">on:</span><br>
+                        <span class="cmd">&nbsp;&nbsp;workflow_run:</span><br>
+                        <span class="cmd">&nbsp;&nbsp;&nbsp;&nbsp;workflows: ["CI"]</span><br>
+                        <span class="cmd">&nbsp;&nbsp;&nbsp;&nbsp;types: [completed]</span><br><br>
+                        <span class="comment"># CI fails -> OwlMind fixes -> PR ready</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--accent);">CLI (manual)</h3>
+                    <div class="code-block" style="font-size: 13px;">
+                        <span class="cmd">$ owlmind auto --goal "Fix #8839"</span><br><br>
+                        <span class="output">&#9670; Planner: analyzing issue...</span><br>
+                        <span class="output">&#9670; Worker: editing serializers.py</span><br>
+                        <span class="output">&#9670; Judge: <span class="highlight">APPROVED</span></span><br><br>
+                        <span class="comment"># Done in 3 minutes. Cost: $0.05</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
