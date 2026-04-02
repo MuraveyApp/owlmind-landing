@@ -268,6 +268,7 @@
             .stats { grid-template-columns: repeat(2, 1fr); }
             .feature-grid, .steps { grid-template-columns: 1fr; }
             .case-grid { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr !important; }
             .email-form { flex-direction: column; }
             .nav-links { gap: 16px; }
         }
@@ -281,6 +282,7 @@
                 <a href="#features">Features</a>
                 <a href="#how">How it works</a>
                 <a href="#cases">Use cases</a>
+                <a href="#pricing">Pricing</a>
                 <a href="https://docs.owlmind.dev" target="_blank">Docs</a>
                 <a href="#waitlist" class="btn btn-primary" style="padding: 8px 20px; font-size: 13px;">Get Early Access</a>
             </div>
@@ -456,31 +458,67 @@
         <div class="container">
             <h2 class="section-title">Pricing</h2>
             <p class="section-sub">Start free. Scale as you grow.</p>
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px;">
-                <div class="feature-card" style="text-align: center;">
-                    <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 8px;">FREE</div>
-                    <div style="font-size: 32px; font-weight: 800;">$0</div>
-                    <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 20px;">per month</div>
-                    <div style="font-size: 14px; color: var(--text-dim); line-height: 2;">5 runs/month<br>Public repos only<br>Community support</div>
+            <div class="pricing-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px;">
+
+                <!-- Free -->
+                <div class="feature-card" style="text-align: center; display: flex; flex-direction: column;">
+                    <div style="font-size: 13px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Free</div>
+                    <div style="font-size: 36px; font-weight: 800;">$0</div>
+                    <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 24px;">per month</div>
+                    <div style="font-size: 14px; color: var(--text-dim); line-height: 2.2; flex: 1; text-align: left; padding: 0 8px;">
+                        1 public repo<br>
+                        5 auto-fix runs/month<br>
+                        Community support
+                    </div>
+                    <a href="https://formspree.io/f/mdapeevj" class="btn btn-secondary" style="display: block; margin-top: 24px; text-align: center;">Get Started</a>
                 </div>
-                <div class="feature-card" style="text-align: center; border-color: var(--accent);">
-                    <div style="font-size: 13px; color: var(--accent); margin-bottom: 8px;">PRO</div>
-                    <div style="font-size: 32px; font-weight: 800;">$99</div>
-                    <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 20px;">per month</div>
-                    <div style="font-size: 14px; color: var(--text-dim); line-height: 2;">100 runs/month<br>Private repos<br>GitHub Actions<br>Email support</div>
+
+                <!-- Pro (Most Popular) -->
+                <div class="feature-card" style="text-align: center; border-color: var(--accent); position: relative; display: flex; flex-direction: column; box-shadow: 0 0 30px var(--accent-glow);">
+                    <div style="position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 4px 14px; border-radius: 20px; white-space: nowrap;">Most Popular</div>
+                    <div style="font-size: 13px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Pro</div>
+                    <div style="font-size: 36px; font-weight: 800;">$99</div>
+                    <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 24px;">per month</div>
+                    <div style="font-size: 14px; color: var(--text-dim); line-height: 2.2; flex: 1; text-align: left; padding: 0 8px;">
+                        Unlimited private repos<br>
+                        100 auto-fix runs/month<br>
+                        GitHub Action integration<br>
+                        PR review summaries<br>
+                        Email support
+                    </div>
+                    <a href="https://formspree.io/f/mdapeevj" class="btn btn-primary" style="display: block; margin-top: 24px; text-align: center;">Get Started</a>
                 </div>
-                <div class="feature-card" style="text-align: center;">
-                    <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 8px;">TEAM</div>
-                    <div style="font-size: 32px; font-weight: 800;">$299</div>
-                    <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 20px;">per month</div>
-                    <div style="font-size: 14px; color: var(--text-dim); line-height: 2;">500 runs/month<br>Dashboard<br>Slack integration<br>Priority support</div>
+
+                <!-- Team -->
+                <div class="feature-card" style="text-align: center; display: flex; flex-direction: column;">
+                    <div style="font-size: 13px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Team</div>
+                    <div style="font-size: 36px; font-weight: 800;">$299</div>
+                    <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 24px;">per month</div>
+                    <div style="font-size: 14px; color: var(--text-dim); line-height: 2.2; flex: 1; text-align: left; padding: 0 8px;">
+                        Everything in Pro<br>
+                        Dashboard &amp; analytics<br>
+                        Approval workflows<br>
+                        Shared policies<br>
+                        Slack integration
+                    </div>
+                    <a href="https://formspree.io/f/mdapeevj" class="btn btn-secondary" style="display: block; margin-top: 24px; text-align: center;">Get Started</a>
                 </div>
-                <div class="feature-card" style="text-align: center;">
-                    <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 8px;">ENTERPRISE</div>
-                    <div style="font-size: 32px; font-weight: 800;">Custom</div>
-                    <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 20px;">contact us</div>
-                    <div style="font-size: 14px; color: var(--text-dim); line-height: 2;">Unlimited runs<br>Self-hosted<br>Audit trail + SSO<br>Dedicated support</div>
+
+                <!-- Enterprise -->
+                <div class="feature-card" style="text-align: center; display: flex; flex-direction: column;">
+                    <div style="font-size: 13px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Enterprise</div>
+                    <div style="font-size: 36px; font-weight: 800;">Custom</div>
+                    <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 24px;">contact us</div>
+                    <div style="font-size: 14px; color: var(--text-dim); line-height: 2.2; flex: 1; text-align: left; padding: 0 8px;">
+                        Everything in Team<br>
+                        Self-hosted deployment<br>
+                        SSO &amp; audit trail<br>
+                        Custom policies<br>
+                        SLA &amp; dedicated support
+                    </div>
+                    <a href="https://formspree.io/f/mdapeevj" class="btn btn-secondary" style="display: block; margin-top: 24px; text-align: center;">Contact Sales</a>
                 </div>
+
             </div>
         </div>
     </section>
