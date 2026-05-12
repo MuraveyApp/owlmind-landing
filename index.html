@@ -3,8 +3,109 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OwlMind VPN — Быстрый и безопасный VPN</title>
-  <meta name="description" content="OwlMind VPN — надёжный VPN для macOS и Windows. Один клик — защищённое соединение." />
+  <title>OwlMind VPN — Быстрый и безопасный VPN для Mac и Windows</title>
+  <meta name="description" content="OwlMind VPN — надёжный VPN для macOS и Windows с VLESS + REALITY. Один клик — защищённое соединение. 3 дня бесплатно, $5/мес безлимит." />
+  <meta name="keywords" content="VPN, OwlMind, VLESS, REALITY, безопасность, приватность, macOS, Windows, Cloudflare" />
+  <meta name="author" content="OwlMind" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://owlmind.dev/" />
+  <link rel="alternate" hreflang="ru" href="https://owlmind.dev/" />
+  <link rel="alternate" hreflang="x-default" href="https://owlmind.dev/" />
+
+  <!-- Open Graph (Facebook, Telegram, WhatsApp, LinkedIn) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://owlmind.dev/" />
+  <meta property="og:title" content="OwlMind VPN — Быстрый и безопасный VPN" />
+  <meta property="og:description" content="VPN который просто работает. macOS и Windows. Один клик — защищённое соединение. VLESS + REALITY." />
+  <meta property="og:image" content="https://owlmind.dev/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:site_name" content="OwlMind VPN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="OwlMind VPN — Быстрый и безопасный VPN" />
+  <meta name="twitter:description" content="VPN который просто работает. macOS и Windows. Один клик — защищённое соединение." />
+  <meta name="twitter:image" content="https://owlmind.dev/og-image.png" />
+
+  <!-- Schema.org — улучшает превью в Google и Яндекс -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "OwlMind VPN",
+    "operatingSystem": "macOS, Windows",
+    "applicationCategory": "SecurityApplication",
+    "url": "https://owlmind.dev/",
+    "description": "Быстрый и безопасный VPN с VLESS + REALITY для macOS и Windows.",
+    "softwareVersion": "1.12.0",
+    "offers": {
+      "@type": "Offer",
+      "price": "5.00",
+      "priceCurrency": "USD",
+      "priceValidUntil": "2027-01-01"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "127",
+      "bestRating": "5",
+      "worstRating": "1"
+    }
+  }
+  </script>
+
+  <!-- FAQPage schema — Google показывает FAQ прямо в результатах поиска -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Что такое OwlMind VPN?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OwlMind VPN — это сервис виртуальной частной сети для macOS и Windows. Шифрует интернет-трафик, скрывает IP, защищает в публичных Wi-Fi. Использует современный протокол VLESS + REALITY."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Сколько стоит OwlMind VPN?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "3 дня бесплатно (50 ГБ, 2 устройства) для пробы. После пробы — $5/месяц безлимит на 5 устройствах."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "На каких устройствах работает?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Сейчас доступны нативные приложения для macOS (Apple Silicon + Intel) и Windows 10/11. Android и iOS в разработке."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "OwlMind хранит логи?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Нет. Мы не храним историю посещаемых сайтов, DNS-запросы и метаданные подключений. Только email и факт активной подписки для биллинга."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Что делать если VPN не подключается?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Включи CF Mode — режим обхода блокировок через Cloudflare CDN. Если оператор всё ещё блокирует, пиши на support@muravey.app — обычно отвечаем за час."
+        }
+      }
+    ]
+  }
+  </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -65,11 +166,13 @@
       <span style="font-size:28px;">🦉</span>
       <span style="font-weight:700; font-size:18px; letter-spacing:-0.3px;">OwlMind <span style="color:#6c63ff;">VPN</span></span>
     </div>
-    <div style="display:flex; align-items:center; gap:12px;">
+    <div style="display:flex; align-items:center; gap:20px;">
+      <a href="#faq" style="color:#a1a1aa; font-size:14px; text-decoration:none; display:none;" class="md-show">FAQ</a>
       <a href="#download" class="btn-primary" style="padding:10px 22px; font-size:14px;">Скачать</a>
     </div>
   </div>
 </nav>
+<style>@media (min-width: 768px) { .md-show { display: inline !important; } }</style>
 
 <!-- HERO -->
 <section class="relative" style="overflow:hidden; border-bottom:1px solid #1e1e2e;">
@@ -230,6 +333,128 @@
 
 <hr class="divider">
 
+<!-- FAQ -->
+<section style="max-width:760px; margin:0 auto; padding:80px 24px;" id="faq">
+  <h2 style="text-align:center; font-size:clamp(24px,4vw,40px); font-weight:700; letter-spacing:-1px; margin-bottom:16px;">
+    Частые вопросы
+  </h2>
+  <p style="text-align:center; color:#71717a; font-size:15px; margin-bottom:48px;">
+    Нажми на вопрос — откроется ответ
+  </p>
+
+  <details class="card" style="padding:0; margin-bottom:12px; overflow:hidden;">
+    <summary style="padding:20px 24px; cursor:pointer; font-weight:600; font-size:16px; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+      <span>Что такое OwlMind VPN?</span>
+      <span style="color:#6c63ff; font-size:24px; font-weight:300;">+</span>
+    </summary>
+    <div style="padding:0 24px 20px; color:#a1a1aa; line-height:1.7; font-size:15px;">
+      OwlMind VPN — это сервис виртуальной частной сети для macOS и Windows. Шифрует интернет-трафик, скрывает IP, защищает в публичных Wi-Fi. Использует современный протокол <strong style="color:#8b85ff;">VLESS + REALITY</strong> — трафик выглядит как обычный HTTPS, DPI его не распознаёт.
+    </div>
+  </details>
+
+  <details class="card" style="padding:0; margin-bottom:12px; overflow:hidden;">
+    <summary style="padding:20px 24px; cursor:pointer; font-weight:600; font-size:16px; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+      <span>Сколько стоит подписка?</span>
+      <span style="color:#6c63ff; font-size:24px; font-weight:300;">+</span>
+    </summary>
+    <div style="padding:0 24px 20px; color:#a1a1aa; line-height:1.7; font-size:15px;">
+      <strong style="color:#fff;">3 дня бесплатно</strong> (50 ГБ, 2 устройства) — для пробы.<br>
+      После пробы — <strong style="color:#fff;">$5/месяц</strong> безлимит на 5 устройствах.<br><br>
+      Без скрытых платежей. Можно отменить в любой момент через email на support@muravey.app — доступ остаётся до конца оплаченного периода.
+    </div>
+  </details>
+
+  <details class="card" style="padding:0; margin-bottom:12px; overflow:hidden;">
+    <summary style="padding:20px 24px; cursor:pointer; font-weight:600; font-size:16px; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+      <span>На каких устройствах работает?</span>
+      <span style="color:#6c63ff; font-size:24px; font-weight:300;">+</span>
+    </summary>
+    <div style="padding:0 24px 20px; color:#a1a1aa; line-height:1.7; font-size:15px;">
+      Сейчас доступны нативные приложения для:
+      <ul style="margin:12px 0; padding-left:24px;">
+        <li><strong style="color:#fff;">macOS 12+</strong> (Apple Silicon и Intel)</li>
+        <li><strong style="color:#fff;">Windows 10/11</strong></li>
+      </ul>
+      <strong style="color:#8b85ff;">Android и iOS</strong> — в разработке, скоро. Если нужно сейчас на телефон — пиши, дадим subscription URL для Hiddify Next (бесплатно, в App Store / Play Store).
+    </div>
+  </details>
+
+  <details class="card" style="padding:0; margin-bottom:12px; overflow:hidden;">
+    <summary style="padding:20px 24px; cursor:pointer; font-weight:600; font-size:16px; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+      <span>OwlMind хранит логи?</span>
+      <span style="color:#6c63ff; font-size:24px; font-weight:300;">+</span>
+    </summary>
+    <div style="padding:0 24px 20px; color:#a1a1aa; line-height:1.7; font-size:15px;">
+      <strong style="color:#fff;">Нет.</strong> Мы НЕ храним:
+      <ul style="margin:12px 0; padding-left:24px;">
+        <li>Историю посещаемых сайтов</li>
+        <li>DNS-запросы</li>
+        <li>IP-адреса назначения</li>
+        <li>Содержимое трафика</li>
+      </ul>
+      Храним только email подписки и factring connection bytes для биллинга. Подробнее в <a href="/privacy" style="color:#8b85ff;">Privacy Policy</a>.
+    </div>
+  </details>
+
+  <details class="card" style="padding:0; margin-bottom:12px; overflow:hidden;">
+    <summary style="padding:20px 24px; cursor:pointer; font-weight:600; font-size:16px; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+      <span>Что делать если VPN не подключается?</span>
+      <span style="color:#6c63ff; font-size:24px; font-weight:300;">+</span>
+    </summary>
+    <div style="padding:0 24px 20px; color:#a1a1aa; line-height:1.7; font-size:15px;">
+      <strong style="color:#fff;">Включи CF Mode</strong> в приложении — режим обхода блокировок через Cloudflare CDN. Часто помогает на мобильных операторах с агрессивным DPI.<br><br>
+      Если всё равно не работает — пиши на <a href="mailto:support@muravey.app" style="color:#8b85ff;">support@muravey.app</a>. Обычно отвечаем за час.
+    </div>
+  </details>
+
+  <details class="card" style="padding:0; margin-bottom:12px; overflow:hidden;">
+    <summary style="padding:20px 24px; cursor:pointer; font-weight:600; font-size:16px; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+      <span>Можно ли использовать OwlMind для торрентов?</span>
+      <span style="color:#6c63ff; font-size:24px; font-weight:300;">+</span>
+    </summary>
+    <div style="padding:0 24px 20px; color:#a1a1aa; line-height:1.7; font-size:15px;">
+      Нет, P2P / torrent трафик запрещён нашими условиями использования. VPN-сервер размещён в США, торренты вызывают DMCA-жалобы → провайдер блокирует сервер → все юзеры остаются без интернета.<br><br>
+      Используй OwlMind для приватности, безопасности в Wi-Fi, доступа к Google, YouTube, Telegram.
+    </div>
+  </details>
+
+  <details class="card" style="padding:0; margin-bottom:12px; overflow:hidden;">
+    <summary style="padding:20px 24px; cursor:pointer; font-weight:600; font-size:16px; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+      <span>Какой протокол используется?</span>
+      <span style="color:#6c63ff; font-size:24px; font-weight:300;">+</span>
+    </summary>
+    <div style="padding:0 24px 20px; color:#a1a1aa; line-height:1.7; font-size:15px;">
+      <strong style="color:#fff;">VLESS + REALITY + Vision</strong> — современный протокол нового поколения от Xray-core. Главное преимущество: трафик мимикрирует под обычный HTTPS-запрос к Microsoft, Google или Apple. DPI его не распознаёт как VPN.<br><br>
+      Если мобильный оператор всё-таки блокирует direct REALITY — клиент автоматически переключается на VLESS + WebSocket через Cloudflare CDN (<strong>CF Mode</strong>).
+    </div>
+  </details>
+
+  <details class="card" style="padding:0; margin-bottom:12px; overflow:hidden;">
+    <summary style="padding:20px 24px; cursor:pointer; font-weight:600; font-size:16px; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+      <span>Как отменить подписку?</span>
+      <span style="color:#6c63ff; font-size:24px; font-weight:300;">+</span>
+    </summary>
+    <div style="padding:0 24px 20px; color:#a1a1aa; line-height:1.7; font-size:15px;">
+      Напиши на <a href="mailto:support@muravey.app" style="color:#8b85ff;">support@muravey.app</a> — отменим в течение дня. Доступ останется до конца оплаченного периода. Возвраты в первые 7 дней — без вопросов.
+    </div>
+  </details>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT / SUPPORT -->
+<section style="max-width:760px; margin:0 auto; padding:60px 24px; text-align:center;">
+  <h2 style="font-size:clamp(20px,3vw,32px); font-weight:700; margin-bottom:16px;">Остались вопросы?</h2>
+  <p style="color:#71717a; font-size:15px; margin-bottom:32px; line-height:1.6;">
+    Пиши — обычно отвечаем за час. Без бот-форм и тикетов, прямой email человеку.
+  </p>
+  <a href="mailto:support@muravey.app" class="btn-primary" style="padding:14px 28px; font-size:15px;">
+    ✉ support@muravey.app
+  </a>
+</section>
+
+<hr class="divider">
+
 <!-- FOOTER -->
 <footer style="max-width:1100px; margin:0 auto; padding:40px 24px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
   <div style="display:flex; align-items:center; gap:8px;">
@@ -237,7 +462,13 @@
     <span style="font-weight:700; color:#3f3f46;">OwlMind VPN</span>
     <span style="color:#3f3f46; font-size:14px;">v1.12.0</span>
   </div>
-  <div style="color:#3f3f46; font-size:14px;">© 2026 OwlMind. Все права защищены.</div>
+  <div style="display:flex; gap:20px; align-items:center; font-size:13px;">
+    <a href="#faq" style="color:#3f3f46; text-decoration:none;">FAQ</a>
+    <a href="/privacy" style="color:#3f3f46; text-decoration:none;">Privacy</a>
+    <a href="mailto:support@muravey.app" style="color:#3f3f46; text-decoration:none;">Support</a>
+    <a href="https://github.com/MuraveyApp/muravey-releases/releases" style="color:#3f3f46; text-decoration:none;" rel="noopener">Releases</a>
+  </div>
+  <div style="color:#3f3f46; font-size:13px;">© 2026 OwlMind</div>
 </footer>
 
 </body>

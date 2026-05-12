@@ -1,0 +1,8 @@
+# OwlMind VPN — owlmind.dev
+# Allow all search engines to index the public landing.
+
+User-agent: *
+Allow: /
+Disallow:
+
+Sitemap: https://owlmind.dev/sitemap.xml
