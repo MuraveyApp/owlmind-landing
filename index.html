@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="ru" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LLM Red Team — OwlMind</title>
-  <meta name="description" content="LLM Red Team that finds what others miss. $2,500. 5 days. PDF report. By the founder of OwlSec, paid CVE researcher (llama.cpp)." />
+  <title>OwlMind VPN — Быстрый и безопасный VPN</title>
+  <meta name="description" content="OwlMind VPN — надёжный VPN для macOS и Windows. Один клик — защищённое соединение." />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -12,338 +12,232 @@
       theme: {
         extend: {
           colors: {
-            ink: '#0a0a0a',
-            paper: '#fafafa',
-            accent: '#f97316',
-            accent2: '#fb923c',
-            line: '#27272a',
-            muted: '#a1a1aa',
-          },
-          fontFamily: {
-            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
-          },
+            ink: '#0a0a0f',
+            accent: '#6c63ff',
+            accent2: '#8b85ff',
+            line: '#1e1e2e',
+            muted: '#71717a',
+          }
         }
       }
     }
   </script>
   <style>
-    body { background: #0a0a0a; color: #e4e4e7; }
+    * { box-sizing: border-box; }
+    body { background: #0a0a0f; color: #e4e4e7; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
     .grid-bg {
       background-image:
-        linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 40px 40px;
+        linear-gradient(to right, rgba(108,99,255,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(108,99,255,0.06) 1px, transparent 1px);
+      background-size: 48px 48px;
     }
-    .glow { box-shadow: 0 0 40px -10px rgba(249, 115, 22, 0.5); }
-    .card { background: #18181b; border: 1px solid #27272a; }
-    .pill { background: #27272a; color: #e4e4e7; }
-    a.btn-primary {
-      background: #f97316; color: #0a0a0a; font-weight: 600;
+    .glow { box-shadow: 0 0 50px -10px rgba(108,99,255,0.6); }
+    .glow-sm { box-shadow: 0 0 30px -8px rgba(108,99,255,0.4); }
+    .card { background: #13131f; border: 1px solid #1e1e2e; border-radius: 16px; }
+    .btn-primary {
+      background: linear-gradient(135deg, #6c63ff, #8b85ff);
+      color: #fff; font-weight: 600; border-radius: 12px;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
+      display: inline-flex; align-items: center; gap: 10px;
     }
-    a.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 30px -8px rgba(249, 115, 22, 0.7); }
-    a.btn-ghost { border: 1px solid #3f3f46; color: #e4e4e7; }
-    a.btn-ghost:hover { border-color: #f97316; color: #f97316; }
-    code { background: #27272a; padding: 1px 6px; border-radius: 4px; font-size: 0.9em; }
-    .check::before { content: "→"; color: #f97316; font-weight: 700; margin-right: 0.5rem; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 40px -8px rgba(108,99,255,0.7); }
+    .btn-ghost {
+      border: 1px solid #2e2e3e; color: #a1a1aa; border-radius: 12px;
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-ghost:hover { border-color: #6c63ff; color: #8b85ff; }
+    .badge { background: rgba(108,99,255,0.15); color: #8b85ff; border: 1px solid rgba(108,99,255,0.3); border-radius: 100px; font-size: 12px; padding: 4px 14px; font-weight: 500; }
+    .feature-icon { background: rgba(108,99,255,0.12); border: 1px solid rgba(108,99,255,0.2); border-radius: 12px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+    .os-pill { background: #13131f; border: 1px solid #2e2e3e; border-radius: 100px; padding: 6px 16px; font-size: 13px; color: #71717a; display: inline-flex; align-items: center; gap: 6px; }
+    .step-num { background: rgba(108,99,255,0.15); color: #8b85ff; border: 1px solid rgba(108,99,255,0.3); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+    @keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+    .float { animation: float 4s ease-in-out infinite; }
+    .divider { border: none; border-top: 1px solid #1e1e2e; margin: 0; }
   </style>
 </head>
-<body class="font-sans antialiased">
+<body>
 
-<!-- Hero -->
-<section class="relative overflow-hidden border-b border-line">
-  <div class="absolute inset-0 grid-bg opacity-50"></div>
-  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink"></div>
-  <div class="relative max-w-5xl mx-auto px-6 py-24 sm:py-32">
-    <div class="flex items-center gap-2 mb-6">
-      <span class="pill px-3 py-1 rounded-full text-xs font-mono">OwlMind / LLM Red Team</span>
-      <span class="pill px-3 py-1 rounded-full text-xs font-mono">$4K paid CVE · llama.cpp</span>
+<!-- NAV -->
+<nav style="border-bottom:1px solid #1e1e2e; backdrop-filter:blur(12px); background:rgba(10,10,15,0.85); position:sticky; top:0; z-index:100;">
+  <div style="max-width:1100px; margin:0 auto; padding:0 24px; height:64px; display:flex; align-items:center; justify-content:space-between;">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span style="font-size:28px;">🦉</span>
+      <span style="font-weight:700; font-size:18px; letter-spacing:-0.3px;">OwlMind <span style="color:#6c63ff;">VPN</span></span>
     </div>
-    <h1 class="text-4xl sm:text-6xl font-bold tracking-tight leading-tight">
-      LLM Red Team that finds <br class="hidden sm:block" />
-      <span class="text-accent">what others miss.</span>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <a href="#download" class="btn-primary" style="padding:10px 22px; font-size:14px;">Скачать</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative" style="overflow:hidden; border-bottom:1px solid #1e1e2e;">
+  <div class="absolute inset-0 grid-bg"></div>
+  <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:600px; height:600px; background:radial-gradient(circle, rgba(108,99,255,0.12) 0%, transparent 70%); pointer-events:none;"></div>
+  <div style="position:relative; max-width:1100px; margin:0 auto; padding:100px 24px 80px; text-align:center;">
+    <div style="margin-bottom:24px;">
+      <span class="badge">v1.12.0 — Доступно сейчас</span>
+    </div>
+    <div class="float" style="font-size:80px; margin-bottom:24px;">🦉</div>
+    <h1 style="font-size:clamp(36px,6vw,72px); font-weight:800; letter-spacing:-2px; line-height:1.05; margin-bottom:24px;">
+      VPN который<br><span style="color:#6c63ff;">просто работает</span>
     </h1>
-    <p class="mt-6 text-xl text-zinc-400 max-w-2xl">
-      $2,500. 5 days. PDF report with reproducible PoCs. Solo founder, paid CVE researcher, no SDR follow-up.
+    <p style="font-size:clamp(16px,2vw,20px); color:#71717a; max-width:560px; margin:0 auto 40px; line-height:1.6;">
+      Один клик — защищённое соединение. Работает там где другие не работают. macOS и Windows.
     </p>
-    <div class="mt-10 flex flex-wrap gap-3">
-      <a href="https://calendly.com/owlmind/llm-redteam" class="btn-primary px-6 py-3 rounded-lg glow">Book 30-min discovery call</a>
-      <a href="#pricing" class="btn-ghost px-6 py-3 rounded-lg">See pricing</a>
+    <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-bottom:48px;">
+      <a href="https://github.com/MuraveyApp/muravey-releases/releases/download/OwlMind-v1.12.0/OwlMind-VPN-1.12.0.dmg" class="btn-primary glow" style="padding:16px 28px; font-size:16px;">
+        <span style="font-size:20px;"></span> Скачать для Mac
+      </a>
+      <a href="https://github.com/MuraveyApp/muravey-releases/releases/download/OwlMind-v1.12.0/OwlMind-VPN-Setup-1.12.0.exe" class="btn-ghost" style="padding:16px 28px; font-size:16px;">
+        <span style="font-size:20px;">🪟</span> Скачать для Windows
+      </a>
     </div>
-    <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-6 text-sm text-zinc-500">
-      <div><div class="text-2xl font-bold text-zinc-200">286</div>vuln detectors in OwlSec</div>
-      <div><div class="text-2xl font-bold text-zinc-200">$4,000</div>paid CVE (llama.cpp)</div>
-      <div><div class="text-2xl font-bold text-zinc-200">3 days</div>turnaround for Basic</div>
-      <div><div class="text-2xl font-bold text-zinc-200">12+</div>attack categories</div>
-    </div>
-  </div>
-</section>
-
-<!-- The problem -->
-<section class="border-b border-line">
-  <div class="max-w-5xl mx-auto px-6 py-20">
-    <h2 class="text-3xl font-bold mb-6">The problem</h2>
-    <div class="text-lg text-zinc-300 space-y-4 max-w-3xl">
-      <p>AI agents in production leak system prompts on the first try. RAG pipelines ingest poisoned docs that quietly rewrite their behavior. Function-calling LLMs get jailbroken into running tools they shouldn't.</p>
-      <p>Most teams ship LLM features without a single adversarial test, because the big consultancies (Bishop Fox, NCC, Trail of Bits) charge $50K+ for an LLM engagement and book 8 weeks out.</p>
-      <p class="text-zinc-100 font-semibold">The result: most production LLM apps are wide open and the founders don't know it.</p>
+    <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center;">
+      <span class="os-pill"><span>🍎</span> macOS 12+</span>
+      <span class="os-pill"><span>🪟</span> Windows 10/11</span>
+      <span class="os-pill"><span>🆓</span> Бесплатно</span>
+      <span class="os-pill"><span>🔒</span> Без логов</span>
     </div>
   </div>
 </section>
 
-<!-- What we test -->
-<section class="border-b border-line">
-  <div class="max-w-5xl mx-auto px-6 py-20">
-    <h2 class="text-3xl font-bold mb-2">What we test</h2>
-    <p class="text-zinc-500 mb-10">12 attack categories, 286 detectors, real PoCs.</p>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div class="card p-5 rounded-lg">
-        <div class="text-accent font-mono text-xs mb-2">PI-001</div>
-        <div class="font-semibold mb-1">Prompt injection</div>
-        <div class="text-sm text-zinc-400">Direct, indirect (via retrieved docs/URLs/files), multi-turn drift.</div>
-      </div>
-      <div class="card p-5 rounded-lg">
-        <div class="text-accent font-mono text-xs mb-2">JB-002</div>
-        <div class="font-semibold mb-1">Jailbreaks</div>
-        <div class="text-sm text-zinc-400">DAN, encoded payloads (base64/leet/unicode), role-play hijack, refusal suppression.</div>
-      </div>
-      <div class="card p-5 rounded-lg">
-        <div class="text-accent font-mono text-xs mb-2">SP-003</div>
-        <div class="font-semibold mb-1">System prompt extraction</div>
-        <div class="text-sm text-zinc-400">Repetition attacks, token-level leakage, debug-mode tricks, completion attacks.</div>
-      </div>
-      <div class="card p-5 rounded-lg">
-        <div class="text-accent font-mono text-xs mb-2">RAG-004</div>
-        <div class="font-semibold mb-1">RAG poisoning</div>
-        <div class="text-sm text-zinc-400">Doc-store contamination, retrieval ranking attacks, embedding-space attacks.</div>
-      </div>
-      <div class="card p-5 rounded-lg">
-        <div class="text-accent font-mono text-xs mb-2">MCP-005</div>
-        <div class="font-semibold mb-1">MCP supply chain</div>
-        <div class="text-sm text-zinc-400">Server impersonation, tool description injection, host filesystem leaks via path traversal.</div>
-      </div>
-      <div class="card p-5 rounded-lg">
-        <div class="text-accent font-mono text-xs mb-2">AGT-006</div>
-        <div class="font-semibold mb-1">Agent hijack</div>
-        <div class="text-sm text-zinc-400">Goal redirection, plan-step injection, tool-call rewriting.</div>
-      </div>
-      <div class="card p-5 rounded-lg">
-        <div class="text-accent font-mono text-xs mb-2">MEM-007</div>
-        <div class="font-semibold mb-1">Memory exfiltration</div>
-        <div class="text-sm text-zinc-400">Context window leakage, conversation history extraction, cross-session bleed.</div>
-      </div>
-      <div class="card p-5 rounded-lg">
-        <div class="text-accent font-mono text-xs mb-2">TOOL-008</div>
-        <div class="font-semibold mb-1">Tool/function call abuse</div>
-        <div class="text-sm text-zinc-400">Argument injection, unauthorized tool chains, side-effect attacks.</div>
-      </div>
-      <div class="card p-5 rounded-lg">
-        <div class="text-accent font-mono text-xs mb-2">OUT-009</div>
-        <div class="font-semibold mb-1">Output integrity</div>
-        <div class="text-sm text-zinc-400">Markdown XSS, hidden instructions in responses, link/IFRAME smuggling.</div>
-      </div>
-      <div class="card p-5 rounded-lg">
-        <div class="text-accent font-mono text-xs mb-2">DOW-010</div>
-        <div class="font-semibold mb-1">Denial-of-wallet</div>
-        <div class="text-sm text-zinc-400">Token exhaustion loops, recursive call amplification, cost bombs.</div>
-      </div>
-      <div class="card p-5 rounded-lg">
-        <div class="text-accent font-mono text-xs mb-2">SAFE-011</div>
-        <div class="font-semibold mb-1">Bias / safety bypass</div>
-        <div class="text-sm text-zinc-400">Multilingual jailbreaks, low-resource language attacks, code-switching evasion.</div>
-      </div>
-      <div class="card p-5 rounded-lg">
-        <div class="text-accent font-mono text-xs mb-2">AUTH-012</div>
-        <div class="font-semibold mb-1">Auth / rate-limit bypass</div>
-        <div class="text-sm text-zinc-400">Header manipulation, multi-account abuse, prompt-driven account confusion.</div>
-      </div>
+<!-- FEATURES -->
+<section style="max-width:1100px; margin:0 auto; padding:80px 24px;">
+  <h2 style="text-align:center; font-size:clamp(24px,4vw,40px); font-weight:700; letter-spacing:-1px; margin-bottom:56px;">
+    Почему OwlMind VPN
+  </h2>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px;">
+
+    <div class="card" style="padding:28px;">
+      <div class="feature-icon" style="margin-bottom:16px;">⚡</div>
+      <h3 style="font-weight:700; font-size:18px; margin-bottom:8px;">Один клик</h3>
+      <p style="color:#71717a; line-height:1.6; font-size:15px;">Нажал Connect — подключился. Никаких настроек, конфигов и технических знаний не нужно.</p>
     </div>
+
+    <div class="card" style="padding:28px;">
+      <div class="feature-icon" style="margin-bottom:16px;">🌐</div>
+      <h3 style="font-weight:700; font-size:18px; margin-bottom:8px;">Cloudflare режим</h3>
+      <p style="color:#71717a; line-height:1.6; font-size:15px;">Если оператор блокирует VPN — включи CF Mode. Трафик идёт через Cloudflare CDN и не блокируется.</p>
+    </div>
+
+    <div class="card" style="padding:28px;">
+      <div class="feature-icon" style="margin-bottom:16px;">🔒</div>
+      <h3 style="font-weight:700; font-size:18px; margin-bottom:8px;">VLESS + REALITY</h3>
+      <p style="color:#71717a; line-height:1.6; font-size:15px;">Современный протокол нового поколения. Трафик выглядит как обычный HTTPS — DPI его не видит.</p>
+    </div>
+
+    <div class="card" style="padding:28px;">
+      <div class="feature-icon" style="margin-bottom:16px;">🚀</div>
+      <h3 style="font-weight:700; font-size:18px; margin-bottom:8px;">Высокая скорость</h3>
+      <p style="color:#71717a; line-height:1.6; font-size:15px;">Серверы в ключевых локациях. Минимальная задержка для СНГ пользователей.</p>
+    </div>
+
+    <div class="card" style="padding:28px;">
+      <div class="feature-icon" style="margin-bottom:16px;">🛡️</div>
+      <h3 style="font-weight:700; font-size:18px; margin-bottom:8px;">Без логов</h3>
+      <p style="color:#71717a; line-height:1.6; font-size:15px;">Мы не храним логи активности. Ваши данные остаются вашими.</p>
+    </div>
+
+    <div class="card" style="padding:28px;">
+      <div class="feature-icon" style="margin-bottom:16px;">💻</div>
+      <h3 style="font-weight:700; font-size:18px; margin-bottom:8px;">Mac + Windows</h3>
+      <p style="color:#71717a; line-height:1.6; font-size:15px;">Нативные приложения для macOS и Windows. Скоро Android и iOS.</p>
+    </div>
+
   </div>
 </section>
 
-<!-- What you get -->
-<section class="border-b border-line">
-  <div class="max-w-5xl mx-auto px-6 py-20">
-    <h2 class="text-3xl font-bold mb-10">What you get</h2>
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="card p-6 rounded-lg">
-        <div class="font-semibold text-lg mb-2">PDF report</div>
-        <p class="text-zinc-400">Executive summary (one page, non-technical), finding-by-finding details with reproducible PoCs (curl/python), CVSS-style severity, concrete fix recommendations.</p>
+<hr class="divider">
+
+<!-- HOW TO INSTALL -->
+<section style="max-width:760px; margin:0 auto; padding:80px 24px;" id="download">
+  <h2 style="text-align:center; font-size:clamp(24px,4vw,40px); font-weight:700; letter-spacing:-1px; margin-bottom:56px;">
+    Установка за 1 минуту
+  </h2>
+
+  <!-- macOS -->
+  <div class="card" style="padding:32px; margin-bottom:20px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:24px;">
+      <span style="font-size:28px;"></span>
+      <h3 style="font-weight:700; font-size:20px;">macOS</h3>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div style="display:flex; align-items:flex-start; gap:14px;">
+        <div class="step-num">1</div>
+        <div>
+          <div style="font-weight:600; margin-bottom:2px;">Скачай DMG файл</div>
+          <div style="color:#71717a; font-size:14px;">OwlMind-VPN-1.12.0.dmg (74 МБ)</div>
+        </div>
       </div>
-      <div class="card p-6 rounded-lg">
-        <div class="font-semibold text-lg mb-2">30-minute debrief call</div>
-        <p class="text-zinc-400">Walk through findings with your team. Q&A. Prioritization help. No slides, just your report on screen.</p>
+      <div style="display:flex; align-items:flex-start; gap:14px;">
+        <div class="step-num">2</div>
+        <div>
+          <div style="font-weight:600; margin-bottom:2px;">Открой DMG и перетащи в Applications</div>
+          <div style="color:#71717a; font-size:14px;">Как любое другое приложение</div>
+        </div>
       </div>
-      <div class="card p-6 rounded-lg">
-        <div class="font-semibold text-lg mb-2">Working exploits</div>
-        <p class="text-zinc-400">Every finding ships with a reproducible PoC. No theoretical "this could happen" filler. If I can't reproduce it, it's not in the report.</p>
-      </div>
-      <div class="card p-6 rounded-lg">
-        <div class="font-semibold text-lg mb-2">Email Q&A</div>
-        <p class="text-zinc-400">During the engagement and 2 weeks after delivery. You email me, I reply.</p>
+      <div style="display:flex; align-items:flex-start; gap:14px;">
+        <div class="step-num">3</div>
+        <div>
+          <div style="font-weight:600; margin-bottom:2px;">При первом запуске: правая кнопка → Открыть</div>
+          <div style="color:#71717a; font-size:14px;">macOS спросит подтверждение — нажми Открыть</div>
+        </div>
       </div>
     </div>
+    <a href="https://github.com/MuraveyApp/muravey-releases/releases/download/OwlMind-v1.12.0/OwlMind-VPN-1.12.0.dmg"
+       class="btn-primary glow" style="margin-top:24px; padding:14px 24px; font-size:15px; width:100%; justify-content:center;">
+      <span style="font-size:18px;"></span> Скачать для Mac (74 МБ)
+    </a>
+  </div>
+
+  <!-- Windows -->
+  <div class="card" style="padding:32px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:24px;">
+      <span style="font-size:28px;">🪟</span>
+      <h3 style="font-weight:700; font-size:20px;">Windows</h3>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div style="display:flex; align-items:flex-start; gap:14px;">
+        <div class="step-num">1</div>
+        <div>
+          <div style="font-weight:600; margin-bottom:2px;">Скачай установщик</div>
+          <div style="color:#71717a; font-size:14px;">OwlMind-VPN-Setup-1.12.0.exe (56 МБ)</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:flex-start; gap:14px;">
+        <div class="step-num">2</div>
+        <div>
+          <div style="font-weight:600; margin-bottom:2px;">Запусти от имени администратора</div>
+          <div style="color:#71717a; font-size:14px;">Правая кнопка → Запустить от имени администратора</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:flex-start; gap:14px;">
+        <div class="step-num">3</div>
+        <div>
+          <div style="font-weight:600; margin-bottom:2px;">Нажми Connect</div>
+          <div style="color:#71717a; font-size:14px;">Готово — соединение установлено</div>
+        </div>
+      </div>
+    </div>
+    <a href="https://github.com/MuraveyApp/muravey-releases/releases/download/OwlMind-v1.12.0/OwlMind-VPN-Setup-1.12.0.exe"
+       class="btn-ghost" style="margin-top:24px; padding:14px 24px; font-size:15px; width:100%; justify-content:center;">
+      <span style="font-size:18px;">🪟</span> Скачать для Windows (56 МБ)
+    </a>
   </div>
 </section>
 
-<!-- Pricing -->
-<section id="pricing" class="border-b border-line">
-  <div class="max-w-6xl mx-auto px-6 py-20">
-    <h2 class="text-3xl font-bold mb-2">Pricing</h2>
-    <p class="text-zinc-500 mb-10">Three tiers. Pay direct or book a call first.</p>
-    <div class="grid lg:grid-cols-3 gap-6">
+<hr class="divider">
 
-      <!-- Basic -->
-      <div class="card p-8 rounded-xl flex flex-col">
-        <div class="font-mono text-xs text-zinc-500 mb-2">BASIC</div>
-        <div class="text-3xl font-bold">$2,500</div>
-        <div class="text-zinc-500 mb-6">3 days · single endpoint</div>
-        <ul class="space-y-2 text-sm text-zinc-300 mb-8 flex-1">
-          <li class="check">Automated scan via OwlSec promptware (10+ attack categories, 286 detectors)</li>
-          <li class="check">AI-generated PoC for each finding (Claude Opus exploit synthesis)</li>
-          <li class="check">15-page PDF report</li>
-          <li class="check">30-minute debrief call</li>
-          <li class="check">Email Q&A for 2 weeks</li>
-        </ul>
-        <a href="https://buy.stripe.com/PLACEHOLDER_BASIC" class="btn-ghost text-center px-4 py-3 rounded-lg">Pay $2,500</a>
-      </div>
-
-      <!-- Pro (highlight) -->
-      <div class="card p-8 rounded-xl flex flex-col relative" style="border-color: #f97316;">
-        <div class="absolute -top-3 left-8 pill px-3 py-1 rounded-full text-xs font-mono" style="background:#f97316;color:#0a0a0a;">MOST POPULAR</div>
-        <div class="font-mono text-xs text-accent mb-2">PRO</div>
-        <div class="text-3xl font-bold">$5,000</div>
-        <div class="text-zinc-500 mb-6">1 week · up to 3 endpoints</div>
-        <ul class="space-y-2 text-sm text-zinc-300 mb-8 flex-1">
-          <li class="check">Everything in Basic</li>
-          <li class="check">Manual review of every automated finding (I do this personally)</li>
-          <li class="check">Custom attacks tailored to your stack (LangChain, LlamaIndex, vLLM, custom)</li>
-          <li class="check">30-page PDF report with technical appendix</li>
-          <li class="check">1-hour presentation to your team</li>
-          <li class="check">Free re-test after fixes (within 60 days)</li>
-        </ul>
-        <a href="https://buy.stripe.com/PLACEHOLDER_PRO" class="btn-primary text-center px-4 py-3 rounded-lg">Pay $5,000</a>
-      </div>
-
-      <!-- Enterprise -->
-      <div class="card p-8 rounded-xl flex flex-col">
-        <div class="font-mono text-xs text-zinc-500 mb-2">ENTERPRISE</div>
-        <div class="text-3xl font-bold">$10,000+</div>
-        <div class="text-zinc-500 mb-6">2-3 weeks · full stack</div>
-        <ul class="space-y-2 text-sm text-zinc-300 mb-8 flex-1">
-          <li class="check">Everything in Pro</li>
-          <li class="check">RAG security audit (data poisoning, retrieval ranking, embedding manipulation)</li>
-          <li class="check">Tool/function calling abuse testing across the full action surface</li>
-          <li class="check">Agent autonomy boundary testing</li>
-          <li class="check">Dedicated researcher with daily updates over Slack/Discord</li>
-          <li class="check">1-hour weekly stakeholder calls</li>
-          <li class="check">Optional $2,500/mo retainer for continuous monitoring</li>
-        </ul>
-        <a href="https://buy.stripe.com/PLACEHOLDER_ENTERPRISE" class="btn-ghost text-center px-4 py-3 rounded-lg">Pay $10,000</a>
-      </div>
-
-    </div>
+<!-- FOOTER -->
+<footer style="max-width:1100px; margin:0 auto; padding:40px 24px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+  <div style="display:flex; align-items:center; gap:8px;">
+    <span style="font-size:22px;">🦉</span>
+    <span style="font-weight:700; color:#3f3f46;">OwlMind VPN</span>
+    <span style="color:#3f3f46; font-size:14px;">v1.12.0</span>
   </div>
-</section>
-
-<!-- Trust signals -->
-<section class="border-b border-line">
-  <div class="max-w-5xl mx-auto px-6 py-20">
-    <h2 class="text-3xl font-bold mb-10">Why trust me</h2>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="card p-6 rounded-lg">
-        <div class="text-accent font-mono text-sm mb-2">CVE / $4,000</div>
-        <div class="font-semibold mb-2">Paid CVE in llama.cpp</div>
-        <p class="text-sm text-zinc-400">Type-confusion bug in the GGUF parser. Reported, fixed upstream, $4,000 bounty paid. Real exploitation, real fix, real check cleared.</p>
-      </div>
-      <div class="card p-6 rounded-lg">
-        <div class="text-accent font-mono text-sm mb-2">OwlSec</div>
-        <div class="font-semibold mb-2">286 vulnerability detectors</div>
-        <p class="text-sm text-zinc-400">In-house scanner that runs on every engagement. Same toolchain that found the GGUF bug. Maintained continuously as new attack classes appear.</p>
-      </div>
-      <div class="card p-6 rounded-lg">
-        <div class="text-accent font-mono text-sm mb-2">AI-assisted</div>
-        <div class="font-semibold mb-2">Claude Opus exploit synthesis</div>
-        <p class="text-sm text-zinc-400">Every finding gets a reproducible PoC synthesized by an LLM, then validated manually. You're not getting a Burp-Suite report dressed up.</p>
-      </div>
-    </div>
-    <p class="text-zinc-500 text-sm mt-8">Solo founder, direct line. You email me, I reply. No account managers, no SDR follow-up cadence.</p>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="border-b border-line">
-  <div class="max-w-4xl mx-auto px-6 py-20">
-    <h2 class="text-3xl font-bold mb-10">FAQ</h2>
-    <div class="space-y-4">
-      <details class="card p-5 rounded-lg group">
-        <summary class="font-semibold cursor-pointer">What if you find no vulnerabilities?</summary>
-        <p class="mt-3 text-zinc-400 text-sm">You get the report anyway, documenting exactly what was tested and why each test didn't yield a finding. That report is itself useful for SOC2/ISO27001 evidence. Refunds: Basic — no refund (the testing was done). Pro/Enterprise — 50% refund if zero findings of medium severity or higher (this has not happened yet).</p>
-      </details>
-      <details class="card p-5 rounded-lg group">
-        <summary class="font-semibold cursor-pointer">Is my data safe?</summary>
-        <p class="mt-3 text-zinc-400 text-sm">Yes. NDA signed before kickoff. All testing happens against endpoints you provide. No data leaves my workstation except the final PDF. Test artifacts (logs, payloads) deleted 30 days after delivery unless you ask me to keep them. Encrypted MacBook, FileVault, no cloud sync of engagement folders.</p>
-      </details>
-      <details class="card p-5 rounded-lg group">
-        <summary class="font-semibold cursor-pointer">How is this different from Lakera / HiddenLayer / Robust Intelligence?</summary>
-        <p class="mt-3 text-zinc-400 text-sm">Those are platforms — you self-serve, you interpret results. This is a service — I do the work, hand you a report, walk you through it. Their automated scans miss the stack-specific stuff (your custom system prompt, your specific RAG pipeline, your tool surface). I find that because I'm a human looking at your specific app, not running you through a generic scanner.</p>
-      </details>
-      <details class="card p-5 rounded-lg group">
-        <summary class="font-semibold cursor-pointer">What languages and frameworks do you support?</summary>
-        <p class="mt-3 text-zinc-400 text-sm">Anything that exposes an HTTP endpoint or a chat interface. Tested: OpenAI, Anthropic, Google, Mistral, local llama.cpp/Ollama, vLLM, LangChain, LlamaIndex, Haystack, AutoGen, CrewAI, MCP servers, custom orchestrators. Exotic stack? Ask before booking.</p>
-      </details>
-      <details class="card p-5 rounded-lg group">
-        <summary class="font-semibold cursor-pointer">Do you sign NDA?</summary>
-        <p class="mt-3 text-zinc-400 text-sm">Yes, mutual NDA before any technical conversation. I'll sign yours, or send mine. Either works.</p>
-      </details>
-      <details class="card p-5 rounded-lg group">
-        <summary class="font-semibold cursor-pointer">Can you handle production traffic?</summary>
-        <p class="mt-3 text-zinc-400 text-sm">I default to staging. If you only have prod, I rate-limit aggressively (≤1 req/sec) and skip destructive tests. We agree on the scope in writing before kickoff.</p>
-      </details>
-      <details class="card p-5 rounded-lg group">
-        <summary class="font-semibold cursor-pointer">What's turnaround time?</summary>
-        <p class="mt-3 text-zinc-400 text-sm">Basic: 3 business days from kickoff. Pro: 5-7 business days. Enterprise: 2-3 weeks. I usually have one slot open for next week — book the discovery call to check.</p>
-      </details>
-      <details class="card p-5 rounded-lg group">
-        <summary class="font-semibold cursor-pointer">Do I get a free re-test after fixes?</summary>
-        <p class="mt-3 text-zinc-400 text-sm">Pro and Enterprise: yes, within 60 days. Basic: no, but the re-test is $1,000 flat (one focused pass on the previously found issues).</p>
-      </details>
-      <details class="card p-5 rounded-lg group">
-        <summary class="font-semibold cursor-pointer">Can you train my team?</summary>
-        <p class="mt-3 text-zinc-400 text-sm">Yes — add-on workshop, 2 hours over Zoom, $1,500. Hands-on with real payloads against a sandbox. Best booked alongside Pro or Enterprise.</p>
-      </details>
-      <details class="card p-5 rounded-lg group">
-        <summary class="font-semibold cursor-pointer">Do you do ongoing monitoring?</summary>
-        <p class="mt-3 text-zinc-400 text-sm">Yes — $2,500/month retainer. I re-scan on every model swap, every prompt change you push, and any time a new public jailbreak/CVE drops that affects your stack. Includes a monthly 30-min sync.</p>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section>
-  <div class="max-w-4xl mx-auto px-6 py-24 text-center">
-    <h2 class="text-3xl sm:text-4xl font-bold mb-4">Stop guessing. Start testing.</h2>
-    <p class="text-zinc-400 max-w-xl mx-auto mb-10">Book a 30-min discovery call (free, no slides) or pay direct and I'll send the kickoff doc within an hour.</p>
-    <div class="flex flex-wrap gap-3 justify-center">
-      <a href="https://calendly.com/owlmind/llm-redteam" class="btn-primary px-6 py-3 rounded-lg glow">Book discovery call</a>
-      <a href="https://buy.stripe.com/PLACEHOLDER_BASIC" class="btn-ghost px-6 py-3 rounded-lg">Pay $2,500 (Basic)</a>
-      <a href="https://buy.stripe.com/PLACEHOLDER_PRO" class="btn-ghost px-6 py-3 rounded-lg">Pay $5,000 (Pro)</a>
-      <a href="https://buy.stripe.com/PLACEHOLDER_ENTERPRISE" class="btn-ghost px-6 py-3 rounded-lg">Pay $10,000 (Enterprise)</a>
-    </div>
-    <p class="text-zinc-600 text-sm mt-10">Or email <a href="mailto:hello@owlmind.dev" class="text-accent hover:underline">hello@owlmind.dev</a></p>
-  </div>
-</section>
-
-<footer class="border-t border-line">
-  <div class="max-w-5xl mx-auto px-6 py-8 flex flex-wrap justify-between items-center text-sm text-zinc-500">
-    <div>OwlMind · Solo founder, paid CVE researcher, OwlSec author. No fluff.</div>
-    <div class="flex gap-4 mt-4 sm:mt-0">
-      <a href="mailto:hello@owlmind.dev" class="hover:text-accent">Email</a>
-      <a href="https://twitter.com/owlmind11" class="hover:text-accent">Twitter</a>
-      <a href="https://owlmind.dev" class="hover:text-accent">owlmind.dev</a>
-    </div>
-  </div>
+  <div style="color:#3f3f46; font-size:14px;">© 2026 OwlMind. Все права защищены.</div>
 </footer>
 
 </body>
