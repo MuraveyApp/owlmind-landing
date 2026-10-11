@@ -946,6 +946,37 @@
 </section>
 </div>
 
+<!-- ========== LIVE DEMO ========== -->
+<div class="wrap">
+<section id="demo" class="s-border reveal">
+<h2 data-en="Live Demo: " data-ru="Живой пример: ">Live Demo: <span class="accent" data-en="SQL Injection" data-ru="SQL-инъекция">SQL Injection</span></h2>
+<p class="section-sub" data-en="A real vulnerability we found in a banking login. Try both buttons — then see the fix." data-ru="Реальная уязвимость, которую мы нашли в банковском входе. Нажмите обе кнопки — и посмотрите, как закрыть дыру.">A real vulnerability we found in a banking login. Try both buttons — then see the fix.</p>
+
+<div class="demo-box">
+  <div class="demo-form">
+    <input type="text" id="demo-user" placeholder="username" value="admin">
+    <input type="text" id="demo-pass" placeholder="password" value="' OR '1'='1">
+    <div class="demo-btns">
+      <button type="button" class="btn-hero primary" id="demo-vuln" data-en="Login (vulnerable)" data-ru="Войти (уязвимо)">Login (vulnerable)</button>
+      <button type="button" class="btn-hero ghost" id="demo-fix" data-en="Login (fixed)" data-ru="Войти (исправлено)">Login (fixed)</button>
+    </div>
+    <div class="demo-result" id="demo-result"></div>
+  </div>
+
+  <div class="demo-code">
+    <div class="code-block vuln">
+      <span class="tag" data-en="Vulnerable" data-ru="Уязвимо">Vulnerable</span>
+      <code>query = "SELECT * FROM users WHERE user='" + u + "' AND pass='" + p + "'"</code>
+    </div>
+    <div class="code-block fix">
+      <span class="tag" data-en="Fixed" data-ru="Исправлено">Fixed</span>
+      <code>query = "SELECT * FROM users WHERE user = ? AND pass = ?" <span data-en="(parameterized)" data-ru="(параметризованный)">(parameterized)</span></code>
+    </div>
+  </div>
+</div>
+</section>
+</div>
+
 <!-- ========== CTA ========== -->
 <div class="wrap">
 <section class="s-border reveal">
@@ -1057,6 +1088,20 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
   });
 });
+
+// Live demo — SQL injection
+(function(){
+  var r=document.getElementById('demo-result');
+  if(!r) return;
+  var isRu=function(){return document.documentElement.getAttribute('lang')==='ru'};
+  var show=function(html){r.innerHTML=html};
+  document.getElementById('demo-vuln').addEventListener('click',function(){
+    show(isRu()?'<span style="color:var(--red)">⚠ Доступ получен — SQL-инъекция обошла вход</span>':'<span style="color:var(--red)">⚠ Access granted — SQL injection bypassed the login</span>');
+  });
+  document.getElementById('demo-fix').addEventListener('click',function(){
+    show(isRu()?'<span style="color:var(--green)">✓ Доступ запрещён — параметризованный запрос заблокировал инъекцию</span>':'<span style="color:var(--green)">✓ Access denied — the parameterized query blocked the injection</span>');
+  });
+})();
 </script>
 </body>
 </html>
