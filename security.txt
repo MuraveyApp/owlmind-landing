@@ -1,0 +1,4 @@
+Contact: mailto:devowlmind@gmail.com
+Expires: 2027-12-31T00:00:00Z
+Preferred-Languages: en, ru
+Canonical: https://owlmind.dev/.well-known/security.txt

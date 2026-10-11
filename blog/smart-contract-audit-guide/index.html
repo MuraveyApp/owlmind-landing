@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-en="Smart Contract Audit Guide — OwlMind Security" data-ru="Гайд по аудиту смарт-контрактов — OwlMind Security">Smart Contract Audit Guide — OwlMind Security</title>
+<meta name="description" data-en="Smart contract audit explained: which vulnerabilities we look for, how the audit runs, how long it takes, what lands in the report and how we re-check after fixes." data-ru="Аудит смарт-контрактов: какие уязвимости ищем, как проходит проверка, сколько длится, что в отчёте и как перепроверяем после исправлений." content="Smart contract audit explained: which vulnerabilities we look for, how the audit runs, how long it takes, what lands in the report and how we re-check after fixes.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://owlmind.dev/blog/smart-contract-audit-guide/">
+<meta property="og:title" content="Smart Contract Audit Guide — OwlMind Security">
+<meta property="og:description" content="What we check, how the audit runs, timelines, report contents and re-verification after fixes.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://owlmind.dev/blog/smart-contract-audit-guide/">
+<meta property="og:image" content="https://owlmind.dev/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#129417;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<nav>
+<div class="nav-inner">
+  <a href="/" class="logo"><i>Owl</i>Mind</a>
+  <div class="nav-links">
+    <a href="/#industries" class="hide-m" data-en="Industries" data-ru="Отрасли">Industries</a>
+    <a href="/casino/" data-en="Casino" data-ru="Казино">Casino</a>
+    <a href="/crypto/" data-en="Crypto" data-ru="Крипто">Crypto</a>
+    <a href="/banking/" data-en="Banking" data-ru="Банки">Banking</a>
+    <a href="/pentest/" data-en="Pentest" data-ru="Пентест">Pentest</a>
+    <a href="mailto:devowlmind@gmail.com?subject=Smart%20Contract%20Audit%20Guide" class="btn-nav" data-en="Contact Us" data-ru="Связаться">Contact Us</a>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button type="button" data-lang="en" data-lang-toggle>EN</button>
+      <button type="button" data-lang="ru" data-lang-toggle>RU</button>
+    </div>
+  </div>
+</div>
+</nav>
+
+<div class="sub-hero">
+<div class="hero-bg"></div>
+<div class="hero-grid"></div>
+<div class="hero-content">
+  <div class="breadcrumb"><a href="/" data-en="Home" data-ru="Главная">Home</a> &nbsp;/&nbsp; <a href="/smart-contract-audit/" data-en="Smart Contract Audit" data-ru="Аудит смарт-контрактов">Smart Contract Audit</a> &nbsp;/&nbsp; <span data-en="Audit Guide" data-ru="Гайд">Audit Guide</span></div>
+  <h1><span data-en="Smart Contract Audit" data-ru="Аудит смарт-">Smart Contract Audit</span> <span class="gr" data-en="Guide: What We Check" data-ru="контрактов: что проверяем">Guide: What We Check</span></h1>
+  <p data-en="No mystery box: the checklist, the timeline, the report and the fix-verification loop." data-ru="Никакого чёрного ящика: чек-лист, сроки, отчёт и цикл проверки исправлений.">No mystery box: the checklist, the timeline, the report and the fix-verification loop.</p>
+  <div class="hero-btns"><a href="mailto:devowlmind@gmail.com?subject=Smart%20Contract%20Audit%20Guide" class="btn-hero primary" data-en="Get a Free Consultation" data-ru="Бесплатная консультация">Get a Free Consultation</a></div>
+</div>
+</div>
+
+<div class="sub-section">
+<section>
+<h2 data-en="Which Vulnerabilities We Look For" data-ru="Какие уязвимости ищем">Which Vulnerabilities We Look For</h2>
+<p data-en="Every audit starts from the money: who can move value, under what checks, and what happens when those checks are raced, replayed or fed hostile input. On that path we hunt:" data-ru="Каждый аудит начинается с денег: кто двигает ценность, под какими проверками, и что будет, если их обгоняют гонкой или подают враждебный вход. На этом пути ищем:">Every audit starts from the money: who can move value, under what checks, and what happens when those checks are raced, replayed or fed hostile input. On that path we hunt:</p>
+<ul class="sub-list">
+  <li><span>&#10003;</span> <span data-en="Reentrancy and cross-function repeated calls" data-ru="Reentrancy и повторные вызовы между функциями">Reentrancy and cross-function repeated calls</span></li>
+  <li><span>&#10003;</span> <span data-en="Flash-loan and price-oracle manipulation" data-ru="Манипуляции через flash-loan и оракулы цен">Flash-loan and price-oracle manipulation</span></li>
+  <li><span>&#10003;</span> <span data-en="Access-control and role-escalation flaws" data-ru="Ошибки контроля доступа и прав">Access-control and role-escalation flaws</span></li>
+  <li><span>&#10003;</span> <span data-en="Overflow, underflow and precision loss" data-ru="Переполнение и потеря точности">Overflow, underflow and precision loss</span></li>
+  <li><span>&#10003;</span> <span data-en="Signature replay, missing nonce or deadline" data-ru="Повтор подписи, нет nonce или срока">Signature replay, missing nonce or deadline</span></li>
+  <li><span>&#10003;</span> <span data-en="Upgradeable-proxy and initializer mistakes" data-ru="Ошибки прокси и инициализаторов">Upgradeable-proxy and initializer mistakes</span></li>
+  <li><span>&#10003;</span> <span data-en="Front-running and missing slippage protection" data-ru="Упреждение и нет защиты от проскальзывания">Front-running and missing slippage protection</span></li>
+  <li><span>&#10003;</span> <span data-en="Centralization: one key that can rug or pause forever" data-ru="Централизация: один ключ всё заблокирует">Centralization: one key that can rug or pause forever</span></li>
+</ul>
+</section>
+
+<section>
+<h2 data-en="How the Audit Runs" data-ru="Как проходит аудит">How the Audit Runs</h2>
+<p data-en="Scope is frozen first: commit hash, chains, in-scope contracts, admin roles. Then a manual line-by-line review of every value-moving function, plus static and symbolic tooling for the rest. Every critical candidate gets a working proof-of-concept — a reproduction, not a screenshot. Findings are ranked by impact and walked through with your team." data-ru="Сначала фиксируем объём: хеш коммита, сети, контракты, админ-роли. Дальше — ручной построчный разбор функций с переводом ценности, плюс статические и символьные инструменты. Каждый критический кандидат получает работающее доказательство — воспроизведение, не скриншот. Находки ранжируются по влиянию и разбираются с командой.">Scope is frozen first: commit hash, chains, in-scope contracts, admin roles. Then a manual line-by-line review of every value-moving function, plus static and symbolic tooling for the rest. Every critical candidate gets a working proof-of-concept — a reproduction, not a screenshot. Findings are ranked by impact and walked through with your team.</p>
+</section>
+
+<section>
+<h2 data-en="How Long It Takes and What It Costs" data-ru="Сколько длится и сколько стоит">How Long It Takes and What It Costs</h2>
+<p data-en="A single contract or token takes 1–2 weeks. A full protocol — core, periphery, scripts and deploy config — takes 3–5 weeks. Timeline and price scale with code size, mechanism novelty and integrations. You get a fixed quote before work starts; scope changes are re-quoted, never billed silently." data-ru="Один контракт или токен — 1–2 недели. Полный протокол — ядро, периферия, скрипты, деплой — 3–5 недель. Срок и цена растут с объёмом кода, новизной механики и интеграциями. До старта — фиксированная смета; изменение объёма пересчитывается, без молчаливых доплат.">A single contract or token takes 1–2 weeks. A full protocol — core, periphery, scripts and deploy config — takes 3–5 weeks. Timeline and price scale with code size, mechanism novelty and integrations. You get a fixed quote before work starts; scope changes are re-quoted, never billed silently.</p>
+</section>
+
+<section>
+<h2 data-en="What Lands in the Report" data-ru="Что в отчёте">What Lands in the Report</h2>
+<ul class="sub-list">
+  <li><span>&#10003;</span> <span data-en="Executive summary for investors" data-ru="Резюме для инвесторов">Executive summary for investors</span></li>
+  <li><span>&#10003;</span> <span data-en="Every finding: root cause, severity, affected code path" data-ru="Каждая находка: корень, серьёзность, путь кода">Every finding: root cause, severity, affected code path</span></li>
+  <li><span>&#10003;</span> <span data-en="Working proof-of-concept for critical and high issues" data-ru="Рабочее доказательство для критичных проблем">Working proof-of-concept for critical and high issues</span></li>
+  <li><span>&#10003;</span> <span data-en="Code-level fix, not a vague recommendation" data-ru="Исправление на уровне кода, не совет">Code-level fix, not a vague recommendation</span></li>
+  <li><span>&#10003;</span> <span data-en="Residual risk and centralization notes" data-ru="Остаточный риск и централизация">Residual risk and centralization notes</span></li>
+</ul>
+</section>
+
+<section>
+<h2 data-en="Re-Check After Fixes" data-ru="Перепроверка после исправлений">Re-Check After Fixes</h2>
+<p data-en="After your team ships fixes, we re-scan the changed code free of charge and confirm each remediation in an updated report — so the final PDF reflects the code you actually deploy. Every audit includes 30 days of support." data-ru="После выпуска исправлений мы бесплатно перепроверяем изменённый код и подтверждаем каждое решение в обновлённом отчёте — чтобы финальный PDF отражал деплоенный код. Каждый аудит включает 30 дней поддержки.">After your team ships fixes, we re-scan the changed code free of charge and confirm each remediation in an updated report — so the final PDF reflects the code you actually deploy. Every audit includes 30 days of support.</p>
+<div class="sub-outcome" data-en="Bottom line: a serious audit is a reproducible process — frozen scope, manual review of value paths, working PoCs, a report partners can act on, and a free re-check after fixes. Anything less is a checkbox." data-ru="Итог: серьёзный аудит — воспроизводимый процесс: фиксированный объём, разбор денежных путей, рабочие доказательства, отчёт для партнёров и бесплатная перепроверка. Всё меньше — галочка.">Bottom line: a serious audit is a reproducible process — frozen scope, manual review of value paths, working PoCs, a report partners can act on, and a free re-check after fixes. Anything less is a checkbox.</div>
+</section>
+
+<section>
+<h2 data-en="Keep Reading" data-ru="Читать дальше">Keep Reading</h2>
+<ul class="sub-list">
+  <li><span>&#10003;</span> <span><a href="/smart-contract-audit/" data-en="Smart contract audit service page" data-ru="Страница услуги аудита смарт-контрактов">Smart contract audit service page</a></span></li>
+  <li><span>&#10003;</span> <span><a href="/crypto/" data-en="Crypto exchange security" data-ru="Защита криптобирж">Crypto exchange security</a></span></li>
+</ul>
+</section>
+
+<section>
+<h2 data-en="FAQ" data-ru="Вопросы">FAQ</h2>
+<div class="faq-item"><h4 data-en="Can you audit before the code is finished?" data-ru="Можно ли аудит до готовности кода?">Can you audit before the code is finished?</h4><p data-en="A partial review of a frozen branch helps, but a final report needs a commit hash that will not move." data-ru="Частичный разбор зафиксированной ветки полезен, но финальный отчёт — по хешу, который не двигается.">A partial review of a frozen branch helps, but a final report needs a commit hash that will not move.</p></div>
+<div class="faq-item"><h4 data-en="Do you publish the report?" data-ru="Публикуете ли отчёт?">Do you publish the report?</h4><p data-en="Only if you choose to. Many teams publish it for listing and investor trust — timing is yours." data-ru="Только если решите. Многие публикуют его ради листинга и доверия — сроки за вами.">Only if you choose to. Many teams publish it for listing and investor trust — timing is yours.</p></div>
+<div class="faq-item"><h4 data-en="What if a finding is disputed?" data-ru="Что если находка оспаривается?">What if a finding is disputed?</h4><p data-en="We walk through the PoC with your engineers. If the issue is by-design or unreachable, we record the reasoning and adjust severity — in writing." data-ru="Разбираем доказательство с инженерами. Если проблема задумана или путь недостижим, фиксируем обоснование и меняем серьёзность — письменно.">We walk through the PoC with your engineers. If the issue is by-design or unreachable, we record the reasoning and adjust severity — in writing.</p></div>
+</section>
+
+<section class="s-border">
+<div class="express-box">
+  <h3 data-en="Ready to Secure Your Protocol?" data-ru="Готовы защитить свой протокол?">Ready to Secure Your Protocol?</h3>
+  <div class="sub" data-en="Get a free consultation and a tailored proposal within 48 hours." data-ru="Бесплатная консультация и персональное предложение в течение 48 часов.">Get a free consultation and a tailored proposal within 48 hours.</div>
+  <a href="mailto:devowlmind@gmail.com?subject=Smart%20Contract%20Audit%20Guide" class="btn-hero primary" style="font-size:16px;padding:16px 40px;display:inline-block" data-en="Get a Free Consultation" data-ru="Бесплатная консультация">Get a Free Consultation</a>
+</div>
+</section>
+</div>
+
+<footer>
+<div class="footer-inner">
+  <div style="display:flex;align-items:center;gap:8px"><span style="font-weight:700;color:var(--dim2)">OwlMind Security</span></div>
+  <div class="footer-links">
+    <a href="/" data-en="Home" data-ru="Главная">Home</a>
+    <a href="/casino/" data-en="Casino" data-ru="Казино">Casino</a>
+    <a href="/crypto/" data-en="Crypto" data-ru="Крипто">Crypto</a>
+    <a href="/banking/" data-en="Banking" data-ru="Банки">Banking</a>
+    <a href="/pentest/" data-en="Pentest" data-ru="Пентест">Pentest</a>
+  </div>
+  <p>&copy; 2026 OwlMind Security. <span data-en="All rights reserved." data-ru="Все права защищены.">All rights reserved.</span></p>
+</div>
+</footer>
+
+<script src="/js/i18n.js"></script>
+</body>
+</html>

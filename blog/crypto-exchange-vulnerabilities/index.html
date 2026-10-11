@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-en="Crypto Exchange Vulnerabilities — OwlMind Security" data-ru="Уязвимости криптобирж — OwlMind Security">Crypto Exchange Vulnerabilities — OwlMind Security</title>
+<meta name="description" data-en="Top crypto exchange vulnerabilities: reentrancy, flash-loan attacks, oracle price manipulation, withdrawal races, key leakage and KYC bypass — what each one is and how to close it." data-ru="Топ уязвимостей криптобирж: повторный вызов, flash-loan, подмена цен через оракулы, гонки при выводе, утечка ключей и обход KYC — что это и как закрыть." content="Top crypto exchange vulnerabilities: reentrancy, flash-loan attacks, oracle price manipulation, withdrawal races, key leakage and KYC bypass — what each one is and how to close it.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://owlmind.dev/blog/crypto-exchange-vulnerabilities/">
+<meta property="og:title" content="Crypto Exchange Vulnerabilities — OwlMind Security">
+<meta property="og:description" content="Reentrancy, flash-loan, oracle manipulation, withdrawal races, key leaks, KYC bypass — and how to fix each.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://owlmind.dev/blog/crypto-exchange-vulnerabilities/">
+<meta property="og:image" content="https://owlmind.dev/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#129417;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<nav>
+<div class="nav-inner">
+  <a href="/" class="logo"><i>Owl</i>Mind</a>
+  <div class="nav-links">
+    <a href="/#industries" class="hide-m" data-en="Industries" data-ru="Отрасли">Industries</a>
+    <a href="/casino/" data-en="Casino" data-ru="Казино">Casino</a>
+    <a href="/crypto/" data-en="Crypto" data-ru="Крипто">Crypto</a>
+    <a href="/banking/" data-en="Banking" data-ru="Банки">Banking</a>
+    <a href="/pentest/" data-en="Pentest" data-ru="Пентест">Pentest</a>
+    <a href="mailto:devowlmind@gmail.com?subject=Crypto%20Exchange%20Vulnerabilities" class="btn-nav" data-en="Contact Us" data-ru="Связаться">Contact Us</a>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button type="button" data-lang="en" data-lang-toggle>EN</button>
+      <button type="button" data-lang="ru" data-lang-toggle>RU</button>
+    </div>
+  </div>
+</div>
+</nav>
+
+<div class="sub-hero">
+<div class="hero-bg"></div>
+<div class="hero-grid"></div>
+<div class="hero-content">
+  <div class="breadcrumb"><a href="/" data-en="Home" data-ru="Главная">Home</a> &nbsp;/&nbsp; <a href="/crypto/" data-en="Crypto" data-ru="Крипто">Crypto</a> &nbsp;/&nbsp; <span data-en="Exchange Vulnerabilities" data-ru="Уязвимости бирж">Exchange Vulnerabilities</span></div>
+  <h1><span data-en="Top Crypto Exchange" data-ru="Топ уязвимостей">Top Crypto Exchange</span> <span class="gr" data-en="Vulnerabilities" data-ru="криптобирж">Vulnerabilities</span></h1>
+  <p data-en="Six bug classes drain exchanges year after year — each has a known fix." data-ru="Шесть классов ошибок опустошают биржи — у каждого есть известное решение.">Six bug classes drain exchanges year after year — each has a known fix.</p>
+  <div class="hero-btns"><a href="mailto:devowlmind@gmail.com?subject=Crypto%20Exchange%20Vulnerabilities" class="btn-hero primary" data-en="Get a Free Consultation" data-ru="Бесплатная консультация">Get a Free Consultation</a></div>
+</div>
+</div>
+
+<div class="sub-section">
+<section>
+<h2 data-en="1. Reentrancy (Repeated Call)" data-ru="1. Повторный вызов (reentrancy)">1. Reentrancy (Repeated Call)</h2>
+<p data-en="The contract transfers funds before it updates the balance. A malicious receiver calls withdraw again while the old balance is still recorded — and drains the vault in one transaction." data-ru="Контракт переводит средства ДО обновления баланса. Вредоносный получатель снова вызывает вывод, пока старый баланс ещё записан, и выкачивает хранилище за одну транзакцию.">The contract transfers funds before it updates the balance. A malicious receiver calls withdraw again while the old balance is still recorded — and drains the vault in one transaction.</p>
+<ul class="sub-list">
+  <li><span>&#10003;</span> <span data-en="Checks-Effects-Interactions: update state first, transfer last" data-ru="Порядок «проверка-эффект-взаимодействие»: сначала состояние, потом перевод">Checks-Effects-Interactions: update state first, transfer last</span></li>
+  <li><span>&#10003;</span> <span data-en="Reentrancy guard on every value-moving function" data-ru="Защита от повторного входа на каждую функцию с переводом">Reentrancy guard on every value-moving function</span></li>
+</ul>
+</section>
+
+<section>
+<h2 data-en="2. Flash-Loan Attacks" data-ru="2. Атаки мгновенными займами">2. Flash-Loan Attacks</h2>
+<p data-en="The attacker borrows huge capital inside one transaction, bends a protocol (vote, pool price, collateral), profits and repays — all atomically. Own capital is not needed." data-ru="Атакующий берёт огромный капитал внутри одной транзакции, гнёт протокол (голосование, цена пула, залог), забирает прибыль и возвращает заём — атомарно. Своих денег не нужно.">The attacker borrows huge capital inside one transaction, bends a protocol (vote, pool price, collateral), profits and repays — all atomically. Own capital is not needed.</p>
+<ul class="sub-list">
+  <li><span>&#10003;</span> <span data-en="Time-weighted average price instead of spot quotes" data-ru="Средняя цена за окно времени вместо мгновенной">Time-weighted average price instead of spot quotes</span></li>
+  <li><span>&#10003;</span> <span data-en="Per-block caps on minting, borrowing and large swaps" data-ru="Лимиты на блок: выпуск, заём, крупные обмены">Per-block caps on minting, borrowing and large swaps</span></li>
+</ul>
+</section>
+
+<section>
+<h2 data-en="3. Oracle Price Manipulation" data-ru="3. Подмена цен через оракулы">3. Oracle Price Manipulation</h2>
+<p data-en="If pricing runs on a thin pool or a single feed, one large swap moves the price and liquidates honest users. The exchange logic is fine — the price input is the bug." data-ru="Если цена берётся из тонкого пула или одной ленты, один крупный обмен двигает её и ликвидирует честных пользователей. Логика исправна — ошибка во входной цене.">If pricing runs on a thin pool or a single feed, one large swap moves the price and liquidates honest users. The exchange logic is fine — the price input is the bug.</p>
+<ul class="sub-list">
+  <li><span>&#10003;</span> <span data-en="Several independent feeds, median of sources" data-ru="Несколько независимых источников, медиана">Several independent feeds, median of sources</span></li>
+  <li><span>&#10003;</span> <span data-en="Deviation circuit-breaker: pause on sharp moves" data-ru="Предохранитель по отклонению: пауза на резком скачке">Deviation circuit-breaker: pause on sharp moves</span></li>
+</ul>
+</section>
+
+<section>
+<h2 data-en="4. Withdrawal Race Conditions" data-ru="4. Гонки при выводе средств">4. Withdrawal Race Conditions</h2>
+<p data-en="Two withdrawal requests pass the balance check before either debits. Both succeed on the same balance — a double-spend. Same shape in refunds and bonus claims." data-ru="Два запроса на вывод проходят проверку баланса до списания. Оба успешны по одному балансу — двойной расход. Та же форма у возвратов и бонусов.">Two withdrawal requests pass the balance check before either debits. Both succeed on the same balance — a double-spend. Same shape in refunds and bonus claims.</p>
+<ul class="sub-list">
+  <li><span>&#10003;</span> <span data-en="One DB transaction: check and debit atomically" data-ru="Одна транзакция базы: проверка и списание атомарно">One DB transaction: check and debit atomically</span></li>
+  <li><span>&#10003;</span> <span data-en="Idempotency keys so a retry cannot pay twice" data-ru="Ключи идемпотентности, чтобы повтор не заплатил дважды">Idempotency keys so a retry cannot pay twice</span></li>
+</ul>
+</section>
+
+<section>
+<h2 data-en="5. Key and Secret Leakage" data-ru="5. Утечка ключей и секретов">5. Key and Secret Leakage</h2>
+<p data-en="Hot-wallet keys, withdrawal API tokens and admin passwords leak through JS bundles, public .env files, CI logs and support chats. One leaked key is a full payout queue." data-ru="Ключи горячего кошелька, токены вывода и админ-пароли утекают через JS-бандлы, публичные .env, логи CI и чаты поддержки. Один утёкший ключ = целая очередь выплат.">Hot-wallet keys, withdrawal API tokens and admin passwords leak through JS bundles, public .env files, CI logs and support chats. One leaked key is a full payout queue.</p>
+<ul class="sub-list">
+  <li><span>&#10003;</span> <span data-en="Sign payouts in HSM or MPC — never on app servers" data-ru="Подпись выплат в HSM или MPC — никогда на прикладных серверах">Sign payouts in HSM or MPC — never on app servers</span></li>
+  <li><span>&#10003;</span> <span data-en="Secret scanning in CI; no secrets in front-end bundles" data-ru="Поиск секретов в CI; никаких секретов во фронтовых бандлах">Secret scanning in CI; no secrets in front-end bundles</span></li>
+</ul>
+</section>
+
+<section>
+<h2 data-en="6. KYC Bypass" data-ru="6. Обход KYC">6. KYC Bypass</h2>
+<p data-en="Selfie-only checks, reusable document uploads and race conditions in the verification state machine let one person open many accounts — for laundering or bonus abuse." data-ru="Проверка по селфи, повторное использование документов и гонки в автомате верификации дают одному человеку много аккаунтов — для отмывания или накрутки.">Selfie-only checks, reusable document uploads and race conditions in the verification state machine let one person open many accounts — for laundering or bonus abuse.</p>
+<ul class="sub-list">
+  <li><span>&#10003;</span> <span data-en="Document authenticity checks plus active liveness" data-ru="Проверка подлинности документа плюс активная проверка живости">Document authenticity checks plus active liveness</span></li>
+  <li><span>&#10003;</span> <span data-en="Server-side state machine — no client-trusted status flags" data-ru="Серверный конечный автомат — без флагов статуса с клиента">Server-side state machine — no client-trusted status flags</span></li>
+</ul>
+</section>
+
+<section>
+<h2 data-en="What a Review Gives You" data-ru="Что даёт проверка">What a Review Gives You</h2>
+<div class="sub-outcome" data-en="A focused pass over the six classes above — contracts, withdrawal services, key management, KYC — with a working proof-of-concept for every critical issue and a code-level fix. Start with the money paths." data-ru="Целевая проверка шести классов выше — контракты, вывод, ключи, KYC — с работающим доказательством каждой критической проблемы и исправлением на уровне кода. Начинайте с денежных путей.">A focused pass over the six classes above — contracts, withdrawal services, key management, KYC — with a working proof-of-concept for every critical issue and a code-level fix. Start with the money paths.</div>
+</section>
+
+<section>
+<h2 data-en="Keep Reading" data-ru="Читать дальше">Keep Reading</h2>
+<ul class="sub-list">
+  <li><span>&#10003;</span> <span><a href="/crypto/" data-en="Crypto exchange security overview" data-ru="Обзор защиты криптобирж">Crypto exchange security overview</a></span></li>
+  <li><span>&#10003;</span> <span><a href="/smart-contract-audit/" data-en="How our smart contract audit works" data-ru="Как проходит наш аудит смарт-контрактов">How our smart contract audit works</a></span></li>
+</ul>
+</section>
+
+<section>
+<h2 data-en="FAQ" data-ru="Вопросы">FAQ</h2>
+<div class="faq-item"><h4 data-en="Which of these is most common?" data-ru="Что из этого встречается чаще всего?">Which of these is most common?</h4><p data-en="Withdrawal races and key leakage. Boring, outside the contract code, and they pay out instantly." data-ru="Гонки при выводе и утечка ключей. Скучные, вне кода, платят мгновенно.">Withdrawal races and key leakage. Boring, outside the contract code, and they pay out instantly.</p></div>
+<div class="faq-item"><h4 data-en="Do flash-loan defenses slow a protocol?" data-ru="Делает ли защита от flash-loan протокол медленным?">Do flash-loan defenses slow a protocol?</h4><p data-en="No. TWAP windows add at most one block of latency — invisible to users, decisive against atomic manipulation." data-ru="Нет. Окна TWAP добавляют максимум одну блоковую задержку — для пользователя незаметно, для атомарной манипуляции решающе.">No. TWAP windows add at most one block of latency — invisible to users, decisive against atomic manipulation.</p></div>
+</section>
+
+<section class="s-border">
+<div class="express-box">
+  <h3 data-en="Found One of These on Your Platform?" data-ru="Нашли у себя один из этих пунктов?">Found One of These on Your Platform?</h3>
+  <div class="sub" data-en="Get a free consultation and a tailored proposal within 48 hours." data-ru="Бесплатная консультация и персональное предложение в течение 48 часов.">Get a free consultation and a tailored proposal within 48 hours.</div>
+  <a href="mailto:devowlmind@gmail.com?subject=Crypto%20Exchange%20Vulnerabilities" class="btn-hero primary" style="font-size:16px;padding:16px 40px;display:inline-block" data-en="Get a Free Consultation" data-ru="Бесплатная консультация">Get a Free Consultation</a>
+</div>
+</section>
+</div>
+
+<footer>
+<div class="footer-inner">
+  <div style="display:flex;align-items:center;gap:8px"><span style="font-weight:700;color:var(--dim2)">OwlMind Security</span></div>
+  <div class="footer-links">
+    <a href="/" data-en="Home" data-ru="Главная">Home</a>
+    <a href="/casino/" data-en="Casino" data-ru="Казино">Casino</a>
+    <a href="/crypto/" data-en="Crypto" data-ru="Крипто">Crypto</a>
+    <a href="/banking/" data-en="Banking" data-ru="Банки">Banking</a>
+    <a href="/pentest/" data-en="Pentest" data-ru="Пентест">Pentest</a>
+  </div>
+  <p>&copy; 2026 OwlMind Security. <span data-en="All rights reserved." data-ru="Все права защищены.">All rights reserved.</span></p>
+</div>
+</footer>
+
+<script src="/js/i18n.js"></script>
+</body>
+</html>
