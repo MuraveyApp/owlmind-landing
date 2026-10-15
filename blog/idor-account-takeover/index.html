@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-en="IDOR — The Object Reference That Gives Away Accounts — OwlMind Security" data-ru="IDOR — ссылка на объект, отдающая чужие аккаунты — OwlMind Security">IDOR — The Object Reference That Gives Away Accounts — OwlMind Security</title>
+<meta content="How a predictable object ID lets one user read another's data, why IDOR is the most common access-control miss, and how to test it properly." data-en="How a predictable object ID lets one user read another's data, why IDOR is the most common access-control miss, and how to test it properly." data-ru="Как предсказуемый идентификатор объекта даёт одному пользователю читать данные другого, почему IDOR — самая частая ошибка контроля доступа и как её правильно тестировать." name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://owlmind.dev/blog/idor-account-takeover/" rel="canonical"/>
+<meta content="IDOR — The Object Reference That Gives Away Accounts — OwlMind Security" property="og:title"/>
+<meta content="How a predictable object ID lets one user read another's data." property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://owlmind.dev/blog/idor-account-takeover/" property="og:url"/>
+<meta content="https://owlmind.dev/og-image.png" property="og:image"/>
+<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🦉&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="/style.css" rel="stylesheet"/>
+<link href="https://owlmind.dev/ru/blog/idor-account-takeover/" hreflang="ru" rel="alternate"/><link href="https://owlmind.dev/blog/idor-account-takeover/" hreflang="x-default" rel="alternate"/></head>
+<body>
+<nav>
+<div class="nav-inner">
+<a class="logo" href="/"><i>Owl</i>Mind</a>
+<div class="nav-links">
+<a class="hide-m" data-en="Industries" data-ru="Отрасли" href="/#industries">Industries</a>
+<a data-en="Casino" data-ru="Казино" href="/casino/">Casino</a>
+<a data-en="Crypto" data-ru="Крипто" href="/crypto/">Crypto</a>
+<a data-en="Banking" data-ru="Банки" href="/banking/">Banking</a>
+<a data-en="Smart Contract" data-ru="Смарт-контракты" href="/smart-contract-audit/">Smart Contract</a>
+<a class="btn-nav" data-en="Contact Us" data-ru="Связаться" href="mailto:devowlmind@gmail.com?subject=Pentest">Contact Us</a>
+<div aria-label="Language" class="lang-toggle" role="group">
+<button data-lang="en" data-lang-toggle="" type="button">EN</button>
+<button data-lang="ru" data-lang-toggle="" type="button">RU</button>
+</div>
+</div>
+</div>
+</nav>
+<div class="sub-hero">
+<div class="hero-bg"></div>
+<div class="hero-grid"></div>
+<div class="hero-content">
+<div class="breadcrumb"><a data-en="Home" data-ru="Главная" href="/">Home</a>  /  <span data-en="Blog" data-ru="Блог">Blog</span>  /  <span data-en="IDOR" data-ru="IDOR">IDOR</span></div>
+<h1><span data-en="IDOR and Account Takeover" data-ru="IDOR и перехват аккаунта">IDOR and Account Takeover</span></h1>
+<p data-en="Change the id in the URL, keep the same session — and the API hands over someone else's account. IDOR is small to exploit and devastating in impact." data-ru="Меняешь id в адресе, оставляешь ту же сессию — и API отдаёт чужой аккаунт. IDOR прост в эксплуатации и разрушителен по последствиям.">Change the id in the URL, keep the same session — and the API hands over someone else's account. IDOR is small to exploit and devastating in impact.</p>
+<div class="hero-btns"><a class="btn-hero primary" data-en="Request an IDOR Audit" data-ru="Заказать проверку IDOR" href="mailto:devowlmind@gmail.com?subject=IDOR%20Audit">Request an IDOR Audit</a></div>
+</div>
+</div>
+<div class="sub-section">
+<section>
+<h2 data-en="What IDOR Actually Is" data-ru="Что такое IDOR на самом деле">What IDOR Actually Is</h2>
+<p data-en="IDOR — insecure direct object reference — is the app trusting the identifier but not checking who is asking. You change /statement/12345 to /statement/12346, and if the server only checks that you are logged in, not that 12346 belongs to you, it returns a stranger's statement, card or passport scan." data-ru="IDOR — это когда приложение доверяет идентификатору, но не проверяет, кто спрашивает. Меняешь /statement/12345 на /statement/12346, и если сервер проверяет только факт входа, а не принадлежность 12346 тебе, — получаешь чужую выписку, карту или скан паспорта.">IDOR — insecure direct object reference — is the app trusting the identifier but not checking who is asking. You change /statement/12345 to /statement/12346, and if the server only checks that you are logged in, not that 12346 belongs to you, it returns a stranger's statement, card or passport scan.</p>
+<p data-en="It is the most common access-control miss because it survives frameworks: the route is wired, the auth middleware runs, and only the object-level check is missing." data-ru="Это самая частая ошибка контроля доступа, потому что переживает фреймворки: маршрут есть, middleware авторизации срабатывает, не хватает только проверки на уровне объекта.">It is the most common access-control miss because it survives frameworks: the route is wired, the auth middleware runs, and only the object-level check is missing.</p>
+<ul class="sub-list">
+<li><span>✓</span> <span data-en="Object ids are predictable and sequential" data-ru="Идентификаторы объектов предсказуемы и последовательны">Object ids are predictable and sequential</span></li>
+<li><span>✓</span> <span data-en="Auth checks 'logged in' but not 'owns this object'" data-ru="Проверка «вошёл ли», но не «владеет ли этим объектом»">Auth checks 'logged in' but not 'owns this object'</span></li>
+<li><span>✓</span> <span data-en="Works across users, roles, and tenants" data-ru="Работает между пользователями, ролями и арендаторами">Works across users, roles, and tenants</span></li>
+<li><span>✓</span> <span data-en="Impacts statements, cards, KYC and admin actions" data-ru="Бьёт по выпискам, картам, KYC и админ-действиям">Impacts statements, cards, KYC and admin actions</span></li>
+</ul>
+</section>
+<section>
+<h2 data-en="From IDOR to Full Account Takeover" data-ru="От IDOR до полного захвата аккаунта">From IDOR to Full Account Takeover</h2>
+<p data-en="A single IDOR on account statements is a data leak. The same pattern on a password-reset or email-change endpoint is full takeover: read the token, or set the contact details, and the account is yours. The fix is the same — the impact is not." data-ru="Один IDOR на выписках — это утечка данных. Тот же паттерн на сбросе пароля или смене почты — полный захват: прочитал токен или поменял контакт — аккаунт твой. Исправление одно, а последствия разные.">A single IDOR on account statements is a data leak. The same pattern on a password-reset or email-change endpoint is full takeover: read the token, or set the contact details, and the account is yours. The fix is the same — the impact is not.</p>
+</section>
+<section>
+<h2 data-en="How We Test It" data-ru="Как мы это тестируем">How We Test It</h2>
+<ul class="sub-list">
+<li><span>1</span> <span data-en="Map every endpoint that takes an object reference" data-ru="Картируем каждый эндпоинт с идентификатором объекта">Map every endpoint that takes an object reference</span></li>
+<li><span>1</span> <span data-en="Test with two accounts and every role boundary" data-ru="Тестируем двумя аккаунтами и на каждой границе ролей">Test with two accounts and every role boundary</span></li>
+<li><span>1</span> <span data-en="Check horizontal and vertical access, not just one" data-ru="Проверяем горизонтальный и вертикальный доступ">Check horizontal and vertical access, not just one</span></li>
+<li><span>1</span> <span data-en="Prove each leak with a real request and negative control" data-ru="Доказываем каждую утечку реальным запросом и отрицательным контролем">Prove each leak with a real request and negative control</span></li>
+</ul>
+<div class="sub-outcome" data-en="Object-level authorization enforced everywhere — one user's data stays one user's data." data-ru="Проверка прав на уровне объекта везде — данные одного пользователя остаются только его.">Object-level authorization enforced everywhere — one user's data stays one user's data.</div>
+</section>
+<section>
+<h2 data-en="FAQ" data-ru="Вопросы">FAQ</h2>
+<div class="faq-item"><h4 data-en="Is IDOR the same as broken access control?" data-ru="IDOR — это то же, что сломанный контроль доступа?">Is IDOR the same as broken access control?</h4><p data-en="IDOR is one specific, common form of it: the object reference is trusted while the ownership check is missing." data-ru="IDOR — это одна конкретная и частая его форма: идентификатору доверяют, а проверку владения пропустили.">IDOR is one specific, common form of it: the object reference is trusted while the ownership check is missing.</p></div>
+<div class="faq-item"><h4 data-en="Do you need two real accounts to test it?" data-ru="Нужны ли два реальных аккаунта для проверки?">Do you need two real accounts to test it?</h4><p data-en="Yes — we test across real or isolated accounts to show exactly what one user can see of another." data-ru="Да — проверяем на реальных или изолированных аккаунтах, чтобы показать, что именно один пользователь видит у другого.">Yes — we test across real or isolated accounts to show exactly what one user can see of another.</p></div>
+</section>
+<section class="s-border">
+<div class="express-box">
+<h3 data-en="Find the References That Leak" data-ru="Найдите ссылки, которые утекают">Find the References That Leak</h3>
+<div class="sub" data-en="Send us your API scope — IDOR assessment within 48 hours." data-ru="Пришлите контур API — проверка IDOR в течение 48 часов.">Send us your API scope — IDOR assessment within 48 hours.</div>
+<a class="btn-hero primary" data-en="Request an IDOR Audit" data-ru="Заказать проверку IDOR" href="mailto:devowlmind@gmail.com?subject=IDOR%20Audit" style="font-size:16px;padding:16px 40px;display:inline-block">Request an IDOR Audit</a>
+</div>
+</section>
+</div>
+<footer>
+<div class="footer-inner">
+<div style="display:flex;align-items:center;gap:8px"><span style="font-weight:700;color:var(--dim2)">OwlMind Security</span></div>
+<div class="footer-links">
+<a data-en="Home" data-ru="Главная" href="/">Home</a>
+<a data-en="Casino" data-ru="Казино" href="/casino/">Casino</a>
+<a data-en="Crypto" data-ru="Крипто" href="/crypto/">Crypto</a>
+<a data-en="Banking" data-ru="Банки" href="/banking/">Banking</a>
+<a data-en="Smart Contract" data-ru="Смарт-контракты" href="/smart-contract-audit/">Smart Contract</a>
+</div>
+<p>© 2026 OwlMind Security. <span data-en="All rights reserved." data-ru="Все права защищены.">All rights reserved.</span></p>
+</div>
+</footer>
+<script src="/js/i18n.js"></script>
+</body>
+</html>

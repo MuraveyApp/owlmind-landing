@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-en="OTP and 2FA Bypass — When the Second Factor Is Just Decoration — OwlMind Security" data-ru="Обход OTP и 2FA — когда второй фактор просто декорация — OwlMind Security">OTP and 2FA Bypass — When the Second Factor Is Just Decoration — OwlMind Security</title>
+<meta content="How one-time codes get bypassed: reuse, missing rate limits, race on verification, and fallback paths that skip 2FA entirely." data-en="How one-time codes get bypassed: reuse, missing rate limits, race on verification, and fallback paths that skip 2FA entirely." data-ru="Как обходят одноразовые коды: повторное использование, нет лимита попыток, гонка на проверке и запасные пути, которые вовсе пропускают 2FA." name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://owlmind.dev/blog/otp-2fa-bypass/" rel="canonical"/>
+<meta content="OTP and 2FA Bypass — When the Second Factor Is Just Decoration — OwlMind Security" property="og:title"/>
+<meta content="How OTP codes get bypassed — reuse, rate limits, races and fallback paths." property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://owlmind.dev/blog/otp-2fa-bypass/" property="og:url"/>
+<meta content="https://owlmind.dev/og-image.png" property="og:image"/>
+<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🦉&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="/style.css" rel="stylesheet"/>
+<link href="https://owlmind.dev/ru/blog/otp-2fa-bypass/" hreflang="ru" rel="alternate"/><link href="https://owlmind.dev/blog/otp-2fa-bypass/" hreflang="x-default" rel="alternate"/></head>
+<body>
+<nav>
+<div class="nav-inner">
+<a class="logo" href="/"><i>Owl</i>Mind</a>
+<div class="nav-links">
+<a class="hide-m" data-en="Industries" data-ru="Отрасли" href="/#industries">Industries</a>
+<a data-en="Casino" data-ru="Казино" href="/casino/">Casino</a>
+<a data-en="Crypto" data-ru="Крипто" href="/crypto/">Crypto</a>
+<a data-en="Banking" data-ru="Банки" href="/banking/">Banking</a>
+<a data-en="Smart Contract" data-ru="Смарт-контракты" href="/smart-contract-audit/">Smart Contract</a>
+<a class="btn-nav" data-en="Contact Us" data-ru="Связаться" href="mailto:devowlmind@gmail.com?subject=Pentest">Contact Us</a>
+<div aria-label="Language" class="lang-toggle" role="group">
+<button data-lang="en" data-lang-toggle="" type="button">EN</button>
+<button data-lang="ru" data-lang-toggle="" type="button">RU</button>
+</div>
+</div>
+</div>
+</nav>
+<div class="sub-hero">
+<div class="hero-bg"></div>
+<div class="hero-grid"></div>
+<div class="hero-content">
+<div class="breadcrumb"><a data-en="Home" data-ru="Главная" href="/">Home</a>  /  <span data-en="Blog" data-ru="Блог">Blog</span>  /  <span data-en="OTP and 2FA Bypass" data-ru="Обход OTP и 2FA">OTP and 2FA Bypass</span></div>
+<h1><span data-en="OTP and 2FA Bypass" data-ru="Обход OTP и 2FA">OTP and 2FA Bypass</span></h1>
+<p data-en="The second factor only protects you if the code is single-use, rate-limited and non-negotiable. Break one assumption and the account is wide open." data-ru="Второй фактор защищает, только если код одноразовый, ограничен по попыткам и не обходится. Сломай одно допущение — и аккаунт открыт.">The second factor only protects you if the code is single-use, rate-limited and non-negotiable. Break one assumption and the account is wide open.</p>
+<div class="hero-btns"><a class="btn-hero primary" data-en="Request a 2FA Audit" data-ru="Заказать аудит 2FA" href="mailto:devowlmind@gmail.com?subject=2FA%20Audit">Request a 2FA Audit</a></div>
+</div>
+</div>
+<div class="sub-section">
+<section>
+<h2 data-en="The Ways a Code Gets Bypassed" data-ru="Способы обхода кода">The Ways a Code Gets Bypassed</h2>
+<p data-en="The code is not single-use and can be replayed. The verify endpoint has no rate limit, so it is brute-forced. Verification races with resend, so one code is reused across attempts. Or a fallback path — an API version, a legacy login, a support reset — skips the code entirely." data-ru="Код не одноразовый, и его можно повторить. На проверке нет лимита, и её перебирают. Проверка гоняется с повторной отправкой, и один код используется на несколько попыток. Или запасной путь — старая версия API, устаревший вход, сброс через поддержку — вовсе пропускает код.">The code is not single-use and can be replayed. The verify endpoint has no rate limit, so it is brute-forced. Verification races with resend, so one code is reused across attempts. Or a fallback path — an API version, a legacy login, a support reset — skips the code entirely.</p>
+<p data-en="Two-factor is a chain, and the attacker only needs the weakest link. The link is almost never the crypto — it is the resend, the retry counter, or the fallback." data-ru="Двухфакторка — это цепочка, и атакующему нужен только слабейший узел. Этот узел почти никогда не криптография — это повторная отправка, счётчик попыток или запасной путь.">Two-factor is a chain, and the attacker only needs the weakest link. The link is almost never the crypto — it is the resend, the retry counter, or the fallback.</p>
+<ul class="sub-list">
+<li><span>✓</span> <span data-en="Codes reusable after a successful or failed login" data-ru="Коды пригодны повторно после успешного или неудачного входа">Codes reusable after a successful or failed login</span></li>
+<li><span>✓</span> <span data-en="No rate limit or lockout on the verify endpoint" data-ru="Нет лимита и блокировки на проверке">No rate limit or lockout on the verify endpoint</span></li>
+<li><span>✓</span> <span data-en="Race between resend and verify reuses one code" data-ru="Гонка между повторной отправкой и проверкой использует один код">Race between resend and verify reuses one code</span></li>
+<li><span>✓</span> <span data-en="Legacy or fallback login skips the code entirely" data-ru="Устаревший или запасной вход пропускает код целиком">Legacy or fallback login skips the code entirely</span></li>
+</ul>
+</section>
+<section>
+<h2 data-en="Why This Matters for Banks and Exchanges" data-ru="Почему это важно для банков и бирж">Why This Matters for Banks and Exchanges</h2>
+<p data-en="OTP is often the last gate before money moves: a transfer, a withdrawal, a card confirmation. If the code is bypassable, the attacker is not reading data — they are moving funds. That turns a convenience flaw into a financial one." data-ru="OTP — часто последние ворота перед движением денег: перевод, вывод, подтверждение карты. Если код обходится, атакующий не читает данные — он двигает средства. Это превращает бытовую дыру в финансовую.">OTP is often the last gate before money moves: a transfer, a withdrawal, a card confirmation. If the code is bypassable, the attacker is not reading data — they are moving funds. That turns a convenience flaw into a financial one.</p>
+</section>
+<section>
+<h2 data-en="How We Test It" data-ru="Как мы это проверяем">How We Test It</h2>
+<ul class="sub-list">
+<li><span>1</span> <span data-en="Map every step that mints or verifies a code" data-ru="Картируем каждый шаг, где код создаётся или проверяется">Map every step that mints or verifies a code</span></li>
+<li><span>1</span> <span data-en="Test reuse, rate limits, resend races and fallbacks" data-ru="Проверяем повтор, лимиты, гонки отправки и запасные пути">Test reuse, rate limits, resend races and fallbacks</span></li>
+<li><span>1</span> <span data-en="Confirm the code is single-use and time-boxed" data-ru="Подтверждаем, что код одноразовый и ограничен по времени">Confirm the code is single-use and time-boxed</span></li>
+<li><span>1</span> <span data-en="Show a working bypass with a negative control" data-ru="Показываем рабочий обход с отрицательным контролем">Show a working bypass with a negative control</span></li>
+</ul>
+<div class="sub-outcome" data-en="A second factor that actually requires a second factor — on every path, with no fallback that skips it." data-ru="Второй фактор, который реально требует второй фактор — на каждом пути, без запасных ходов мимо.">A second factor that actually requires a second factor — on every path, with no fallback that skips it.</div>
+</section>
+<section>
+<h2 data-en="FAQ" data-ru="Вопросы">FAQ</h2>
+<div class="faq-item"><h4 data-en="Is SMS OTP weaker than an app code?" data-ru="SMS-код слабее кода из приложения?">Is SMS OTP weaker than an app code?</h4><p data-en="It can be — SIM swap and SMS interception add risk. The bigger issue is almost always the verification logic, not the channel." data-ru="Может быть — подмена SIM и перехват SMS добавляют риск. Но главная проблема почти всегда в логике проверки, а не в канале.">It can be — SIM swap and SMS interception add risk. The bigger issue is almost always the verification logic, not the channel.</p></div>
+<div class="faq-item"><h4 data-en="Do you test against live accounts?" data-ru="Вы тестируете на живых аккаунтах?">Do you test against live accounts?</h4><p data-en="On isolated accounts and agreed test numbers only — never against real customer accounts." data-ru="Только на изолированных аккаунтах и согласованных тестовых номерах — никогда против реальных клиентов.">On isolated accounts and agreed test numbers only — never against real customer accounts.</p></div>
+</section>
+<section class="s-border">
+<div class="express-box">
+<h3 data-en="Test the Second Factor Properly" data-ru="Проверьте второй фактор как следует">Test the Second Factor Properly</h3>
+<div class="sub" data-en="Send us your auth flow — 2FA bypass assessment within 48 hours." data-ru="Пришлите контур входа — проверка обхода 2FA за 48 часов.">Send us your auth flow — 2FA bypass assessment within 48 hours.</div>
+<a class="btn-hero primary" data-en="Request a 2FA Audit" data-ru="Заказать аудит 2FA" href="mailto:devowlmind@gmail.com?subject=2FA%20Audit" style="font-size:16px;padding:16px 40px;display:inline-block">Request a 2FA Audit</a>
+</div>
+</section>
+</div>
+<footer>
+<div class="footer-inner">
+<div style="display:flex;align-items:center;gap:8px"><span style="font-weight:700;color:var(--dim2)">OwlMind Security</span></div>
+<div class="footer-links">
+<a data-en="Home" data-ru="Главная" href="/">Home</a>
+<a data-en="Casino" data-ru="Казино" href="/casino/">Casino</a>
+<a data-en="Crypto" data-ru="Крипто" href="/crypto/">Crypto</a>
+<a data-en="Banking" data-ru="Банки" href="/banking/">Banking</a>
+<a data-en="Smart Contract" data-ru="Смарт-контракты" href="/smart-contract-audit/">Smart Contract</a>
+</div>
+<p>© 2026 OwlMind Security. <span data-en="All rights reserved." data-ru="Все права защищены.">All rights reserved.</span></p>
+</div>
+</footer>
+<script src="/js/i18n.js"></script>
+</body>
+</html>

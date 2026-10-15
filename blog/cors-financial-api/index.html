@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-en="CORS Misconfiguration on Financial APIs — Cross-Origin Reads of User Data — OwlMind Security" data-ru="CORS на финансовых API — чтение пользовательских данных из чужого источника — OwlMind Security">CORS Misconfiguration on Financial APIs — Cross-Origin Reads of User Data — OwlMind Security</title>
+<meta content="How a permissive CORS policy lets any site read a user's financial data, and how to distinguish the real risk from harmless misconfiguration." data-en="How a permissive CORS policy lets any site read a user's financial data, and how to distinguish the real risk from harmless misconfiguration." data-ru="Как излишне доверчивый CORS позволяет любому сайту читать финансовые данные пользователя и как отличить реальный риск от безобидной ошибки." name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://owlmind.dev/blog/cors-financial-api/" rel="canonical"/>
+<meta content="CORS Misconfiguration on Financial APIs — Cross-Origin Reads of User Data — OwlMind Security" property="og:title"/>
+<meta content="How a permissive CORS policy lets any site read a user's financial data." property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://owlmind.dev/blog/cors-financial-api/" property="og:url"/>
+<meta content="https://owlmind.dev/og-image.png" property="og:image"/>
+<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🦉&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="/style.css" rel="stylesheet"/>
+<link href="https://owlmind.dev/ru/blog/cors-financial-api/" hreflang="ru" rel="alternate"/><link href="https://owlmind.dev/blog/cors-financial-api/" hreflang="x-default" rel="alternate"/></head>
+<body>
+<nav>
+<div class="nav-inner">
+<a class="logo" href="/"><i>Owl</i>Mind</a>
+<div class="nav-links">
+<a class="hide-m" data-en="Industries" data-ru="Отрасли" href="/#industries">Industries</a>
+<a data-en="Casino" data-ru="Казино" href="/casino/">Casino</a>
+<a data-en="Crypto" data-ru="Крипто" href="/crypto/">Crypto</a>
+<a data-en="Banking" data-ru="Банки" href="/banking/">Banking</a>
+<a data-en="Smart Contract" data-ru="Смарт-контракты" href="/smart-contract-audit/">Smart Contract</a>
+<a class="btn-nav" data-en="Contact Us" data-ru="Связаться" href="mailto:devowlmind@gmail.com?subject=Pentest">Contact Us</a>
+<div aria-label="Language" class="lang-toggle" role="group">
+<button data-lang="en" data-lang-toggle="" type="button">EN</button>
+<button data-lang="ru" data-lang-toggle="" type="button">RU</button>
+</div>
+</div>
+</div>
+</nav>
+<div class="sub-hero">
+<div class="hero-bg"></div>
+<div class="hero-grid"></div>
+<div class="hero-content">
+<div class="breadcrumb"><a data-en="Home" data-ru="Главная" href="/">Home</a>  /  <span data-en="Blog" data-ru="Блог">Blog</span>  /  <span data-en="CORS on Financial APIs" data-ru="CORS на финансовых API">CORS on Financial APIs</span></div>
+<h1><span data-en="CORS Misconfiguration on Financial APIs" data-ru="CORS на финансовых API">CORS Misconfiguration on Financial APIs</span></h1>
+<p data-en="If the server reflects any origin and sends credentials, any website a user visits can read their balance and transactions. That is the CORS risk." data-ru="Если сервер отражает любой источник и шлёт куки, любой сайт, который посетит пользователь, прочитает его баланс и транзакции. Это риск CORS.">If the server reflects any origin and sends credentials, any website a user visits can read their balance and transactions. That is the CORS risk.</p>
+<div class="hero-btns"><a class="btn-hero primary" data-en="Request a CORS Audit" data-ru="Заказать проверку CORS" href="mailto:devowlmind@gmail.com?subject=CORS%20Audit">Request a CORS Audit</a></div>
+</div>
+</div>
+<div class="sub-section">
+<section>
+<h2 data-en="When CORS Becomes a Breach" data-ru="Когда CORS становится взломом">When CORS Becomes a Breach</h2>
+<p data-en="CORS is only dangerous when three things align: the server reflects the attacker's origin, it sends credentials with the response, and the endpoint returns user data. Then any page the user opens can read their authenticated data across origins." data-ru="CORS опасен только когда сходится три вещи: сервер отражает источник атакующего, шлёт куки с ответом, а эндпоинт отдаёт пользовательские данные. Тогда любая открытая пользователем страница читает его авторизованные данные из чужого источника.">CORS is only dangerous when three things align: the server reflects the attacker's origin, it sends credentials with the response, and the endpoint returns user data. Then any page the user opens can read their authenticated data across origins.</p>
+<p data-en="A wildcard without credentials is usually harmless. A reflected origin with credentials on a balance endpoint is a silent data thief. The difference matters, and scanners get it wrong in both directions." data-ru="Звёздочка без кук обычно безобидна. Отражённый источник с куками на эндпоинте баланса — тихий вор данных. Разница важна, и сканеры ошибаются в обе стороны.">A wildcard without credentials is usually harmless. A reflected origin with credentials on a balance endpoint is a silent data thief. The difference matters, and scanners get it wrong in both directions.</p>
+<ul class="sub-list">
+<li><span>✓</span> <span data-en="Origin reflected instead of allow-listed" data-ru="Источник отражается вместо белого списка">Origin reflected instead of allow-listed</span></li>
+<li><span>✓</span> <span data-en="Credentials sent with the cross-origin response" data-ru="Куки отправляются с кросс-доменным ответом">Credentials sent with the cross-origin response</span></li>
+<li><span>✓</span> <span data-en="Endpoint returns balances, statements or PII" data-ru="Эндпоинт отдаёт балансы, выписки или личные данные">Endpoint returns balances, statements or PII</span></li>
+<li><span>✓</span> <span data-en="Wildcard with credentials, or null origin accepted" data-ru="Звёздочка с куками или принятый пустой источник">Wildcard with credentials, or null origin accepted</span></li>
+</ul>
+</section>
+<section>
+<h2 data-en="Why the Fix Is a Policy, Not a Line" data-ru="Почему исправление — это политика, а не строка">Why the Fix Is a Policy, Not a Line</h2>
+<p data-en="The fix is an allow-list of the exact origins that need access, credentials only where required, and no reflection. But the hard part is knowing every origin that legitimately calls the API — which is exactly the map an assessment produces." data-ru="Исправление — белый список точных источников, куки только где нужно и никакого отражения. Но сложность в том, чтобы знать каждый источник, который легитимно зовёт API, — именно такую карту и даёт оценка.">The fix is an allow-list of the exact origins that need access, credentials only where required, and no reflection. But the hard part is knowing every origin that legitimately calls the API — which is exactly the map an assessment produces.</p>
+</section>
+<section>
+<h2 data-en="How We Verify It" data-ru="Как мы это проверяем">How We Verify It</h2>
+<ul class="sub-list">
+<li><span>1</span> <span data-en="Probe every data endpoint with attacker origins" data-ru="Проверяем каждый эндпоинт с источниками атакующего">Probe every data endpoint with attacker origins</span></li>
+<li><span>1</span> <span data-en="Confirm credentials are actually sent" data-ru="Подтверждаем, что куки реально отправляются">Confirm credentials are actually sent</span></li>
+<li><span>1</span> <span data-en="Show a real cross-origin read with a negative control" data-ru="Показываем реальное кросс-доменное чтение с отрицательным контролем">Show a real cross-origin read with a negative control</span></li>
+<li><span>1</span> <span data-en="Distinguish true risk from benign wildcard" data-ru="Отличаем настоящий риск от безобидной звёздочки">Distinguish true risk from benign wildcard</span></li>
+</ul>
+<div class="sub-outcome" data-en="A CORS policy that allows exactly the origins you trust — and proof no other site can read your users' data." data-ru="Политика CORS, допускающая только доверенные источники, — и доказательство, что чужой сайт не прочитает данные ваших пользователей.">A CORS policy that allows exactly the origins you trust — and proof no other site can read your users' data.</div>
+</section>
+<section>
+<h2 data-en="FAQ" data-ru="Вопросы">FAQ</h2>
+<div class="faq-item"><h4 data-en="Is every CORS finding a vulnerability?" data-ru="Каждая ли находка CORS — уязвимость?">Is every CORS finding a vulnerability?</h4><p data-en="No. Many are benign. We verify each one against a real cross-origin request and report only what actually leaks data." data-ru="Нет, многие безобидны. Проверяем каждую реальным кросс-доменным запросом и отчитываемся только о том, что реально утекает.">No. Many are benign. We verify each one against a real cross-origin request and report only what actually leaks data.</p></div>
+<div class="faq-item"><h4 data-en="Do you need a browser to prove it?" data-ru="Нужен ли браузер для доказательства?">Do you need a browser to prove it?</h4><p data-en="A crafted page in a browser is the cleanest proof, so yes — we demonstrate the read exactly as an attacker's site would." data-ru="Страница в браузере — самое чистое доказательство, поэтому да — показываем чтение ровно так, как сделал бы сайт атакующего.">A crafted page in a browser is the cleanest proof, so yes — we demonstrate the read exactly as an attacker's site would.</p></div>
+</section>
+<section class="s-border">
+<div class="express-box">
+<h3 data-en="Tighten Your Cross-Origin Policy" data-ru="Ужесточите политику источников">Tighten Your Cross-Origin Policy</h3>
+<div class="sub" data-en="Send us your API scope — CORS assessment within 48 hours." data-ru="Пришлите контур API — проверка CORS за 48 часов.">Send us your API scope — CORS assessment within 48 hours.</div>
+<a class="btn-hero primary" data-en="Request a CORS Audit" data-ru="Заказать проверку CORS" href="mailto:devowlmind@gmail.com?subject=CORS%20Audit" style="font-size:16px;padding:16px 40px;display:inline-block">Request a CORS Audit</a>
+</div>
+</section>
+</div>
+<footer>
+<div class="footer-inner">
+<div style="display:flex;align-items:center;gap:8px"><span style="font-weight:700;color:var(--dim2)">OwlMind Security</span></div>
+<div class="footer-links">
+<a data-en="Home" data-ru="Главная" href="/">Home</a>
+<a data-en="Casino" data-ru="Казино" href="/casino/">Casino</a>
+<a data-en="Crypto" data-ru="Крипто" href="/crypto/">Crypto</a>
+<a data-en="Banking" data-ru="Банки" href="/banking/">Banking</a>
+<a data-en="Smart Contract" data-ru="Смарт-контракты" href="/smart-contract-audit/">Smart Contract</a>
+</div>
+<p>© 2026 OwlMind Security. <span data-en="All rights reserved." data-ru="Все права защищены.">All rights reserved.</span></p>
+</div>
+</footer>
+<script src="/js/i18n.js"></script>
+</body>
+</html>

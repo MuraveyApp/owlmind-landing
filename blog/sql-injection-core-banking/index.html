@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-en="SQL Injection in Core Banking — How It Happens and How to Find It — OwlMind Security" data-ru="SQL-инъекция в ядре банка — как это происходит и как её найти — OwlMind Security">SQL Injection in Core Banking — How It Happens and How to Find It — OwlMind Security</title>
+<meta content="How SQL injection reaches a core banking system, why scanners miss it, and the fix that closes it. Real findings, anonymised, from a CIS bank engagement." data-en="How SQL injection reaches a core banking system, why scanners miss it, and the fix that closes it. Real findings, anonymised, from a CIS bank engagement." data-ru="Как SQL-инъекция добирается до ядра банка, почему её пропускают сканеры и как её закрыть. Обезличенные находки из проверки банка в СНГ." name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://owlmind.dev/blog/sql-injection-core-banking/" rel="canonical"/>
+<meta content="SQL Injection in Core Banking — How It Happens and How to Find It — OwlMind Security" property="og:title"/>
+<meta content="How SQL injection reaches a core banking system — and why scanners miss it." property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://owlmind.dev/blog/sql-injection-core-banking/" property="og:url"/>
+<meta content="https://owlmind.dev/og-image.png" property="og:image"/>
+<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🦉&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="/style.css" rel="stylesheet"/>
+<link href="https://owlmind.dev/ru/blog/sql-injection-core-banking/" hreflang="ru" rel="alternate"/><link href="https://owlmind.dev/blog/sql-injection-core-banking/" hreflang="x-default" rel="alternate"/></head>
+<body>
+<nav>
+<div class="nav-inner">
+<a class="logo" href="/"><i>Owl</i>Mind</a>
+<div class="nav-links">
+<a class="hide-m" data-en="Industries" data-ru="Отрасли" href="/#industries">Industries</a>
+<a data-en="Casino" data-ru="Казино" href="/casino/">Casino</a>
+<a data-en="Crypto" data-ru="Крипто" href="/crypto/">Crypto</a>
+<a data-en="Banking" data-ru="Банки" href="/banking/">Banking</a>
+<a data-en="Smart Contract" data-ru="Смарт-контракты" href="/smart-contract-audit/">Smart Contract</a>
+<a class="btn-nav" data-en="Contact Us" data-ru="Связаться" href="mailto:devowlmind@gmail.com?subject=Pentest">Contact Us</a>
+<div aria-label="Language" class="lang-toggle" role="group">
+<button data-lang="en" data-lang-toggle="" type="button">EN</button>
+<button data-lang="ru" data-lang-toggle="" type="button">RU</button>
+</div>
+</div>
+</div>
+</nav>
+<div class="sub-hero">
+<div class="hero-bg"></div>
+<div class="hero-grid"></div>
+<div class="hero-content">
+<div class="breadcrumb"><a data-en="Home" data-ru="Главная" href="/">Home</a>  /  <span data-en="Blog" data-ru="Блог">Blog</span>  /  <span data-en="SQL Injection in Banking" data-ru="SQL-инъекция в банке">SQL Injection in Banking</span></div>
+<h1><span data-en="SQL Injection in Core Banking" data-ru="SQL-инъекция в ядре банка">SQL Injection in Core Banking</span></h1>
+<p data-en="One unsanitised parameter on an internal portal, and an attacker is reading customer accounts. Here is the real path a banking SQLi takes." data-ru="Один неочищенный параметр на внутреннем портале — и злоумышленник читает счета клиентов. Вот реальный путь банковской SQL-инъекции.">One unsanitised parameter on an internal portal, and an attacker is reading customer accounts. Here is the real path a banking SQLi takes.</p>
+<div class="hero-btns"><a class="btn-hero primary" data-en="Request a Banking Audit" data-ru="Заказать аудит банка" href="mailto:devowlmind@gmail.com?subject=Banking%20Audit">Request a Banking Audit</a></div>
+</div>
+</div>
+<div class="sub-section">
+<section>
+<h2 data-en="The Real Path of a Banking SQLi" data-ru="Реальный путь банковской SQL-инъекции">The Real Path of a Banking SQLi</h2>
+<p data-en="A core banking injection rarely starts on the public site. It starts one or two hops inside: an admin portal, a support panel, a legacy web service that talks to the database with a concatenated query. The perimeter looks clean, so the query was never reviewed." data-ru="Инъекция в ядре банка редко начинается на публичном сайте. Она начинается на один-два шага глубже: админ-портал, панель поддержки, устаревший веб-сервис, который склеивает запрос к базе. Периметр выглядит чистым, поэтому запрос никто не проверял.">A core banking injection rarely starts on the public site. It starts one or two hops inside: an admin portal, a support panel, a legacy web service that talks to the database with a concatenated query. The perimeter looks clean, so the query was never reviewed.</p>
+<p data-en="Once the first union or error-based response works, the attacker maps the schema and escalates to reading account balances, transaction logs and card tables — often with the database account that has the broadest rights, because it was convenient at the time." data-ru="Как только срабатывает первый union или вывод через ошибку, злоумышленник рисует схему и доходит до чтения остатков, истории проводок и карточных таблиц — часто под учёткой базы с самыми широкими правами, потому что так было удобно.">Once the first union or error-based response works, the attacker maps the schema and escalates to reading account balances, transaction logs and card tables — often with the database account that has the broadest rights, because it was convenient at the time.</p>
+<ul class="sub-list">
+<li><span>✓</span> <span data-en="Internal and support panels are the weakest link" data-ru="Внутренние панели и панели поддержки — слабейшее звено">Internal and support panels are the weakest link</span></li>
+<li><span>✓</span> <span data-en="Legacy web services concatenate queries directly" data-ru="Устаревшие веб-сервисы склеивают запросы напрямую">Legacy web services concatenate queries directly</span></li>
+<li><span>✓</span> <span data-en="Database accounts run with far too many privileges" data-ru="Учётки базы работают со слишком широкими правами">Database accounts run with far too many privileges</span></li>
+<li><span>✓</span> <span data-en="Error messages leak schema and column names" data-ru="Сообщения об ошибках выдают схему и имена колонок">Error messages leak schema and column names</span></li>
+</ul>
+</section>
+<section>
+<h2 data-en="Why Scanners Miss It" data-ru="Почему сканеры это пропускают">Why Scanners Miss It</h2>
+<p data-en="An automated scanner sees a parameter, sends a quote, checks for a signature, and moves on. A banking SQLi often hides behind multi-step flows, custom encoding, or a WAF that the app itself bypasses on internal calls. You need a human who follows the money and the login walls to the actual query." data-ru="Сканер видит параметр, шлёт кавычку, проверяет сигнатуру и идёт дальше. Банковская инъекция часто прячется за многошаговыми сценариями, своей кодировкой или за WAF, который само приложение обходит на внутренних вызовах. Нужен человек, который идёт за деньгами и за стенами входа до реального запроса.">An automated scanner sees a parameter, sends a quote, checks for a signature, and moves on. A banking SQLi often hides behind multi-step flows, custom encoding, or a WAF that the app itself bypasses on internal calls. You need a human who follows the money and the login walls to the actual query.</p>
+</section>
+<section>
+<h2 data-en="How to Close It" data-ru="Как это закрыть">How to Close It</h2>
+<ul class="sub-list">
+<li><span>1</span> <span data-en="Parameterised queries everywhere — no string-built SQL" data-ru="Параметризованные запросы везде — никакой SQL из строк">Parameterised queries everywhere — no string-built SQL</span></li>
+<li><span>1</span> <span data-en="Least-privilege database accounts per service" data-ru="Для каждого сервиса — учётка базы с минимальными правами">Least-privilege database accounts per service</span></li>
+<li><span>1</span> <span data-en="Suppress verbose errors in production" data-ru="Глушить подробные ошибки в проде">Suppress verbose errors in production</span></li>
+<li><span>1</span> <span data-en="Audit the internal surface, not just the public site" data-ru="Аудировать внутренний контур, а не только публичный сайт">Audit the internal surface, not just the public site</span></li>
+</ul>
+<div class="sub-outcome" data-en="A fixed core means customer accounts stay private, and a regulator question gets a concrete answer instead of a panic." data-ru="Закрытое ядро — это приватные счета клиентов и конкретный ответ регулятору вместо паники.">A fixed core means customer accounts stay private, and a regulator question gets a concrete answer instead of a panic.</div>
+</section>
+<section>
+<h2 data-en="FAQ" data-ru="Вопросы">FAQ</h2>
+<div class="faq-item"><h4 data-en="Do you need production access to find a banking SQLi?" data-ru="Нужен ли доступ в прод, чтобы найти SQL-инъекцию?">Do you need production access to find a banking SQLi?</h4><p data-en="Most findings reproduce on a staging or UAT environment that mirrors the portal and database. Live verification, when required, runs in an agreed window." data-ru="Большинство находок воспроизводится на staging или UAT с тем же порталом и базой. Проверка на проде — только в согласованное окно.">Most findings reproduce on a staging or UAT environment that mirrors the portal and database. Live verification, when required, runs in an agreed window.</p></div>
+<div class="faq-item"><h4 data-en="Is this legal to test?" data-ru="Законно ли это тестировать?">Is this legal to test?</h4><p data-en="Yes — under an NDA and a signed scope. We test only systems you own or are authorised to assess." data-ru="Да — под NDA и подписанный объём. Проверяем только системы, которыми вы владеете или на которые есть разрешение.">Yes — under an NDA and a signed scope. We test only systems you own or are authorised to assess.</p></div>
+</section>
+<section class="s-border">
+<div class="express-box">
+<h3 data-en="Find the Injection Before an Attacker Does" data-ru="Найдите инъекцию раньше злоумышленника">Find the Injection Before an Attacker Does</h3>
+<div class="sub" data-en="Send us your banking scope — proposal within 48 hours." data-ru="Пришлите контур банка — предложение в течение 48 часов.">Send us your banking scope — proposal within 48 hours.</div>
+<a class="btn-hero primary" data-en="Request a Banking Audit" data-ru="Заказать аудит банка" href="mailto:devowlmind@gmail.com?subject=Banking%20Audit" style="font-size:16px;padding:16px 40px;display:inline-block">Request a Banking Audit</a>
+</div>
+</section>
+</div>
+<footer>
+<div class="footer-inner">
+<div style="display:flex;align-items:center;gap:8px"><span style="font-weight:700;color:var(--dim2)">OwlMind Security</span></div>
+<div class="footer-links">
+<a data-en="Home" data-ru="Главная" href="/">Home</a>
+<a data-en="Casino" data-ru="Казино" href="/casino/">Casino</a>
+<a data-en="Crypto" data-ru="Крипто" href="/crypto/">Crypto</a>
+<a data-en="Banking" data-ru="Банки" href="/banking/">Banking</a>
+<a data-en="Smart Contract" data-ru="Смарт-контракты" href="/smart-contract-audit/">Smart Contract</a>
+</div>
+<p>© 2026 OwlMind Security. <span data-en="All rights reserved." data-ru="Все права защищены.">All rights reserved.</span></p>
+</div>
+</footer>
+<script src="/js/i18n.js"></script>
+</body>
+</html>

@@ -1,15 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://owlmind.dev/</loc><lastmod>2026-10-12</lastmod></url>
-  <url><loc>https://owlmind.dev/casino/</loc><lastmod>2026-10-12</lastmod></url>
-  <url><loc>https://owlmind.dev/crypto/</loc><lastmod>2026-10-12</lastmod></url>
-  <url><loc>https://owlmind.dev/banking/</loc><lastmod>2026-10-12</lastmod></url>
-  <url><loc>https://owlmind.dev/pentest/</loc><lastmod>2026-10-12</lastmod></url>
-  <url><loc>https://owlmind.dev/smart-contract-audit/</loc><lastmod>2026-10-12</lastmod></url>
-  <url><loc>https://owlmind.dev/blog/</loc><lastmod>2026-10-12</lastmod></url>
-  <url><loc>https://owlmind.dev/blog/payment-system-pentest/</loc><lastmod>2026-10-12</lastmod></url>
-  <url><loc>https://owlmind.dev/blog/casino-audit-prep/</loc><lastmod>2026-10-12</lastmod></url>
-  <url><loc>https://owlmind.dev/blog/crypto-exchange-vulnerabilities/</loc><lastmod>2026-10-12</lastmod></url>
-  <url><loc>https://owlmind.dev/blog/smart-contract-audit-guide/</loc><lastmod>2026-10-12</lastmod></url>
-  <url><loc>https://owlmind.dev/privacy.html</loc><lastmod>2026-10-12</lastmod></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://owlmind.dev/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/banking/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/banking/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/banking/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/banking/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/casino/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/casino/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/casino/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/casino/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/crypto/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/crypto/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/crypto/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/crypto/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/pentest/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/pentest/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/pentest/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/pentest/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/smart-contract-audit/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/smart-contract-audit/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/smart-contract-audit/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/smart-contract-audit/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/blog/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/blog/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/blog/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/blog/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/blog/casino-audit-prep/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/blog/casino-audit-prep/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/blog/casino-audit-prep/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/blog/casino-audit-prep/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/blog/crypto-exchange-vulnerabilities/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/blog/crypto-exchange-vulnerabilities/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/blog/crypto-exchange-vulnerabilities/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/blog/crypto-exchange-vulnerabilities/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/blog/payment-system-pentest/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/blog/payment-system-pentest/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/blog/payment-system-pentest/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/blog/payment-system-pentest/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/blog/smart-contract-audit-guide/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/blog/smart-contract-audit-guide/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/blog/smart-contract-audit-guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/blog/smart-contract-audit-guide/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/blog/sql-injection-core-banking/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/blog/sql-injection-core-banking/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/blog/sql-injection-core-banking/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/blog/sql-injection-core-banking/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/blog/provably-fair-casino-rng/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/blog/provably-fair-casino-rng/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/blog/provably-fair-casino-rng/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/blog/provably-fair-casino-rng/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/blog/withdrawal-race-conditions/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/blog/withdrawal-race-conditions/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/blog/withdrawal-race-conditions/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/blog/withdrawal-race-conditions/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/blog/hardcoded-credentials-production/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/blog/hardcoded-credentials-production/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/blog/hardcoded-credentials-production/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/blog/hardcoded-credentials-production/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/blog/idor-account-takeover/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/blog/idor-account-takeover/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/blog/idor-account-takeover/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/blog/idor-account-takeover/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/blog/otp-2fa-bypass/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/blog/otp-2fa-bypass/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/blog/otp-2fa-bypass/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/blog/otp-2fa-bypass/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/blog/smart-contract-reentrancy/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/blog/smart-contract-reentrancy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/blog/smart-contract-reentrancy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/blog/smart-contract-reentrancy/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/blog/cors-financial-api/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/blog/cors-financial-api/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/blog/cors-financial-api/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/blog/cors-financial-api/"/>
+  </url>
+  <url>
+    <loc>https://owlmind.dev/privacy.html</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://owlmind.dev/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://owlmind.dev/privacy.html"/>
+  </url>
 </urlset>

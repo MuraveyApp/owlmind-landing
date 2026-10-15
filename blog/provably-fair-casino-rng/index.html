@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-en="Provably Fair Is Not Always Fair — Server-Seed Leaks in Casinos — OwlMind Security" data-ru="Provably fair не всегда честен — утечки server seed в казино — OwlMind Security">Provably Fair Is Not Always Fair — Server-Seed Leaks in Casinos — OwlMind Security</title>
+<meta content="How a crash-game server seed leaks before the round, why provably-fair maths does not save you, and how to check your RNG pipeline." data-en="How a crash-game server seed leaks before the round, why provably-fair maths does not save you, and how to check your RNG pipeline." data-ru="Как server seed краш-игры утекает до раунда, почему математика provably fair не спасает и как проверить контур случайности." name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://owlmind.dev/blog/provably-fair-casino-rng/" rel="canonical"/>
+<meta content="Provably Fair Is Not Always Fair — Server-Seed Leaks in Casinos — OwlMind Security" property="og:title"/>
+<meta content="How a crash-game server seed leaks before the round — and breaks fairness." property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://owlmind.dev/blog/provably-fair-casino-rng/" property="og:url"/>
+<meta content="https://owlmind.dev/og-image.png" property="og:image"/>
+<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🦉&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="/style.css" rel="stylesheet"/>
+<link href="https://owlmind.dev/ru/blog/provably-fair-casino-rng/" hreflang="ru" rel="alternate"/><link href="https://owlmind.dev/blog/provably-fair-casino-rng/" hreflang="x-default" rel="alternate"/></head>
+<body>
+<nav>
+<div class="nav-inner">
+<a class="logo" href="/"><i>Owl</i>Mind</a>
+<div class="nav-links">
+<a class="hide-m" data-en="Industries" data-ru="Отрасли" href="/#industries">Industries</a>
+<a data-en="Casino" data-ru="Казино" href="/casino/">Casino</a>
+<a data-en="Crypto" data-ru="Крипто" href="/crypto/">Crypto</a>
+<a data-en="Banking" data-ru="Банки" href="/banking/">Banking</a>
+<a data-en="Smart Contract" data-ru="Смарт-контракты" href="/smart-contract-audit/">Smart Contract</a>
+<a class="btn-nav" data-en="Contact Us" data-ru="Связаться" href="mailto:devowlmind@gmail.com?subject=Pentest">Contact Us</a>
+<div aria-label="Language" class="lang-toggle" role="group">
+<button data-lang="en" data-lang-toggle="" type="button">EN</button>
+<button data-lang="ru" data-lang-toggle="" type="button">RU</button>
+</div>
+</div>
+</div>
+</nav>
+<div class="sub-hero">
+<div class="hero-bg"></div>
+<div class="hero-grid"></div>
+<div class="hero-content">
+<div class="breadcrumb"><a data-en="Home" data-ru="Главная" href="/">Home</a>  /  <span data-en="Blog" data-ru="Блог">Blog</span>  /  <span data-en="Provably Fair RNG" data-ru="Provably fair и RNG">Provably Fair RNG</span></div>
+<h1><span data-en="Provably Fair Is Not Always Fair" data-ru="Provably fair не всегда честен">Provably Fair Is Not Always Fair</span></h1>
+<p data-en="The maths can be sound while the game is still rigged — because the seed leaks before the round. Here is the most common fairness break in crash games." data-ru="Математика может быть верной, а игра всё равно подстроенной — потому что seed утекает до раунда. Вот самый частый разлом честности в краш-играх.">The maths can be sound while the game is still rigged — because the seed leaks before the round. Here is the most common fairness break in crash games.</p>
+<div class="hero-btns"><a class="btn-hero primary" data-en="Request a Fairness Audit" data-ru="Заказать аудит честности" href="mailto:devowlmind@gmail.com?subject=Casino%20Audit">Request a Fairness Audit</a></div>
+</div>
+</div>
+<div class="sub-section">
+<section>
+<h2 data-en="How Fairness Breaks" data-ru="Как ломается честность">How Fairness Breaks</h2>
+<p data-en="Provably fair works because the server commits to a hash of the seed before the round, then reveals it after. The moment the raw seed is disclosed early — in a debug endpoint, a WebSocket message, a log, an API response — a player can predict the crash point and always cash out at the top." data-ru="Provably fair работает, потому что сервер до раунда фиксирует хэш seed, а после — раскрывает его. Как только сырой seed утекает раньше — в отладочном эндпоинте, сообщении вебсокета, логе, ответе API — игрок предсказывает точку краша и всегда забирает на пике.">Provably fair works because the server commits to a hash of the seed before the round, then reveals it after. The moment the raw seed is disclosed early — in a debug endpoint, a WebSocket message, a log, an API response — a player can predict the crash point and always cash out at the top.</p>
+<p data-en="We have seen the seed arrive in the round payload itself, alongside the hash that was supposed to hide it. The audit that catches this looks at the whole real-time channel, not just the game maths." data-ru="Мы видели, как seed приходит в самом теле раунда — рядом с хэшем, который должен был его прятать. Аудит, который это ловит, смотрит на весь реалтайм-канал, а не только на математику игры.">We have seen the seed arrive in the round payload itself, alongside the hash that was supposed to hide it. The audit that catches this looks at the whole real-time channel, not just the game maths.</p>
+<ul class="sub-list">
+<li><span>✓</span> <span data-en="Raw server seed disclosed before the round ends" data-ru="Сырой server seed раскрыт до конца раунда">Raw server seed disclosed before the round ends</span></li>
+<li><span>✓</span> <span data-en="Seed leaked in WebSocket frames or debug endpoints" data-ru="Seed утёк в кадрах вебсокета или отладочных эндпоинтах">Seed leaked in WebSocket frames or debug endpoints</span></li>
+<li><span>✓</span> <span data-en="Hash commitment missing or made after the fact" data-ru="Фиксация хэша отсутствует или сделана постфактум">Hash commitment missing or made after the fact</span></li>
+<li><span>✓</span> <span data-en="Predictable or reused seeds across rounds" data-ru="Предсказуемые или повторяющиеся seed между раундами">Predictable or reused seeds across rounds</span></li>
+</ul>
+</section>
+<section>
+<h2 data-en="What This Costs a Casino" data-ru="Во что это обходится казино">What This Costs a Casino</h2>
+<p data-en="A predictable crash point means a smart player withdraws every time. Regulators, game providers and affiliate networks all audit fairness before they trust you — and a broken provably-fair chain is a licence risk, not a bug." data-ru="Предсказуемая точка краша — это умный игрок, который выводит каждый раз. Регуляторы, провайдеры игр и партнёрские сети проверяют честность, прежде чем вам довериться, — а сломанная цепочка provably fair это риск лицензии, а не баг.">A predictable crash point means a smart player withdraws every time. Regulators, game providers and affiliate networks all audit fairness before they trust you — and a broken provably-fair chain is a licence risk, not a bug.</p>
+</section>
+<section>
+<h2 data-en="How We Check an RNG Pipeline" data-ru="Как мы проверяем контур случайности">How We Check an RNG Pipeline</h2>
+<ul class="sub-list">
+<li><span>1</span> <span data-en="Map the full round flow: bet → seed → result → payout" data-ru="Картируем весь цикл раунда: ставка → seed → результат → выплата">Map the full round flow: bet → seed → result → payout</span></li>
+<li><span>1</span> <span data-en="Watch the live WebSocket channel for early seed or result" data-ru="Смотрим живой канал вебсокета на ранний seed или результат">Watch the live WebSocket channel for early seed or result</span></li>
+<li><span>1</span> <span data-en="Verify the hash commitment is made before the bet closes" data-ru="Проверяем, что фиксация хэша сделана до закрытия ставки">Verify the hash commitment is made before the bet closes</span></li>
+<li><span>1</span> <span data-en="Test seed generation for predictability and reuse" data-ru="Тестируем генерацию seed на предсказуемость и повторное использование">Test seed generation for predictability and reuse</span></li>
+</ul>
+<div class="sub-outcome" data-en="A fairness report you can show regulators and game providers — your games stay provably fair, your funds stay where they belong." data-ru="Отчёт о честности, который можно показать регуляторам и провайдерам игр — игры остаются provably fair, а деньги на месте.">A fairness report you can show regulators and game providers — your games stay provably fair, your funds stay where they belong.</div>
+</section>
+<section>
+<h2 data-en="FAQ" data-ru="Вопросы">FAQ</h2>
+<div class="faq-item"><h4 data-en="Do you test live games?" data-ru="Вы тестируете живые игры?">Do you test live games?</h4><p data-en="We test the fairness pipeline end to end in staging and, where agreed, on live with isolated fixtures — never against real player balances." data-ru="Проверяем контур честности целиком на staging и, по согласованию, на проде на изолированных данных — никогда против балансов реальных игроков.">We test the fairness pipeline end to end in staging and, where agreed, on live with isolated fixtures — never against real player balances.</p></div>
+<div class="faq-item"><h4 data-en="Which games do you cover?" data-ru="Какие игры вы покрываете?">Which games do you cover?</h4><p data-en="Crash games, slots, roulette, card games, and any custom RNG — including the game-provider integrations behind them." data-ru="Краш-игры, слоты, рулетку, карточные игры и любой свой RNG — включая интеграции провайдеров за ними.">Crash games, slots, roulette, card games, and any custom RNG — including the game-provider integrations behind them.</p></div>
+</section>
+<section class="s-border">
+<div class="express-box">
+<h3 data-en="Prove Your Games Are Fair" data-ru="Докажите честность своих игр">Prove Your Games Are Fair</h3>
+<div class="sub" data-en="Send us your game scope — fairness audit proposal within 48 hours." data-ru="Пришлите контур игр — предложение по аудиту честности за 48 часов.">Send us your game scope — fairness audit proposal within 48 hours.</div>
+<a class="btn-hero primary" data-en="Request a Fairness Audit" data-ru="Заказать аудит честности" href="mailto:devowlmind@gmail.com?subject=Casino%20Audit" style="font-size:16px;padding:16px 40px;display:inline-block">Request a Fairness Audit</a>
+</div>
+</section>
+</div>
+<footer>
+<div class="footer-inner">
+<div style="display:flex;align-items:center;gap:8px"><span style="font-weight:700;color:var(--dim2)">OwlMind Security</span></div>
+<div class="footer-links">
+<a data-en="Home" data-ru="Главная" href="/">Home</a>
+<a data-en="Casino" data-ru="Казино" href="/casino/">Casino</a>
+<a data-en="Crypto" data-ru="Крипто" href="/crypto/">Crypto</a>
+<a data-en="Banking" data-ru="Банки" href="/banking/">Banking</a>
+<a data-en="Smart Contract" data-ru="Смарт-контракты" href="/smart-contract-audit/">Smart Contract</a>
+</div>
+<p>© 2026 OwlMind Security. <span data-en="All rights reserved." data-ru="Все права защищены.">All rights reserved.</span></p>
+</div>
+</footer>
+<script src="/js/i18n.js"></script>
+</body>
+</html>

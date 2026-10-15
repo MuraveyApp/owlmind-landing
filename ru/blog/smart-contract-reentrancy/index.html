@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html class="dark" lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-en="Reentrancy in Smart Contracts — The Bug That Drains a Pool — OwlMind Security" data-ru="Реентранси в смарт-контрактах — баг, который опустошает пул — OwlMind Security">Реентранси в смарт-контрактах — баг, который опустошает пул — OwlMind Security</title>
+<meta content="Как реентранси позволяет контракту опустошить пул, исправление, которое это предотвращает, и что реально покрывает аудит смарт-контракта." data-en="How reentrancy lets a contract drain a pool, the fix that prevents it, and what a real smart-contract audit covers beyond the obvious." data-ru="Как реентранси позволяет контракту опустошить пул, исправление, которое это предотвращает, и что реально покрывает аудит смарт-контракта." name="description"/>
+<meta content="index, follow" name="robots"/>
+
+<meta content="Реентранси в смарт-контрактах — баг, который опустошает пул — OwlMind Security" property="og:title"/>
+<meta content="Как реентранси позволяет контракту опустошить пул, исправление, которое это предотвращает, и что реально покрывает аудит смарт-контракта." property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://owlmind.dev/ru/blog/smart-contract-reentrancy/" property="og:url"/>
+<meta content="https://owlmind.dev/og-image.png" property="og:image"/>
+<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🦉&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="/style.css" rel="stylesheet"/>
+<link href="https://owlmind.dev/ru/blog/smart-contract-reentrancy/" rel="canonical"/><link href="https://owlmind.dev/blog/smart-contract-reentrancy/" hreflang="en" rel="alternate"/><link href="https://owlmind.dev/ru/blog/smart-contract-reentrancy/" hreflang="ru" rel="alternate"/><link href="https://owlmind.dev/blog/smart-contract-reentrancy/" hreflang="x-default" rel="alternate"/></head>
+<body>
+<nav>
+<div class="nav-inner">
+<a class="logo" href="/ru/"><i>Owl</i>Mind</a>
+<div class="nav-links">
+<a class="hide-m" data-en="Industries" data-ru="Отрасли" href="/ru/#industries">Отрасли</a>
+<a data-en="Casino" data-ru="Казино" href="/ru/casino/">Казино</a>
+<a data-en="Crypto" data-ru="Крипто" href="/ru/crypto/">Крипто</a>
+<a data-en="Banking" data-ru="Банки" href="/ru/banking/">Банки</a>
+<a data-en="Smart Contract" data-ru="Смарт-контракты" href="/ru/smart-contract-audit/">Смарт-контракты</a>
+<a class="btn-nav" data-en="Contact Us" data-ru="Связаться" href="mailto:devowlmind@gmail.com?subject=Pentest">Связаться</a>
+<div aria-label="Language" class="lang-toggle" role="group">
+<a class="lang-link" data-lang="en" href="https://owlmind.dev/blog/smart-contract-reentrancy/">EN</a>
+<a class="lang-link" data-lang="ru" href="https://owlmind.dev/ru/blog/smart-contract-reentrancy/">RU</a>
+</div>
+</div>
+</div>
+</nav>
+<div class="sub-hero">
+<div class="hero-bg"></div>
+<div class="hero-grid"></div>
+<div class="hero-content">
+<div class="breadcrumb"><a data-en="Home" data-ru="Главная" href="/ru/">Главная</a>  /  <span data-en="Blog" data-ru="Блог">Блог</span>  /  <span data-en="Smart Contract Reentrancy" data-ru="Реентранси в смарт-контрактах">Реентранси в смарт-контрактах</span></div>
+<h1><span data-en="Reentrancy in Smart Contracts" data-ru="Реентранси в смарт-контрактах">Реентранси в смарт-контрактах</span></h1>
+<p data-en="A contract sends funds, then updates its balance. Between those two steps, the attacker calls back in — and withdraws again. That is reentrancy." data-ru="Контракт отправляет средства, затем обновляет баланс. Между этими шагами атакующий вызывает его снова — и выводит ещё раз. Это реентранси.">Контракт отправляет средства, затем обновляет баланс. Между этими шагами атакующий вызывает его снова — и выводит ещё раз. Это реентранси.</p>
+<div class="hero-btns"><a class="btn-hero primary" data-en="Request a Smart Contract Audit" data-ru="Заказать аудит смарт-контракта" href="mailto:devowlmind@gmail.com?subject=Smart%20Contract%20Audit">Заказать аудит смарт-контракта</a></div>
+</div>
+</div>
+<div class="sub-section">
+<section>
+<h2 data-en="How Reentrancy Works" data-ru="Как работает реентранси">Как работает реентранси</h2>
+<p data-en="Reentrancy happens when a contract makes an external call before updating its own state. The called contract — which the attacker controls — calls back into the original function while the balance still shows the old value. The withdraw runs twice on one balance." data-ru="Реентранси возникает, когда контракт делает внешний вызов до обновления своего состояния. Вызываемый контракт — который контролирует атакующий — зовёт исходную функцию снова, пока баланс всё ещё показывает старое значение. Вывод срабатывает дважды на один баланс.">Реентранси возникает, когда контракт делает внешний вызов до обновления своего состояния. Вызываемый контракт — который контролирует атакующий — зовёт исходную функцию снова, пока баланс всё ещё показывает старое значение. Вывод срабатывает дважды на один баланс.</p>
+<p data-en="The classic case is a pool or vault with a naive withdraw. It is the bug behind several famous nine-figure exploits, and it is still shipped because the pattern looks correct on first read." data-ru="Классика — пул или хранилище с наивным выводом. Это баг, стоящий за несколькими известными девятизначными взломами, и его до сих пор релизят, потому что на первый взгляд паттерн выглядит правильным.">Классика — пул или хранилище с наивным выводом. Это баг, стоящий за несколькими известными девятизначными взломами, и его до сих пор релизят, потому что на первый взгляд паттерн выглядит правильным.</p>
+<ul class="sub-list">
+<li><span>✓</span> <span data-en="External call made before state is updated" data-ru="Внешний вызов сделан до обновления состояния">Внешний вызов сделан до обновления состояния</span></li>
+<li><span>✓</span> <span data-en="Attacker contract re-enters during the call" data-ru="Контракт атакующего повторно входит во время вызова">Контракт атакующего повторно входит во время вызова</span></li>
+<li><span>✓</span> <span data-en="Balance or allowance read from stale state" data-ru="Баланс или лимит читаются из устаревшего состояния">Баланс или лимит читаются из устаревшего состояния</span></li>
+<li><span>✓</span> <span data-en="Funds drained repeatedly in one transaction" data-ru="Средства выводятся многократно в одной транзакции">Средства выводятся многократно в одной транзакции</span></li>
+</ul>
+</section>
+<section>
+<h2 data-en="The Fix" data-ru="Исправление">Исправление</h2>
+<p data-en="Update state before any external call, or guard the entry with a reentrancy lock, or use the checks-effects-interactions pattern. The key is one rule: internal state must be consistent before you hand control to an untrusted address." data-ru="Обновляйте состояние до внешнего вызова, защищайте вход замком реентранси или используйте паттерн «проверки — эффекты — взаимодействия». Правило одно: внутреннее состояние должно быть согласовано до передачи контроля недоверенному адресу.">Обновляйте состояние до внешнего вызова, защищайте вход замком реентранси или используйте паттерн «проверки — эффекты — взаимодействия». Правило одно: внутреннее состояние должно быть согласовано до передачи контроля недоверенному адресу.</p>
+</section>
+<section>
+<h2 data-en="What an Audit Actually Covers" data-ru="Что реально покрывает аудит">Что реально покрывает аудит</h2>
+<ul class="sub-list">
+<li><span>1</span> <span data-en="Reentrancy, overflow/underflow, access control" data-ru="Реентранси, переполнение, контроль доступа">Реентранси, переполнение, контроль доступа</span></li>
+<li><span>1</span> <span data-en="Oracle and price manipulation" data-ru="Манипуляции оракулом и ценой">Манипуляции оракулом и ценой</span></li>
+<li><span>1</span> <span data-en="Upgradeable-proxy and admin-key risks" data-ru="Риски обновляемых прокси и админ-ключей">Риски обновляемых прокси и админ-ключей</span></li>
+<li><span>1</span> <span data-en="Signature replay, flash-loan and cross-chain vectors" data-ru="Повтор подписи, флеш-займы и межсетевые векторы">Повтор подписи, флеш-займы и межсетевые векторы</span></li>
+</ul>
+<div class="sub-outcome" data-en="A technical report with a working proof-of-concept for every critical finding and a code-level fix — the evidence investors and listing partners ask for." data-ru="Технический отчёт с рабочим доказательством каждой критической находки и исправлением на уровне кода — то, что просят инвесторы и биржи листинга.">Технический отчёт с рабочим доказательством каждой критической находки и исправлением на уровне кода — то, что просят инвесторы и биржи листинга.</div>
+</section>
+<section>
+<h2 data-en="FAQ" data-ru="Вопросы">Вопросы</h2>
+<div class="faq-item"><h4 data-en="How long does a smart contract audit take?" data-ru="Сколько длится аудит смарт-контракта?">Сколько длится аудит смарт-контракта?</h4><p data-en="One to two weeks for a single contract, three to five for a full protocol with tests and a re-audit of fixes." data-ru="Одна-две недели на один контракт, три-пять на полный протокол с тестами и перепроверкой исправлений.">Одна-две недели на один контракт, три-пять на полный протокол с тестами и перепроверкой исправлений.</p></div>
+<div class="faq-item"><h4 data-en="Do you re-audit after fixes?" data-ru="Вы перепроверяете после исправлений?">Вы перепроверяете после исправлений?</h4><p data-en="Yes — every audit includes 30 days of support and a free re-scan of fixed items." data-ru="Да — каждый аудит включает 30 дней поддержки и бесплатную перепроверку закрытого.">Да — каждый аудит включает 30 дней поддержки и бесплатную перепроверку закрытого.</p></div>
+</section>
+<section class="s-border">
+<div class="express-box">
+<h3 data-en="Audit Your Contract Before It Ships" data-ru="Проверьте контракт до релиза">Проверьте контракт до релиза</h3>
+<div class="sub" data-en="Send us your contract — audit proposal within 48 hours." data-ru="Пришлите контракт — предложение по аудиту за 48 часов.">Пришлите контракт — предложение по аудиту за 48 часов.</div>
+<a class="btn-hero primary" data-en="Request a Smart Contract Audit" data-ru="Заказать аудит смарт-контракта" href="mailto:devowlmind@gmail.com?subject=Smart%20Contract%20Audit" style="font-size:16px;padding:16px 40px;display:inline-block">Заказать аудит смарт-контракта</a>
+</div>
+</section>
+</div>
+<footer>
+<div class="footer-inner">
+<div style="display:flex;align-items:center;gap:8px"><span style="font-weight:700;color:var(--dim2)">OwlMind Security</span></div>
+<div class="footer-links">
+<a data-en="Home" data-ru="Главная" href="/ru/">Главная</a>
+<a data-en="Casino" data-ru="Казино" href="/ru/casino/">Казино</a>
+<a data-en="Crypto" data-ru="Крипто" href="/ru/crypto/">Крипто</a>
+<a data-en="Banking" data-ru="Банки" href="/ru/banking/">Банки</a>
+<a data-en="Smart Contract" data-ru="Смарт-контракты" href="/ru/smart-contract-audit/">Смарт-контракты</a>
+</div>
+<p>© 2026 OwlMind Security. <span data-en="All rights reserved." data-ru="Все права защищены.">Все права защищены.</span></p>
+</div>
+</footer>
+
+</body>
+</html>

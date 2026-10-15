@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-en="Withdrawal Race Conditions — Double-Spend on Cashout — OwlMind Security" data-ru="Гонка на выводе средств — двойная трата при кэшауте — OwlMind Security">Withdrawal Race Conditions — Double-Spend on Cashout — OwlMind Security</title>
+<meta content="How a race condition lets two parallel withdrawals drain one balance, why it happens in exchanges and casinos, and how to close the window." data-en="How a race condition lets two parallel withdrawals drain one balance, why it happens in exchanges and casinos, and how to close the window." data-ru="Как гонка позволяет двум параллельным выводам обнулить один баланс, почему это бывает на биржах и в казино и как закрыть окно." name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://owlmind.dev/blog/withdrawal-race-conditions/" rel="canonical"/>
+<meta content="Withdrawal Race Conditions — Double-Spend on Cashout — OwlMind Security" property="og:title"/>
+<meta content="How two parallel withdrawals drain one balance — and how to close the race." property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://owlmind.dev/blog/withdrawal-race-conditions/" property="og:url"/>
+<meta content="https://owlmind.dev/og-image.png" property="og:image"/>
+<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🦉&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="/style.css" rel="stylesheet"/>
+<link href="https://owlmind.dev/ru/blog/withdrawal-race-conditions/" hreflang="ru" rel="alternate"/><link href="https://owlmind.dev/blog/withdrawal-race-conditions/" hreflang="x-default" rel="alternate"/></head>
+<body>
+<nav>
+<div class="nav-inner">
+<a class="logo" href="/"><i>Owl</i>Mind</a>
+<div class="nav-links">
+<a class="hide-m" data-en="Industries" data-ru="Отрасли" href="/#industries">Industries</a>
+<a data-en="Casino" data-ru="Казино" href="/casino/">Casino</a>
+<a data-en="Crypto" data-ru="Крипто" href="/crypto/">Crypto</a>
+<a data-en="Banking" data-ru="Банки" href="/banking/">Banking</a>
+<a data-en="Smart Contract" data-ru="Смарт-контракты" href="/smart-contract-audit/">Smart Contract</a>
+<a class="btn-nav" data-en="Contact Us" data-ru="Связаться" href="mailto:devowlmind@gmail.com?subject=Pentest">Contact Us</a>
+<div aria-label="Language" class="lang-toggle" role="group">
+<button data-lang="en" data-lang-toggle="" type="button">EN</button>
+<button data-lang="ru" data-lang-toggle="" type="button">RU</button>
+</div>
+</div>
+</div>
+</nav>
+<div class="sub-hero">
+<div class="hero-bg"></div>
+<div class="hero-grid"></div>
+<div class="hero-content">
+<div class="breadcrumb"><a data-en="Home" data-ru="Главная" href="/">Home</a>  /  <span data-en="Blog" data-ru="Блог">Blog</span>  /  <span data-en="Withdrawal Race Conditions" data-ru="Гонки на выводе">Withdrawal Race Conditions</span></div>
+<h1><span data-en="Withdrawal Race Conditions" data-ru="Гонка на выводе средств">Withdrawal Race Conditions</span></h1>
+<p data-en="Two requests, one balance, a window of microseconds. When the balance check and the debit are not atomic, money leaves twice." data-ru="Два запроса, один баланс, окно в микросекунды. Когда проверка баланса и списание не атомарны, деньги уходят дважды.">Two requests, one balance, a window of microseconds. When the balance check and the debit are not atomic, money leaves twice.</p>
+<div class="hero-btns"><a class="btn-hero primary" data-en="Request a Race Audit" data-ru="Заказать аудит гонок" href="mailto:devowlmind@gmail.com?subject=Race%20Audit">Request a Race Audit</a></div>
+</div>
+</div>
+<div class="sub-section">
+<section>
+<h2 data-en="The Mechanics of the Race" data-ru="Механика гонки">The Mechanics of the Race</h2>
+<p data-en="A withdrawal is a read-then-write: check the balance, then debit it. If those two steps are separate and the request is fast enough, two parallel requests both read the same balance before either debits. Both are approved, and the account goes negative — or a float account pays twice." data-ru="Вывод — это прочитать и записать: проверить баланс, затем списать. Если эти два шага разделены, а запрос достаточно быстрый, два параллельных запроса оба читают один баланс раньше любого списания. Оба одобряются — счёт уходит в минус или расчётный счёт платит дважды.">A withdrawal is a read-then-write: check the balance, then debit it. If those two steps are separate and the request is fast enough, two parallel requests both read the same balance before either debits. Both are approved, and the account goes negative — or a float account pays twice.</p>
+<p data-en="On a crypto exchange or a casino cashout this is direct money loss, and it is only visible when someone deliberately fires the same withdrawal in parallel. Normal testing never does that." data-ru="На криптобирже или кэшауте казино это прямая потеря денег, и видно её только когда кто-то намеренно шлёт один и тот же вывод параллельно. Обычное тестирование так не делает.">On a crypto exchange or a casino cashout this is direct money loss, and it is only visible when someone deliberately fires the same withdrawal in parallel. Normal testing never does that.</p>
+<ul class="sub-list">
+<li><span>✓</span> <span data-en="Balance check and debit are separate operations" data-ru="Проверка баланса и списание — отдельные операции">Balance check and debit are separate operations</span></li>
+<li><span>✓</span> <span data-en="No idempotency key on the withdrawal request" data-ru="Нет ключа идемпотентности на запросе вывода">No idempotency key on the withdrawal request</span></li>
+<li><span>✓</span> <span data-en="Parallel requests both pass the balance check" data-ru="Параллельные запросы оба проходят проверку баланса">Parallel requests both pass the balance check</span></li>
+<li><span>✓</span> <span data-en="Race window widens under load or slow database" data-ru="Окно гонки шире под нагрузкой или при медленной базе">Race window widens under load or slow database</span></li>
+</ul>
+</section>
+<section>
+<h2 data-en="Where We See It Most" data-ru="Где это встречается чаще всего">Where We See It Most</h2>
+<p data-en="Withdrawal, cashout, redeem, refund, bonus claim — any flow that moves value in a read-then-write pattern. Exchanges and casinos are the most exposed because the flows are public and the incentive to try is high." data-ru="Вывод, кэшаут, погашение, возврат, бонус — любой поток, который двигает ценность по схеме «прочитал — записал». Биржи и казино уязвимее всего, потому что потоки публичные, а стимул попробовать высокий.">Withdrawal, cashout, redeem, refund, bonus claim — any flow that moves value in a read-then-write pattern. Exchanges and casinos are the most exposed because the flows are public and the incentive to try is high.</p>
+</section>
+<section>
+<h2 data-en="How to Close It" data-ru="Как это закрыть">How to Close It</h2>
+<ul class="sub-list">
+<li><span>1</span> <span data-en="Make check-and-debit atomic in one transaction" data-ru="Сделать проверку и списание атомарными в одной транзакции">Make check-and-debit atomic in one transaction</span></li>
+<li><span>1</span> <span data-en="Add an idempotency key and reject duplicates" data-ru="Добавить ключ идемпотентности и отклонять дубли">Add an idempotency key and reject duplicates</span></li>
+<li><span>1</span> <span data-en="Lock the balance row during the withdrawal" data-ru="Блокировать строку баланса на время вывода">Lock the balance row during the withdrawal</span></li>
+<li><span>1</span> <span data-en="Re-test with single-packet parallel requests" data-ru="Перепроверить однопакетными параллельными запросами">Re-test with single-packet parallel requests</span></li>
+</ul>
+<div class="sub-outcome" data-en="A cashout flow that cannot be double-spent — and proof of it for your partners and auditors." data-ru="Поток кэшаута, который нельзя удвоить — и доказательство этого для партнёров и аудиторов.">A cashout flow that cannot be double-spent — and proof of it for your partners and auditors.</div>
+</section>
+<section>
+<h2 data-en="FAQ" data-ru="Вопросы">FAQ</h2>
+<div class="faq-item"><h4 data-en="How do you prove a race exists?" data-ru="Как вы доказываете, что гонка есть?">How do you prove a race exists?</h4><p data-en="We fire the same withdrawal with HTTP/2 single-packet parallelism and show both requests approved against one balance — with a negative control that a normal serial withdrawal is rejected correctly." data-ru="Шлём один и тот же вывод однопакетным параллелизмом HTTP/2 и показываем, что оба запроса одобрены против одного баланса — с отрицательным контролем, где обычный последовательный вывод корректно отклоняется.">We fire the same withdrawal with HTTP/2 single-packet parallelism and show both requests approved against one balance — with a negative control that a normal serial withdrawal is rejected correctly.</p></div>
+<div class="faq-item"><h4 data-en="Do you move real funds to test it?" data-ru="Вы двигаете реальные средства для проверки?">Do you move real funds to test it?</h4><p data-en="No. Tests run on isolated fixtures and test accounts, never on customer balances." data-ru="Нет. Проверки идут на изолированных данных и тестовых счетах, никогда на балансах клиентов.">No. Tests run on isolated fixtures and test accounts, never on customer balances.</p></div>
+</section>
+<section class="s-border">
+<div class="express-box">
+<h3 data-en="Close the Race Before It Drains You" data-ru="Закройте гонку раньше, чем она вас обнулит">Close the Race Before It Drains You</h3>
+<div class="sub" data-en="Send us your withdrawal flow — race-condition assessment within 48 hours." data-ru="Пришлите контур вывода — оценка гонок в течение 48 часов.">Send us your withdrawal flow — race-condition assessment within 48 hours.</div>
+<a class="btn-hero primary" data-en="Request a Race Audit" data-ru="Заказать аудит гонок" href="mailto:devowlmind@gmail.com?subject=Race%20Audit" style="font-size:16px;padding:16px 40px;display:inline-block">Request a Race Audit</a>
+</div>
+</section>
+</div>
+<footer>
+<div class="footer-inner">
+<div style="display:flex;align-items:center;gap:8px"><span style="font-weight:700;color:var(--dim2)">OwlMind Security</span></div>
+<div class="footer-links">
+<a data-en="Home" data-ru="Главная" href="/">Home</a>
+<a data-en="Casino" data-ru="Казино" href="/casino/">Casino</a>
+<a data-en="Crypto" data-ru="Крипто" href="/crypto/">Crypto</a>
+<a data-en="Banking" data-ru="Банки" href="/banking/">Banking</a>
+<a data-en="Smart Contract" data-ru="Смарт-контракты" href="/smart-contract-audit/">Smart Contract</a>
+</div>
+<p>© 2026 OwlMind Security. <span data-en="All rights reserved." data-ru="Все права защищены.">All rights reserved.</span></p>
+</div>
+</footer>
+<script src="/js/i18n.js"></script>
+</body>
+</html>

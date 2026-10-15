@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html class="dark" lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-en="OwlMind Security — AI-Powered Security Research &amp; Consulting" data-ru="OwlMind Security — исследование и консалтинг в области безопасности на базе ИИ">OwlMind Security — исследование и консалтинг в области безопасности на базе ИИ</title>
+<meta content="OwlMind Security — специализированная компания по исследованию и консалтингу в области безопасности. Методика на базе ИИ находит критические уязвимости, которые пропускают обычные аудиты. Нам доверяют банки, казино, биржи и компании." data-en="OwlMind Security — specialized security research and consulting firm. AI-powered methodology that uncovers critical vulnerabilities traditional audits miss. Trusted by banks, casinos, exchanges, and enterprises." data-ru="OwlMind Security — специализированная компания по исследованию и консалтингу в области безопасности. Методика на базе ИИ находит критические уязвимости, которые пропускают обычные аудиты. Нам доверяют банки, казино, биржи и компании." name="description"/>
+<meta content="OwlMind, security audit, penetration testing, banking security, casino security, crypto security, fintech security, AI security, PCI DSS, ISO 27001, SOC 2, GDPR, NIS2, DORA" name="keywords"/>
+<meta content="OwlMind Security" name="author"/>
+<meta content="index, follow" name="robots"/>
+
+<meta content="website" property="og:type"/>
+<meta content="https://owlmind.dev/ru/" property="og:url"/>
+<meta content="OwlMind Security — исследование и консалтинг в области безопасности на базе ИИ" property="og:title"/>
+<meta content="OwlMind Security — специализированная компания по исследованию и консалтингу в области безопасности. Методика на базе ИИ находит критические уязвимости, которые пропускают обычные аудиты. Нам доверяют банки, казино, биржи и компании." property="og:description"/>
+<meta content="ru_RU" property="og:locale"/>
+<meta content="OwlMind Security" property="og:site_name"/>
+<meta content="https://owlmind.dev/og-image.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://owlmind.dev/og-image.png" name="twitter:image"/>
+<meta content="OwlMind Security — исследование и консалтинг в области безопасности на базе ИИ" name="twitter:title"/>
+<meta content="OwlMind Security — специализированная компания по исследованию и консалтингу в области безопасности. Методика на базе ИИ находит критические уязвимости, которые пропускают обычные аудиты. Нам доверяют банки, казино, биржи и компании." name="twitter:description"/>
+<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🦉&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link href="/style.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"ProfessionalService",
+  "name":"OwlMind Security",
+  "url":"https://owlmind.dev",
+  "description":"AI-powered security research and consulting firm. Specialized in identifying critical vulnerabilities across banking, casinos, crypto, fintech, telecom, and technology sectors. Proprietary AI methodology with zero false positives.",
+  "foundingDate":"2026",
+  "serviceType":["Security Audit","Penetration Testing","Source Code Audit","Mobile App Audit","Compliance Assessment","Continuous Monitoring","Incident Response"],
+  "areaServed":"Worldwide",
+  "email":"devowlmind@gmail.com",
+  "telephone":"+8618500722205"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"How does the security audit work?","acceptedAnswer":{"@type":"Answer","text":"We start with an NDA and a scoping call, then test your systems from multiple angles — attacker, auditor, and architect. Every finding is manually verified and critical issues are reported immediately."}},
+    {"@type":"Question","name":"How long does a penetration test take?","acceptedAnswer":{"@type":"Answer","text":"An express check takes about a week, a standard audit 2-3 weeks, and a full enterprise assessment 4-6 weeks, depending on the number of systems."}},
+    {"@type":"Question","name":"What do I get at the end?","acceptedAnswer":{"@type":"Answer","text":"A report in three formats — executive, technical, and compliance — with every vulnerability rated by severity, video proof-of-concept for critical and high findings, and a code-level fix for each."}},
+    {"@type":"Question","name":"Do you sign an NDA?","acceptedAnswer":{"@type":"Answer","text":"Yes. We sign a mutual non-disclosure agreement before any work begins, and all findings and data stay strictly confidential."}},
+    {"@type":"Question","name":"Will the testing break my systems?","acceptedAnswer":{"@type":"Answer","text":"No. Testing is non-destructive and controlled. We do not modify data or disrupt service, and critical findings are reported to you first."}},
+    {"@type":"Question","name":"Do you also fix the vulnerabilities?","acceptedAnswer":{"@type":"Answer","text":"We provide code-level remediation for every finding and 30 days of post-engagement support with a free re-scan of fixed items."}}
+  ]
+}
+</script>
+<link href="https://owlmind.dev/ru/" rel="canonical"/><link href="https://owlmind.dev/" hreflang="en" rel="alternate"/><link href="https://owlmind.dev/ru/" hreflang="ru" rel="alternate"/><link href="https://owlmind.dev/" hreflang="x-default" rel="alternate"/></head>
+<body>
+<!-- ========== NAVIGATION ========== -->
+<nav>
+<div class="nav-inner">
+<a class="logo" href="/ru/"><i>Owl</i>Mind</a>
+<div class="nav-links">
+<a class="hide-m" data-en="Industries" data-ru="Отрасли" href="#industries">Отрасли</a>
+<a data-en="Casino" data-ru="Казино" href="/ru/casino/">Казино</a>
+<a data-en="Crypto" data-ru="Крипто" href="/ru/crypto/">Крипто</a>
+<a data-en="Banking" data-ru="Банки" href="/ru/banking/">Банки</a>
+<a class="hide-m" data-en="Services" data-ru="Услуги" href="#services">Услуги</a>
+<a class="hide-m" data-en="Pricing" data-ru="Цены" href="#pricing">Цены</a>
+<a class="hide-m" data-en="Methodology" data-ru="Методика" href="#methodology">Методика</a>
+<a class="btn-nav" data-en="Contact Us" data-ru="Связаться" href="#contact">Связаться</a>
+<div aria-label="Language" class="lang-toggle" role="group">
+<a class="lang-link" data-lang="en" href="https://owlmind.dev/">EN</a>
+<a class="lang-link" data-lang="ru" href="https://owlmind.dev/ru/">RU</a>
+</div>
+</div>
+</div>
+</nav>
+<!-- ========== HERO ========== -->
+<div class="hero">
+<div class="hero-bg"></div>
+<div class="hero-grid"></div>
+<div class="hero-orb o1"></div>
+<div class="hero-orb o2"></div>
+<div class="hero-orb o3"></div>
+<div class="hero-scan"></div>
+<div class="hero-content">
+<div class="pill"><span class="dot"></span> <span data-en="AI-Powered Security Research" data-ru="Исследование безопасности на базе ИИ">Исследование безопасности на базе ИИ</span></div>
+<h1><span data-en="Penetration Testing &amp; Security Audits" data-ru="Пентест и аудит безопасности">Пентест и аудит безопасности</span><br/><span class="gr" data-en="for Banks, Casinos &amp; Crypto Exchanges" data-ru="для банков, казино и криптобирж">для банков, казино и криптобирж</span></h1>
+<p data-en="We find the critical vulnerabilities your last audit missed — verified by hand, with video proof-of-concept." data-ru="Находим критические уязвимости, которые пропустил ваш прошлый аудит — каждую подтверждаем вручную, с видео-доказательством.">Находим критические уязвимости, которые пропустил ваш прошлый аудит — каждую подтверждаем вручную, с видео-доказательством.</p>
+<div class="hero-btns">
+<a class="btn-hero primary" data-en="Get a Free Consultation" data-ru="Бесплатная консультация" href="mailto:devowlmind@gmail.com?subject=Consultation%20Request">Бесплатная консультация</a>
+<a class="btn-hero ghost" data-en="Telegram" data-ru="Telegram" href="https://t.me/devowlmind" rel="noopener" target="_blank">Telegram</a>
+<a class="btn-hero ghost" data-en="WhatsApp" data-ru="WhatsApp" href="https://wa.me/8618500722205" rel="noopener" target="_blank">WhatsApp</a>
+</div>
+<p class="hero-note" data-en="First consultation is free — no obligations." data-ru="Первая консультация бесплатна — без обязательств.">Первая консультация бесплатна — без обязательств.</p>
+</div>
+</div>
+<!-- ========== STATS ========== -->
+<div class="wrap">
+<div class="stats reveal">
+<div class="stat"><div class="stat-num" style="color:var(--green)">80+</div><div class="stat-label" data-en="Systems Assessed" data-ru="Проверено систем">Проверено систем</div></div>
+<div class="stat"><div class="stat-num" style="color:var(--accent2)">1,000+</div><div class="stat-label" data-en="Critical &amp; High Findings" data-ru="Критических и высоких находок">Критических и высоких находок</div></div>
+<div class="stat"><div class="stat-num" style="color:var(--gold)">100%</div><div class="stat-label" data-en="Manually Verified" data-ru="Проверено вручную">Проверено вручную</div></div>
+<div class="stat"><div class="stat-num" style="color:var(--orange)">48h</div><div class="stat-label" data-en="Proposal Delivery" data-ru="Срок предложения">Срок предложения</div></div>
+</div>
+</div>
+<div class="wrap">
+<div class="trust-banner reveal">
+<p data-en="Every finding is verified by hand by a senior security researcher — not an automated scanner. Your report contains only confirmed vulnerabilities with working proof-of-concept." data-ru="Каждую находку проверяет вручную старший специалист по безопасности — не автоматический сканер. В отчёте только подтверждённые уязвимости с рабочим доказательством.">Каждую находку проверяет вручную старший специалист по безопасности — не автоматический сканер. В отчёте только подтверждённые уязвимости с рабочим доказательством.</p>
+</div>
+</div>
+<!-- ========== INDUSTRIES WE PROTECT ========== -->
+<div class="wrap">
+<section class="reveal" id="industries">
+<h2 data-en="Industries We " data-ru="Отрасли, которые мы ">Отрасли, которые мы <span class="accent" data-en="Protect" data-ru="защищаем">защищаем</span></h2>
+<p class="section-sub" data-en="Deep security expertise across the sectors that need it most." data-ru="Глубокая экспертиза в сферах, которым это нужнее всего.">Глубокая экспертиза в сферах, которым это нужнее всего.</p>
+<div class="industry-grid">
+<div class="industry-block">
+<div class="head">
+<div class="industry-icon" style="background:linear-gradient(135deg,var(--accent),#9f7afa)">B</div>
+<h4 data-en="Banking &amp; Finance" data-ru="Банки и финансы">Банки и финансы</h4>
+</div>
+<p class="pain" data-en="One unpatched hole in your core — and the regulator, the press, and your customers all find out at once." data-ru="Одна незакрытая дыра в ядре — и о ней одновременно узнают регулятор, пресса и клиенты.">Одна незакрытая дыра в ядре — и о ней одновременно узнают регулятор, пресса и клиенты.</p>
+<div class="mini">
+<div>
+<h5 data-en="What we test" data-ru="Что проверяем">Что проверяем</h5>
+<ul>
+<li data-en="Core banking systems" data-ru="Ядро банка">Ядро банка</li>
+<li data-en="Online &amp; mobile banking" data-ru="Онлайн- и мобильный банк">Онлайн- и мобильный банк</li>
+<li data-en="Payment processing &amp; acquiring" data-ru="Обработка платежей и эквайринг">Обработка платежей и эквайринг</li>
+<li data-en="Internal networks" data-ru="Внутренняя сеть">Внутренняя сеть</li>
+<li data-en="Authentication &amp; 2FA" data-ru="Вход и двухфакторная защита">Вход и двухфакторная защита</li>
+</ul>
+</div>
+<div>
+<h5 data-en="What we find" data-ru="Что находим">Что находим</h5>
+<ul>
+<li data-en="Remote code execution" data-ru="Полный захват серверов">Полный захват серверов</li>
+<li data-en="SQL injection to accounts" data-ru="Доступ к счетам через базу">Доступ к счетам через базу</li>
+<li data-en="Authentication bypass" data-ru="Обход входа">Обход входа</li>
+<li data-en="Open databases" data-ru="Открытые базы">Открытые базы</li>
+<li data-en="Lateral movement paths" data-ru="Пути перехода между системами">Пути перехода между системами</li>
+</ul>
+</div>
+<div>
+<h5 data-en="Outcome" data-ru="Результат">Результат</h5>
+<p class="outcome" data-en="A report your risk committee and regulator can act on — every critical fixed before it becomes a breach." data-ru="Отчёт, который примут риск-комитет и регулятор — каждая критическая дыра закрыта до того, как стала утечкой.">Отчёт, который примут риск-комитет и регулятор — каждая критическая дыра закрыта до того, как стала утечкой.</p>
+</div>
+</div>
+</div>
+<div class="industry-block">
+<div class="head">
+<div class="industry-icon" style="background:linear-gradient(135deg,#ec4899,#f472b6)">C</div>
+<h4 data-en="Online Casinos &amp; Betting" data-ru="Онлайн-казино и букмекеры">Онлайн-казино и букмекеры</h4>
+</div>
+<p class="pain" data-en="A player who can change the odds, withdraw twice, or read your RNG is an empty bank account." data-ru="Игрок, который меняет коэффициент, снимает вывод дважды или читает генератор случайных чисел, — это пустой счёт.">Игрок, который меняет коэффициент, снимает вывод дважды или читает генератор случайных чисел, — это пустой счёт.</p>
+<div class="mini">
+<div>
+<h5 data-en="What we test" data-ru="Что проверяем">Что проверяем</h5>
+<ul>
+<li data-en="Game logic &amp; RNG fairness" data-ru="Логика игр и честность случайных чисел">Логика игр и честность случайных чисел</li>
+<li data-en="Odds / coefficient integrity" data-ru="Честность коэффициентов">Честность коэффициентов</li>
+<li data-en="Deposit &amp; withdrawal flows" data-ru="Ввод и вывод денег">Ввод и вывод денег</li>
+<li data-en="Bonus &amp; promo abuse" data-ru="Бонусы и акции">Бонусы и акции</li>
+<li data-en="Real-time (WebSocket) channels" data-ru="Живой игровой канал">Живой игровой канал</li>
+</ul>
+</div>
+<div>
+<h5 data-en="What we find" data-ru="Что находим">Что находим</h5>
+<ul>
+<li data-en="Odds manipulation" data-ru="Подмена коэффициентов">Подмена коэффициентов</li>
+<li data-en="Double-spend on cashout" data-ru="Двойное списание при выводе">Двойное списание при выводе</li>
+<li data-en="Negative / zero amount bypass" data-ru="Уход в минус по сумме">Уход в минус по сумме</li>
+<li data-en="Unauthorized balance changes" data-ru="Изменение баланса без прав">Изменение баланса без прав</li>
+<li data-en="Exposed provider APIs" data-ru="Открытые доступы к провайдерам">Открытые доступы к провайдерам</li>
+</ul>
+</div>
+<div>
+<h5 data-en="Outcome" data-ru="Результат">Результат</h5>
+<p class="outcome" data-en="Prove your games are fair and your money is safe — keep the licence and the players." data-ru="Докажите, что игры честные, а деньги в безопасности — сохраните лицензию и игроков.">Докажите, что игры честные, а деньги в безопасности — сохраните лицензию и игроков.</p>
+</div>
+</div>
+</div>
+<div class="industry-block">
+<div class="head">
+<div class="industry-icon" style="background:linear-gradient(135deg,var(--gold),#f59e0b)">₿</div>
+<h4 data-en="Crypto Exchanges &amp; Web3" data-ru="Криптобиржи и web3">Криптобиржи и web3</h4>
+</div>
+<p class="pain" data-en="One bug in a smart contract or withdrawal flow and users' funds are gone — permanently, with no chargeback." data-ru="Одна ошибка в смарт-контракте или в выводе средств — и деньги пользователей ушли навсегда, без возврата.">Одна ошибка в смарт-контракте или в выводе средств — и деньги пользователей ушли навсегда, без возврата.</p>
+<div class="mini">
+<div>
+<h5 data-en="What we test" data-ru="Что проверяем">Что проверяем</h5>
+<ul>
+<li data-en="Smart contracts" data-ru="Смарт-контракты">Смарт-контракты</li>
+<li data-en="Wallets &amp; custody" data-ru="Кошельки и хранение">Кошельки и хранение</li>
+<li data-en="Deposit / withdrawal logic" data-ru="Ввод и вывод средств">Ввод и вывод средств</li>
+<li data-en="Trading engine" data-ru="Торговое ядро">Торговое ядро</li>
+<li data-en="KYC / AML flows" data-ru="Проверка клиента (KYC)">Проверка клиента (KYC)</li>
+</ul>
+</div>
+<div>
+<h5 data-en="What we find" data-ru="Что находим">Что находим</h5>
+<ul>
+<li data-en="Reentrancy" data-ru="Повторный вызов функции">Повторный вызов функции</li>
+<li data-en="Flash-loan attacks" data-ru="Атаки мгновенными займами">Атаки мгновенными займами</li>
+<li data-en="Signature replay" data-ru="Повторное использование подписи">Повторное использование подписи</li>
+<li data-en="Price manipulation" data-ru="Подмена цен">Подмена цен</li>
+<li data-en="Private-key exposure" data-ru="Утечка закрытых ключей">Утечка закрытых ключей</li>
+</ul>
+</div>
+<div>
+<h5 data-en="Outcome" data-ru="Результат">Результат</h5>
+<p class="outcome" data-en="Hard proof your contract and exchange logic hold — before the market tests them for you." data-ru="Железное доказательство, что контракт и логика биржи выдержат — до того, как их проверит рынок.">Железное доказательство, что контракт и логика биржи выдержат — до того, как их проверит рынок.</p>
+</div>
+</div>
+</div>
+<div class="industry-block">
+<div class="head">
+<div class="industry-icon" style="background:linear-gradient(135deg,var(--green),#6ee7b7)">F</div>
+<h4 data-en="Fintech &amp; Payments" data-ru="Финтех и платежи">Финтех и платежи</h4>
+</div>
+<p class="pain" data-en="Payments are the one place where a bug converts directly into stolen money." data-ru="Платежи — единственное место, где баг напрямую превращается в украденные деньги.">Платежи — единственное место, где баг напрямую превращается в украденные деньги.</p>
+<div class="mini">
+<div>
+<h5 data-en="What we test" data-ru="Что проверяем">Что проверяем</h5>
+<ul>
+<li data-en="Payment gateways" data-ru="Платёжные шлюзы">Платёжные шлюзы</li>
+<li data-en="Digital wallets" data-ru="Цифровые кошельки">Цифровые кошельки</li>
+<li data-en="Open-banking APIs" data-ru="Открытые банковские интерфейсы">Открытые банковские интерфейсы</li>
+<li data-en="KYC &amp; onboarding" data-ru="Регистрация и проверка клиента">Регистрация и проверка клиента</li>
+<li data-en="Card tokenization" data-ru="Защита карточных данных">Защита карточных данных</li>
+</ul>
+</div>
+<div>
+<h5 data-en="What we find" data-ru="Что находим">Что находим</h5>
+<ul>
+<li data-en="IDOR between accounts" data-ru="Доступ к чужим счетам">Доступ к чужим счетам</li>
+<li data-en="OTP / 2FA bypass" data-ru="Обход одноразовых кодов">Обход одноразовых кодов</li>
+<li data-en="Card data exposure" data-ru="Утечка карт">Утечка карт</li>
+<li data-en="Amount tampering" data-ru="Подмена сумм">Подмена сумм</li>
+<li data-en="Broken settlement" data-ru="Сломанные расчёты с продавцами">Сломанные расчёты с продавцами</li>
+</ul>
+</div>
+<div>
+<h5 data-en="Outcome" data-ru="Результат">Результат</h5>
+<p class="outcome" data-en="PCI DSS-ready payment flows your partners and auditors will sign off on." data-ru="Платёжные потоки, готовые к проверке по PCI DSS, которые подпишут партнёры и аудиторы.">Платёжные потоки, готовые к проверке по PCI DSS, которые подпишут партнёры и аудиторы.</p>
+</div>
+</div>
+</div>
+<div class="industry-block">
+<div class="head">
+<div class="industry-icon" style="background:linear-gradient(135deg,var(--blue),#818cf8)">A</div>
+<h4 data-en="AI &amp; Technology" data-ru="ИИ и технологии">ИИ и технологии</h4>
+</div>
+<p class="pain" data-en="Your AI product is new — and the ways to attack it are newer: prompt injection, model theft, poisoned data." data-ru="Ваш ИИ-продукт новый, и способы его атаковать ещё новее — обман модели, кража модели, отравленные данные.">Ваш ИИ-продукт новый, и способы его атаковать ещё новее — обман модели, кража модели, отравленные данные.</p>
+<div class="mini">
+<div>
+<h5 data-en="What we test" data-ru="Что проверяем">Что проверяем</h5>
+<ul>
+<li data-en="LLM apps &amp; agents" data-ru="Приложения на ИИ и агенты">Приложения на ИИ и агенты</li>
+<li data-en="ML pipelines" data-ru="Пайплайны обучения">Пайплайны обучения</li>
+<li data-en="MCP / tool integrations" data-ru="Интеграции инструментов">Интеграции инструментов</li>
+<li data-en="SaaS &amp; APIs" data-ru="SaaS и программные интерфейсы">SaaS и программные интерфейсы</li>
+<li data-en="Cloud infrastructure" data-ru="Облачная инфраструктура">Облачная инфраструктура</li>
+</ul>
+</div>
+<div>
+<h5 data-en="What we find" data-ru="Что находим">Что находим</h5>
+<ul>
+<li data-en="Prompt injection" data-ru="Обман модели">Обман модели</li>
+<li data-en="SSRF through AI frameworks" data-ru="Захват сервера через ИИ-фреймворки">Захват сервера через ИИ-фреймворки</li>
+<li data-en="Model &amp; secret exfiltration" data-ru="Кража модели и секретов">Кража модели и секретов</li>
+<li data-en="RCE in agent toolchains" data-ru="Полный контроль над инструментами агента">Полный контроль над инструментами агента</li>
+<li data-en="Missing auth on APIs" data-ru="Открытые доступы без входа">Открытые доступы без входа</li>
+</ul>
+</div>
+<div>
+<h5 data-en="Outcome" data-ru="Результат">Результат</h5>
+<p class="outcome" data-en="Ship AI with confidence — attack surface mapped and closed before your customers find it." data-ru="Запускайте ИИ спокойно — поверхность атаки описана и закрыта до того, как её нашли клиенты.">Запускайте ИИ спокойно — поверхность атаки описана и закрыта до того, как её нашли клиенты.</p>
+</div>
+</div>
+</div>
+<div class="industry-block">
+<div class="head">
+<div class="industry-icon" style="background:linear-gradient(135deg,var(--orange),#fbbf24)">G</div>
+<h4 data-en="Government &amp; Public Sector" data-ru="Госсектор">Госсектор</h4>
+</div>
+<p class="pain" data-en="Citizen data is a national target — one leak and trust in the institution is gone." data-ru="Данные граждан — национальная цель; одна утечка, и доверие к ведомству потеряно.">Данные граждан — национальная цель; одна утечка, и доверие к ведомству потеряно.</p>
+<div class="mini">
+<div>
+<h5 data-en="What we test" data-ru="Что проверяем">Что проверяем</h5>
+<ul>
+<li data-en="E-government portals" data-ru="Порталы электронных услуг">Порталы электронных услуг</li>
+<li data-en="Citizen data stores" data-ru="Хранилища данных граждан">Хранилища данных граждан</li>
+<li data-en="Authentication &amp; ID systems" data-ru="Системы входа и удостоверения">Системы входа и удостоверения</li>
+<li data-en="Internal admin panels" data-ru="Внутренние панели администраторов">Внутренние панели администраторов</li>
+<li data-en="Critical infrastructure" data-ru="Критическая инфраструктура">Критическая инфраструктура</li>
+</ul>
+</div>
+<div>
+<h5 data-en="What we find" data-ru="Что находим">Что находим</h5>
+<ul>
+<li data-en="Mass data exposure" data-ru="Массовая утечка данных">Массовая утечка данных</li>
+<li data-en="Broken auth on citizen records" data-ru="Сломанный вход к записям граждан">Сломанный вход к записям граждан</li>
+<li data-en="Admin access bypass" data-ru="Обход доступа администратора">Обход доступа администратора</li>
+<li data-en="Unpatched legacy systems" data-ru="Незакрытые устаревшие системы">Незакрытые устаревшие системы</li>
+</ul>
+</div>
+<div>
+<h5 data-en="Outcome" data-ru="Результат">Результат</h5>
+<p class="outcome" data-en="Protect citizen data and stay ahead of compliance (GOST, NIS2, national standards)." data-ru="Защита данных граждан и соответствие стандартам (ГОСТ, NIS2 и национальным требованиям).">Защита данных граждан и соответствие стандартам (ГОСТ, NIS2 и национальным требованиям).</p>
+</div>
+</div>
+</div>
+<div class="industry-block">
+<div class="head">
+<div class="industry-icon" style="background:linear-gradient(135deg,#818cf8,#c084fc)">T</div>
+<h4 data-en="Telecom" data-ru="Телеком">Телеком</h4>
+</div>
+<p class="pain" data-en="Billing and mobile money are cash systems — an attacker inside them is moving money, not reading data." data-ru="Биллинг и мобильные деньги — это денежные системы; злоумышленник внутри не читает данные, он двигает деньги.">Биллинг и мобильные деньги — это денежные системы; злоумышленник внутри не читает данные, он двигает деньги.</p>
+<div class="mini">
+<div>
+<h5 data-en="What we test" data-ru="Что проверяем">Что проверяем</h5>
+<ul>
+<li data-en="Billing systems" data-ru="Биллинг">Биллинг</li>
+<li data-en="Mobile money" data-ru="Мобильные деньги">Мобильные деньги</li>
+<li data-en="Subscriber data" data-ru="Данные абонентов">Данные абонентов</li>
+<li data-en="SMS / OTP gateways" data-ru="Шлюзы СМС-кодов">Шлюзы СМС-кодов</li>
+<li data-en="Network services" data-ru="Сетевые сервисы">Сетевые сервисы</li>
+</ul>
+</div>
+<div>
+<h5 data-en="What we find" data-ru="Что находим">Что находим</h5>
+<ul>
+<li data-en="OTP interception" data-ru="Перехват одноразовых кодов">Перехват одноразовых кодов</li>
+<li data-en="Billing tampering" data-ru="Подмена биллинга">Подмена биллинга</li>
+<li data-en="Subscriber data leaks" data-ru="Утечка данных абонентов">Утечка данных абонентов</li>
+<li data-en="Exposed management interfaces" data-ru="Открытые панели управления">Открытые панели управления</li>
+<li data-en="SIM &amp; identity abuse" data-ru="Злоупотребление сим-картами">Злоупотребление сим-картами</li>
+</ul>
+</div>
+<div>
+<h5 data-en="Outcome" data-ru="Результат">Результат</h5>
+<p class="outcome" data-en="Lock down the systems that hold real money and every subscriber's identity." data-ru="Закрыты системы, которые держат реальные деньги и личность каждого абонента.">Закрыты системы, которые держат реальные деньги и личность каждого абонента.</p>
+</div>
+</div>
+</div>
+<div class="industry-block">
+<div class="head">
+<div class="industry-icon" style="background:linear-gradient(135deg,#34d399,#6ee7b7)">E</div>
+<h4 data-en="E-commerce &amp; Retail" data-ru="Электронная коммерция">Электронная коммерция</h4>
+</div>
+<p class="pain" data-en="Customer cards, orders, and supplier systems in one place — a breach hits sales and trust together." data-ru="Карты покупателей, заказы и системы поставщиков в одном месте — атака бьёт и по продажам, и по доверию одновременно.">Карты покупателей, заказы и системы поставщиков в одном месте — атака бьёт и по продажам, и по доверию одновременно.</p>
+<div class="mini">
+<div>
+<h5 data-en="What we test" data-ru="Что проверяем">Что проверяем</h5>
+<ul>
+<li data-en="Storefronts &amp; marketplaces" data-ru="Магазины и маркетплейсы">Магазины и маркетплейсы</li>
+<li data-en="Payment integration" data-ru="Приём платежей">Приём платежей</li>
+<li data-en="Customer accounts" data-ru="Аккаунты покупателей">Аккаунты покупателей</li>
+<li data-en="Order &amp; fulfilment" data-ru="Заказы и доставка">Заказы и доставка</li>
+<li data-en="Supplier portals" data-ru="Порталы поставщиков">Порталы поставщиков</li>
+</ul>
+</div>
+<div>
+<h5 data-en="What we find" data-ru="Что находим">Что находим</h5>
+<ul>
+<li data-en="Card data exposure" data-ru="Утечка карт">Утечка карт</li>
+<li data-en="Order tampering" data-ru="Подмена заказов">Подмена заказов</li>
+<li data-en="Account takeover" data-ru="Захват аккаунтов">Захват аккаунтов</li>
+<li data-en="Price / quantity manipulation" data-ru="Изменение цены и количества">Изменение цены и количества</li>
+<li data-en="Supply-chain pivots" data-ru="Переходы в цепочку поставок">Переходы в цепочку поставок</li>
+</ul>
+</div>
+<div>
+<h5 data-en="Outcome" data-ru="Результат">Результат</h5>
+<p class="outcome" data-en="Keep your store, your customers, and your payment rails safe through peak season." data-ru="Магазин, клиенты и платёжные каналы в безопасности даже в пиковый сезон.">Магазин, клиенты и платёжные каналы в безопасности даже в пиковый сезон.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- ========== WHY ORGANIZATIONS CHOOSE US ========== -->
+<div class="wrap">
+<section class="s-border reveal">
+<h2 data-en="Why Organizations " data-ru="Почему компании ">Почему компании <span class="accent" data-en="Choose Us" data-ru="выбирают нас">выбирают нас</span></h2>
+<p class="section-sub" data-en="Standard audits miss the criticals. We verify every finding by hand, with proof — so your report has no noise, only real risk." data-ru="Обычные аудиты пропускают критическое. Мы каждую находку подтверждаем вручную, с доказательством — в отчёте нет шума, только реальный риск.">Обычные аудиты пропускают критическое. Мы каждую находку подтверждаем вручную, с доказательством — в отчёте нет шума, только реальный риск.</p>
+<div class="problem-grid">
+<div class="problem-card traditional">
+<h4 data-en="Traditional Auditors" data-ru="Обычные аудиторы" style="color:var(--red)">Обычные аудиторы</h4>
+<div class="num-big" style="color:var(--red)">~30</div>
+<p data-en="findings on average" data-ru="находок в среднем" style="font-size:12px;color:var(--dim);margin:0">находок в среднем</p>
+<ul>
+<li><span style="color:var(--red)">✗</span> <span data-en="4–6 weeks duration" data-ru="4–6 недель">4–6 недель</span></li>
+<li><span style="color:var(--red)">✗</span> <span data-en="$50,000–$200,000 cost" data-ru="$50 000–$200 000">$50 000–$200 000</span></li>
+<li><span style="color:var(--red)">✗</span> <span data-en="Partial verification only" data-ru="Частичная проверка">Частичная проверка</span></li>
+<li><span style="color:var(--red)">✗</span> <span data-en="Unknown false positive rate" data-ru="Неизвестный процент ложных">Неизвестный процент ложных</span></li>
+</ul>
+</div>
+<div class="problem-card internal">
+<h4 data-en="Internal Teams" data-ru="Внутренние команды" style="color:var(--orange)">Внутренние команды</h4>
+<div class="num-big" data-en="Limited" data-ru="Ограничены" style="color:var(--orange)">Ограничены</div>
+<p data-en="scope and capacity" data-ru="по охвату и ресурсам" style="font-size:12px;color:var(--dim);margin:0">по охвату и ресурсам</p>
+<ul>
+<li><span style="color:var(--orange)">—</span> <span data-en="Cannot replace external audit" data-ru="Не заменяют внешний аудит">Не заменяют внешний аудит</span></li>
+<li><span style="color:var(--orange)">—</span> <span data-en="Compliance requires third party" data-ru="Соответствие требует третью сторону">Соответствие требует третью сторону</span></li>
+<li><span style="color:var(--orange)">—</span> <span data-en="Blind spots in own systems" data-ru="Слепые зоны в своих системах">Слепые зоны в своих системах</span></li>
+<li><span style="color:var(--orange)">—</span> <span data-en="Stretched across operations" data-ru="Распылены по задачам">Распылены по задачам</span></li>
+</ul>
+</div>
+<div class="problem-card owlmind-card">
+<h4 style="color:var(--green)">OwlMind Security</h4>
+<div class="num-big" data-en="1,000+" data-ru="1 000+" style="color:var(--green)">1 000+</div>
+<p data-en="critical &amp; high findings" data-ru="критических и высоких находок" style="font-size:12px;color:var(--dim);margin:0">критических и высоких находок</p>
+<ul>
+<li><span style="color:var(--green)">✓</span> <span data-en="Days, not months" data-ru="Дни, а не месяцы">Дни, а не месяцы</span></li>
+<li><span style="color:var(--green)">✓</span> <span data-en="$10K–$25K per engagement" data-ru="$10K–$25K за проект">$10K–$25K за проект</span></li>
+<li><span style="color:var(--green)">✓</span> <span data-en="Every finding verified by hand" data-ru="Каждая находка проверена вручную">Каждая находка проверена вручную</span></li>
+<li><span style="color:var(--green)">✓</span> <span data-en="No scanner noise in your report" data-ru="Без шума сканера в отчёте">Без шума сканера в отчёте</span></li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+<!-- ========== CASE STUDY ========== -->
+<div class="wrap">
+<section class="s-border reveal" id="case-study">
+<h2 data-en="Case Study: " data-ru="Кейс: ">Кейс: <span class="accent" data-en="Core Banking — Major CIS Bank" data-ru="ядро банка — крупный банк СНГ">ядро банка — крупный банк СНГ</span></h2>
+<p class="section-sub" data-en="A deep audit of one bank's core, online banking, and acquiring — 768 verified vulnerabilities, including 157 critical and 244 high." data-ru="Глубокая проверка ядра банка, онлайн-банка и эквайринга — 768 подтверждённых уязвимостей, из них 157 критических и 244 высоких.">Глубокая проверка ядра банка, онлайн-банка и эквайринга — 768 подтверждённых уязвимостей, из них 157 критических и 244 высоких.</p>
+<div class="results-grid">
+<div class="result-card border-crit">
+<div class="title" data-en="Core Banking &amp; Online Banking" data-ru="Ядро и онлайн-банк">Ядро и онлайн-банк</div>
+<div class="big-num" style="color:var(--text)">768</div>
+<div class="breakdown"><span class="crit">157</span> <span data-en="Critical" data-ru="критических">критических</span>  |  <span class="high">244</span> <span data-en="High" data-ru="высоких">высоких</span></div>
+<ul class="finding-list">
+<li data-en="SQL injection into the core banking system" data-ru="Инъекция в базу ядра банка">Инъекция в базу ядра банка</li>
+<li data-en="Full control of the card system" data-ru="Полный контроль карточной системы">Полный контроль карточной системы</li>
+<li data-en="Payment-order manipulation and 2FA bypass" data-ru="Подмена платёжных поручений и обход двухфакторки">Подмена платёжных поручений и обход двухфакторки</li>
+</ul>
+</div>
+<div class="result-card border-crit">
+<div class="title" data-en="Payment Gateway &amp; Acquiring" data-ru="Платёжный шлюз и эквайринг">Платёжный шлюз и эквайринг</div>
+<div class="big-num" style="color:var(--text)">590+</div>
+<div class="breakdown"><span class="crit">148</span> <span data-en="Critical" data-ru="критических">критических</span>  |  <span class="high">179</span> <span data-en="High" data-ru="высоких">высоких</span></div>
+<ul class="finding-list">
+<li data-en="Open payment APIs without authentication" data-ru="Открытые платёжные API без входа">Открытые платёжные API без входа</li>
+<li data-en="OTP bypass" data-ru="Обход одноразовых кодов">Обход одноразовых кодов</li>
+<li data-en="Mass card-data exposure" data-ru="Массовая утечка карточных данных">Массовая утечка карточных данных</li>
+</ul>
+</div>
+</div>
+<div class="total-bar">
+<div class="left">
+<div class="num">1,000+</div>
+<div class="desc" data-en="Critical and high findings, each verified by hand across 80+ systems" data-ru="Критических и высоких находок, каждая проверена вручную, по 80+ системам">Критических и высоких находок, каждая проверена вручную, по 80+ системам</div>
+</div>
+<div class="vs" data-en="across" data-ru="по отраслям">по отраслям<br/><strong data-en="iGaming, crypto, banks, AI" data-ru="iGaming, крипто, банки, ИИ">iGaming, крипто, банки, ИИ</strong></div>
+</div>
+</section>
+</div>
+<!-- ========== CLIENT RESULTS ========== -->
+<div class="wrap">
+<section class="s-border reveal" id="results">
+<h2 data-en="Client " data-ru="Результаты ">Результаты <span class="accent" data-en="Results" data-ru="клиентов">клиентов</span></h2>
+<p class="section-sub" data-en="A snapshot of what we found across iGaming, crypto, banking, and fintech engagements. Client names withheld under NDA." data-ru="Выборка того, что мы нашли в iGaming, криптобиржах, банках и финтехе. Имена клиентов скрыты по соглашению о неразглашении.">Выборка того, что мы нашли в iGaming, криптобиржах, банках и финтехе. Имена клиентов скрыты по соглашению о неразглашении.</p>
+<div class="results-grid">
+<div class="result-card border-crit">
+<div class="title" data-en="Betting &amp; Casino Platform" data-ru="Букмекер и онлайн-казино">Букмекер и онлайн-казино</div>
+<div class="big-num" style="color:var(--text)">2,300+</div>
+<div class="breakdown"><span class="crit">70</span> <span data-en="Critical" data-ru="критических">критических</span>  |  <span class="high">1,145</span> <span data-en="High" data-ru="высоких">высоких</span></div>
+<ul class="finding-list">
+<li data-en="Hardcoded demo login to production game lobby" data-ru="Жёстко зашитый демо-вход в боевое игровое лобби">Жёстко зашитый демо-вход в боевое игровое лобби</li>
+<li data-en="Provably-fair break — server seed disclosed before round" data-ru="Нарушение честности — серверный сид раскрыт до раунда">Нарушение честности — серверный сид раскрыт до раунда</li>
+<li data-en="Financial chain — mass deposit to withdrawal cancellation" data-ru="Финансовая цепочка — от массового пополнения до отмены вывода">Финансовая цепочка — от массового пополнения до отмены вывода</li>
+</ul>
+</div>
+<div class="result-card border-crit">
+<div class="title" data-en="Casino Game Provider" data-ru="Провайдер казино-игр">Провайдер казино-игр</div>
+<div class="big-num" style="color:var(--text)">3,300+</div>
+<div class="breakdown"><span class="crit">96</span> <span data-en="Critical" data-ru="критических">критических</span>  |  <span class="high">1,819</span> <span data-en="High" data-ru="высоких">высоких</span></div>
+<ul class="finding-list">
+<li data-en="Remote code execution on game servers" data-ru="Полный захват игровых серверов">Полный захват игровых серверов</li>
+<li data-en="Authentication bypass on game APIs" data-ru="Обход входа в игровых API">Обход входа в игровых API</li>
+<li data-en="Exposed provider backends" data-ru="Открытые внутренние сервисы провайдера">Открытые внутренние сервисы провайдера</li>
+</ul>
+</div>
+<div class="result-card border-high">
+<div class="title" data-en="Crash-Game Provider" data-ru="Провайдер crash-игр">Провайдер crash-игр</div>
+<div class="big-num" style="color:var(--text)">1,500+</div>
+<div class="breakdown"><span class="crit">59</span> <span data-en="Critical" data-ru="критических">критических</span>  |  <span class="high">1,057</span> <span data-en="High" data-ru="высоких">высоких</span></div>
+<ul class="finding-list">
+<li data-en="Raw server-seed leak before round — fairness break" data-ru="Утечка сида до раунда — нарушение честности">Утечка сида до раунда — нарушение честности</li>
+<li data-en="Unauthenticated channel subscription" data-ru="Подписка на каналы без входа">Подписка на каналы без входа</li>
+<li data-en="Cross-game token reuse" data-ru="Повторное использование токена между играми">Повторное использование токена между играми</li>
+</ul>
+</div>
+<div class="result-card border-crit">
+<div class="title" data-en="Core Banking — Major CIS Bank" data-ru="Ядро банка — крупный банк СНГ">Ядро банка — крупный банк СНГ</div>
+<div class="big-num" style="color:var(--text)">760+</div>
+<div class="breakdown"><span class="crit">157</span> <span data-en="Critical" data-ru="критических">критических</span>  |  <span class="high">244</span> <span data-en="High" data-ru="высоких">высоких</span></div>
+<ul class="finding-list">
+<li data-en="SQL injection into core banking" data-ru="Инъекция в базу ядра банка">Инъекция в базу ядра банка</li>
+<li data-en="Full card-system control" data-ru="Полный контроль карточной системы">Полный контроль карточной системы</li>
+<li data-en="Payment-order manipulation + 2FA bypass" data-ru="Подмена платёжных поручений + обход двухфакторки">Подмена платёжных поручений + обход двухфакторки</li>
+</ul>
+</div>
+<div class="result-card border-crit">
+<div class="title" data-en="National Payment Processor" data-ru="Национальный платёжный оператор">Национальный платёжный оператор</div>
+<div class="big-num" style="color:var(--text)">590+</div>
+<div class="breakdown"><span class="crit">148</span> <span data-en="Critical" data-ru="критических">критических</span>  |  <span class="high">179</span> <span data-en="High" data-ru="высоких">высоких</span></div>
+<ul class="finding-list">
+<li data-en="Open payment APIs without authentication" data-ru="Открытые платёжные API без входа">Открытые платёжные API без входа</li>
+<li data-en="OTP bypass" data-ru="Обход одноразовых кодов">Обход одноразовых кодов</li>
+<li data-en="Mass card-data exposure" data-ru="Массовая утечка карточных данных">Массовая утечка карточных данных</li>
+</ul>
+</div>
+<div class="result-card border-high">
+<div class="title" data-en="Major Fintech Bank" data-ru="Крупный финтех-банк">Крупный финтех-банк</div>
+<div class="big-num" style="color:var(--text)">248</div>
+<div class="breakdown"><span class="crit">19</span> <span data-en="Critical" data-ru="критических">критических</span>  |  <span class="high">70</span> <span data-en="High" data-ru="высоких">высоких</span></div>
+<ul class="finding-list">
+<li data-en="SSRF to internal services" data-ru="Подделка запросов к внутренним сервисам">Подделка запросов к внутренним сервисам</li>
+<li data-en="IDOR on customer records" data-ru="Доступ к чужим данным клиентов">Доступ к чужим данным клиентов</li>
+<li data-en="Push-notification auth bypass" data-ru="Обход входа через push-уведомления">Обход входа через push-уведомления</li>
+</ul>
+</div>
+<div class="result-card border-crit">
+<div class="title" data-en="Crypto Exchange" data-ru="Криптобиржа">Криптобиржа</div>
+<div class="big-num" style="color:var(--text)">660</div>
+<div class="breakdown"><span class="crit">47</span> <span data-en="Critical" data-ru="критических">критических</span>  |  <span class="high">431</span> <span data-en="High" data-ru="высоких">высоких</span></div>
+<ul class="finding-list">
+<li data-en="Trading API authentication flaws" data-ru="Дыры входа в торговом API">Дыры входа в торговом API</li>
+<li data-en="Order manipulation" data-ru="Подмена ордеров">Подмена ордеров</li>
+<li data-en="Private-key exposure" data-ru="Утечка закрытых ключей">Утечка закрытых ключей</li>
+</ul>
+</div>
+<div class="result-card border-crit">
+<div class="title" data-en="Crypto Exchange #2" data-ru="Криптобиржа №2">Криптобиржа №2</div>
+<div class="big-num" style="color:var(--text)">595</div>
+<div class="breakdown"><span class="crit">52</span> <span data-en="Critical" data-ru="критических">критических</span>  |  <span class="high">255</span> <span data-en="High" data-ru="высоких">высоких</span></div>
+<ul class="finding-list">
+<li data-en="Withdrawal race conditions" data-ru="Одновременные выводы">Одновременные выводы</li>
+<li data-en="KYC bypass" data-ru="Обход проверки клиента">Обход проверки клиента</li>
+<li data-en="Wallet access-control flaws" data-ru="Ошибки контроля доступа к кошелькам">Ошибки контроля доступа к кошелькам</li>
+</ul>
+</div>
+<div class="result-card border-high">
+<div class="title" data-en="Crypto Exchange #3" data-ru="Криптобиржа №3">Криптобиржа №3</div>
+<div class="big-num" style="color:var(--text)">525</div>
+<div class="breakdown"><span class="crit">42</span> <span data-en="Critical" data-ru="критических">критических</span>  |  <span class="high">226</span> <span data-en="High" data-ru="высоких">высоких</span></div>
+<ul class="finding-list">
+<li data-en="Deposit / withdrawal logic flaws" data-ru="Ошибки логики ввода-вывода">Ошибки логики ввода-вывода</li>
+<li data-en="Account takeover vectors" data-ru="Векторы захвата аккаунтов">Векторы захвата аккаунтов</li>
+<li data-en="Sensitive data exposure" data-ru="Утечка важных данных">Утечка важных данных</li>
+</ul>
+</div>
+<div class="result-card border-crit">
+<div class="title" data-en="Live Casino Provider" data-ru="Провайдер лайв-казино">Провайдер лайв-казино</div>
+<div class="big-num" style="color:var(--text)">2,080</div>
+<div class="breakdown"><span class="crit">45</span> <span data-en="Critical" data-ru="критических">критических</span>  |  <span class="high">1,040</span> <span data-en="High" data-ru="высоких">высоких</span></div>
+<ul class="finding-list">
+<li data-en="Game-stream authentication bypass" data-ru="Обход входа в игровой поток">Обход входа в игровой поток</li>
+<li data-en="Real-time channel manipulation" data-ru="Подмена каналов реального времени">Подмена каналов реального времени</li>
+<li data-en="Exposed game-provider APIs" data-ru="Открытые доступы к игровым провайдерам">Открытые доступы к игровым провайдерам</li>
+</ul>
+</div>
+<div class="result-card border-high">
+<div class="title" data-en="Betting Platform #2" data-ru="Букмекерская платформа №2">Букмекерская платформа №2</div>
+<div class="big-num" style="color:var(--text)">732</div>
+<div class="breakdown"><span class="crit">40</span> <span data-en="Critical" data-ru="критических">критических</span>  |  <span class="high">385</span> <span data-en="High" data-ru="высоких">высоких</span></div>
+<ul class="finding-list">
+<li data-en="Odds / coefficient manipulation" data-ru="Подмена коэффициентов">Подмена коэффициентов</li>
+<li data-en="Payment-flow abuse" data-ru="Злоупотребление платёжными потоками">Злоупотребление платёжными потоками</li>
+<li data-en="Affiliate-panel access flaws" data-ru="Дыры доступа к панелям партнёров">Дыры доступа к панелям партнёров</li>
+</ul>
+</div>
+<div class="result-card border-high">
+<div class="title" data-en="Airline Booking Platform" data-ru="Платформа бронирования авиабилетов">Платформа бронирования авиабилетов</div>
+<div class="big-num" style="color:var(--text)">209</div>
+<div class="breakdown"><span class="crit">38</span> <span data-en="Critical" data-ru="критических">критических</span>  |  <span class="high">61</span> <span data-en="High" data-ru="высоких">высоких</span></div>
+<ul class="finding-list">
+<li data-en="Booking without payment" data-ru="Бронирование без оплаты">Бронирование без оплаты</li>
+<li data-en="Passenger-data exposure" data-ru="Утечка данных пассажиров">Утечка данных пассажиров</li>
+<li data-en="GDS integration flaws" data-ru="Дыры в интеграции с системами бронирования">Дыры в интеграции с системами бронирования</li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+<!-- ========== SERVICES ========== -->
+<div class="wrap">
+<section class="s-border reveal" id="services">
+<h2 data-en="Our " data-ru="Наши ">Наши <span class="accent" data-en="Services" data-ru="услуги">услуги</span></h2>
+<p class="section-sub" data-en="Comprehensive security assessment and consulting for organizations across all industries." data-ru="Комплексная проверка безопасности и консалтинг для компаний из любых отраслей.">Комплексная проверка безопасности и консалтинг для компаний из любых отраслей.</p>
+<div class="service-grid">
+<div class="service-card">
+<div class="service-num">01</div>
+<h4 data-en="Deep Security Audit" data-ru="Глубокая проверка безопасности">Глубокая проверка безопасности</h4>
+<p data-en="Full penetration testing of web applications, APIs, infrastructure, business logic, and cloud environments." data-ru="Полное тестирование на проникновение веб-приложений, API, инфраструктуры, бизнес-логики и облака.">Полное тестирование на проникновение веб-приложений, API, инфраструктуры, бизнес-логики и облака.</p>
+</div>
+<div class="service-card">
+<div class="service-num">02</div>
+<h4 data-en="Source Code Audit" data-ru="Аудит исходного кода">Аудит исходного кода</h4>
+<p data-en="Static and dynamic analysis with taint tracking and vulnerability chain discovery across any language." data-ru="Статический и динамический анализ с отслеживанием данных и поиском цепочек уязвимостей на любом языке.">Статический и динамический анализ с отслеживанием данных и поиском цепочек уязвимостей на любом языке.</p>
+</div>
+<div class="service-card">
+<div class="service-num">03</div>
+<h4 data-en="Mobile Application Security" data-ru="Безопасность мобильных приложений">Безопасность мобильных приложений</h4>
+<p data-en="iOS and Android reverse engineering, API security, data storage analysis, and authentication testing." data-ru="Разбор iOS и Android, безопасность API, анализ хранения данных и проверка входа.">Разбор iOS и Android, безопасность API, анализ хранения данных и проверка входа.</p>
+</div>
+<div class="service-card">
+<div class="service-num">04</div>
+<h4 data-en="Compliance Assessment" data-ru="Проверка соответствия">Проверка соответствия</h4>
+<p data-en="PCI DSS, ISO 27001, SOC 2, GOST R 57580, GDPR gap analysis and remediation planning." data-ru="Анализ разрывов и план устранения по PCI DSS, ISO 27001, SOC 2, ГОСТ Р 57580, GDPR.">Анализ разрывов и план устранения по PCI DSS, ISO 27001, SOC 2, ГОСТ Р 57580, GDPR.</p>
+</div>
+<div class="service-card">
+<div class="service-num">05</div>
+<h4 data-en="Continuous Monitoring" data-ru="Постоянный мониторинг">Постоянный мониторинг</h4>
+<p data-en="24/7 attack surface monitoring with monthly re-scans and real-time alerting for emerging threats." data-ru="Мониторинг поверхности атаки 24/7 с ежемесячными перепроверками и оповещениями в реальном времени.">Мониторинг поверхности атаки 24/7 с ежемесячными перепроверками и оповещениями в реальном времени.</p>
+</div>
+<div class="service-card">
+<div class="service-num">06</div>
+<h4 data-en="Incident Response" data-ru="Реагирование на инциденты">Реагирование на инциденты</h4>
+<p data-en="Emergency breach investigation, containment, forensics, and recovery with rapid deployment." data-ru="Срочное расследование взлома, локализация, сбор улик и восстановление с быстрым развёртыванием.">Срочное расследование взлома, локализация, сбор улик и восстановление с быстрым развёртыванием.</p>
+</div>
+</div>
+<p style="font-size:14px;color:var(--dim);text-align:center;margin-top:20px;line-height:1.7"><span data-en="Every engagement is scoped individually." data-ru="Каждый проект оценивается индивидуально.">Каждый проект оценивается индивидуально.</span> <a data-en="Contact us" data-ru="Свяжитесь с нами" href="mailto:devowlmind@gmail.com?subject=Proposal%20Request" style="color:var(--accent2);font-weight:600">Свяжитесь с нами</a> <span data-en="for a tailored proposal within 48 hours." data-ru="— и получите предложение в течение 48 часов.">— и получите предложение в течение 48 часов.</span></p>
+<div class="guarantee-box">
+<h3 data-en="Our Commitment" data-ru="Наши обязательства">Наши обязательства</h3>
+<ul class="guarantee-list">
+<li><span class="check-icon">✓</span> <span data-en="Every finding manually verified by senior security researchers" data-ru="Каждая находка проверена вручную старшими специалистами">Каждая находка проверена вручную старшими специалистами</span></li>
+<li><span class="check-icon">✓</span> <span data-en="Reports delivered in three formats: Executive, Technical, and Compliance" data-ru="Отчёты в трёх форматах: для руководства, технический и для соответствия">Отчёты в трёх форматах: для руководства, технический и для соответствия</span></li>
+<li><span class="check-icon">✓</span> <span data-en="Video proof-of-concept for all critical and high-severity vulnerabilities" data-ru="Видео-доказательство для всех критических и высоких уязвимостей">Видео-доказательство для всех критических и высоких уязвимостей</span></li>
+<li><span class="check-icon">✓</span> <span data-en="Code-level remediation recommendations for every finding" data-ru="Рекомендации по исправлению на уровне кода для каждой находки">Рекомендации по исправлению на уровне кода для каждой находки</span></li>
+<li><span class="check-icon">✓</span> <span data-en="30-day post-engagement support included" data-ru="Поддержка 30 дней после завершения включена">Поддержка 30 дней после завершения включена</span></li>
+</ul>
+</div>
+</section>
+</div>
+<!-- ========== METHODOLOGY ========== -->
+<div class="wrap">
+<section class="s-border reveal" id="methodology">
+<h2 data-en="Our " data-ru="Наша ">Наша <span class="accent" data-en="Methodology" data-ru="методика">методика</span></h2>
+<p class="section-sub" data-en="A rigorous six-stage process aligned with PTES, OWASP Testing Guide, and NIST SP 800-115." data-ru="Строгий шестиэтапный процесс по PTES, руководству OWASP и NIST SP 800-115.">Строгий шестиэтапный процесс по PTES, руководству OWASP и NIST SP 800-115.</p>
+<div class="method-grid">
+<div class="method-card"><div class="step">01</div><div class="name" data-en="AI-Powered Analysis" data-ru="Анализ на базе ИИ">Анализ на базе ИИ</div><div class="desc" data-en="32 specialized security tools analyze code and infrastructure simultaneously across multiple attack vectors." data-ru="32 специализированных инструмента анализируют код и инфраструктуру одновременно по разным направлениям атаки.">32 специализированных инструмента анализируют код и инфраструктуру одновременно по разным направлениям атаки.</div></div>
+<div class="method-card"><div class="step">02</div><div class="name" data-en="Multi-Angle Attack" data-ru="Атака с разных сторон">Атака с разных сторон</div><div class="desc" data-en="Every system tested from 3 perspectives: attacker, auditor, and architect — catching what single-view audits miss." data-ru="Каждую систему проверяем с 3 сторон: атакующий, аудитор и архитектор — ловим то, что пропускают односторонние проверки.">Каждую систему проверяем с 3 сторон: атакующий, аудитор и архитектор — ловим то, что пропускают односторонние проверки.</div></div>
+<div class="method-card"><div class="step">03</div><div class="name" data-en="Taint Analysis" data-ru="Анализ потоков данных">Анализ потоков данных</div><div class="desc" data-en="Data flow tracking from user input to vulnerable sinks — proving exploitability, not just theoretical risk." data-ru="Отслеживаем путь данных от ввода до опасной точки — доказываем реальность атаки, а не теоретический риск.">Отслеживаем путь данных от ввода до опасной точки — доказываем реальность атаки, а не теоретический риск.</div></div>
+<div class="method-card"><div class="step">04</div><div class="name" data-en="Business Logic Testing" data-ru="Проверка бизнес-логики">Проверка бизнес-логики</div><div class="desc" data-en="Boundary value fuzzing on payment flows, authentication chains, and transaction processing logic." data-ru="Проверка граничных значений в платежах, цепочках входа и логике обработки операций.">Проверка граничных значений в платежах, цепочках входа и логике обработки операций.</div></div>
+<div class="method-card"><div class="step">05</div><div class="name" data-en="Expert Verification" data-ru="Проверка экспертом">Проверка экспертом</div><div class="desc" data-en="Every finding manually verified by senior researcher. Zero false positives in delivered reports." data-ru="Каждая находка проверена вручную старшим специалистом. Ноль ложных срабатываний в отчётах.">Каждая находка проверена вручную старшим специалистом. Ноль ложных срабатываний в отчётах.</div></div>
+<div class="method-card"><div class="step">06</div><div class="name" data-en="Actionable Remediation" data-ru="Практичные исправления">Практичные исправления</div><div class="desc" data-en="Each finding includes severity rating, impact analysis, code-level fix, and priority recommendation." data-ru="У каждой находки — уровень серьёзности, анализ последствий, исправление на уровне кода и приоритет.">У каждой находки — уровень серьёзности, анализ последствий, исправление на уровне кода и приоритет.</div></div>
+</div>
+</section>
+</div>
+<!-- ========== HOW WE WORK TOGETHER ========== -->
+<div class="wrap">
+<section class="s-border reveal">
+<h2 data-en="How We " data-ru="Как мы ">Как мы <span class="accent" data-en="Work Together" data-ru="работаем">работаем</span></h2>
+<p class="section-sub" data-en="From first contact to ongoing protection — a transparent, professional process." data-ru="От первого контакта до постоянной защиты — прозрачный и профессиональный процесс.">От первого контакта до постоянной защиты — прозрачный и профессиональный процесс.</p>
+<div class="flow-card">
+<div class="flow-steps">
+<div class="flow-step"><div class="num">1</div><h4 data-en="NDA &amp; Scoping Call" data-ru="Соглашение и созвон">Соглашение и созвон</h4><p data-en="Sign mutual NDA, discuss systems and priorities. 30-minute call." data-ru="Подписываем соглашение, обсуждаем системы и приоритеты. Созвон 30 минут.">Подписываем соглашение, обсуждаем системы и приоритеты. Созвон 30 минут.</p></div>
+<div class="flow-step"><div class="num">2</div><h4 data-en="Custom Proposal" data-ru="Персональное предложение">Персональное предложение</h4><p data-en="Tailored proposal within 48 hours. Clear scope, timeline, deliverables." data-ru="Предложение в течение 48 часов. Чёткий объём, сроки и результаты.">Предложение в течение 48 часов. Чёткий объём, сроки и результаты.</p></div>
+<div class="flow-step"><div class="num">3</div><h4 data-en="Audit Execution" data-ru="Проведение аудита">Проведение аудита</h4><p data-en="Deep testing with daily progress updates. Critical findings reported immediately. Zero disruption." data-ru="Глубокая проверка с ежедневными обновлениями. Критические находки — сразу. Без остановки работы.">Глубокая проверка с ежедневными обновлениями. Критические находки — сразу. Без остановки работы.</p></div>
+<div class="flow-step"><div class="num">4</div><h4 data-en="Comprehensive Report" data-ru="Полный отчёт">Полный отчёт</h4><p data-en="Detailed findings with severity, PoC, and remediation per vulnerability." data-ru="Подробные находки с серьёзностью, доказательством и исправлением по каждой.">Подробные находки с серьёзностью, доказательством и исправлением по каждой.</p></div>
+<div class="flow-step"><div class="num">5</div><h4 data-en="Remediation Support" data-ru="Поддержка исправлений">Поддержка исправлений</h4><p data-en="30-day support window. Free re-scan of fixed items." data-ru="Окно поддержки 30 дней. Бесплатная перепроверка исправленного.">Окно поддержки 30 дней. Бесплатная перепроверка исправленного.</p></div>
+<div class="flow-step"><div class="num">6</div><h4 data-en="Ongoing Protection" data-ru="Постоянная защита">Постоянная защита</h4><p data-en="Optional continuous monitoring subscription. Monthly re-scans." data-ru="Опциональная подписка на постоянный мониторинг. Ежемесячные перепроверки.">Опциональная подписка на постоянный мониторинг. Ежемесячные перепроверки.</p></div>
+</div>
+</div>
+</section>
+</div>
+<!-- ========== COMPLIANCE EXPERTISE ========== -->
+<div class="wrap">
+<section class="s-border reveal">
+<h2 data-en="Compliance " data-ru="Соответствие ">Соответствие <span class="accent" data-en="Expertise" data-ru="требованиям">требованиям</span></h2>
+<p class="section-sub" data-en="We map every finding to the compliance frameworks that matter to your organization." data-ru="Мы привязываем каждую находку к стандартам, которые важны вашей организации.">Мы привязываем каждую находку к стандартам, которые важны вашей организации.</p>
+<div class="compliance-grid">
+<div class="compliance-card"><div class="compliance-icon">PCI</div><h4>PCI DSS</h4><p data-en="Payment card industry — banks, fintech, e-commerce" data-ru="Платёжные карты — банки, финтех, торговля">Платёжные карты — банки, финтех, торговля</p></div>
+<div class="compliance-card"><div class="compliance-icon">ISO</div><h4>ISO 27001</h4><p data-en="Information security management — all industries" data-ru="Управление безопасностью — все отрасли">Управление безопасностью — все отрасли</p></div>
+<div class="compliance-card"><div class="compliance-icon">SOC</div><h4>SOC 2</h4><p data-en="Service organization controls — SaaS, cloud, tech" data-ru="Контроль сервисных организаций — SaaS, облако, ИТ">Контроль сервисных организаций — SaaS, облако, ИТ</p></div>
+<div class="compliance-card"><div class="compliance-icon">RU</div><h4>GOST R 57580</h4><p data-en="CIS banking security standard" data-ru="Стандарт безопасности банков СНГ">Стандарт безопасности банков СНГ</p></div>
+<div class="compliance-card"><div class="compliance-icon">EU</div><h4>GDPR / KVKK</h4><p data-en="Data protection — EU, Turkey, international" data-ru="Защита данных — ЕС, Турция, международно">Защита данных — ЕС, Турция, международно</p></div>
+<div class="compliance-card"><div class="compliance-icon">N2</div><h4>NIS2 / DORA</h4><p data-en="EU critical infrastructure &amp; financial resilience" data-ru="Критическая инфраструктура ЕС и устойчивость финансов">Критическая инфраструктура ЕС и устойчивость финансов</p></div>
+</div>
+</section>
+</div>
+<!-- ========== STANDARDS & FRAMEWORKS ========== -->
+<div class="wrap">
+<section class="s-border reveal">
+<h2 data-en="Standards &amp; " data-ru="Стандарты и ">Стандарты и <span class="accent" data-en="Frameworks" data-ru="методологии">методологии</span></h2>
+<p class="section-sub" data-en="Our assessments are conducted in accordance with internationally recognized security testing standards." data-ru="Наши проверки проводятся по международно признанным стандартам тестирования безопасности.">Наши проверки проводятся по международно признанным стандартам тестирования безопасности.</p>
+<div class="standards-grid">
+<div class="standard-card"><div class="label">PTES</div><h4 data-en="Penetration Testing Execution Standard" data-ru="Стандарт проведения пентеста">Стандарт проведения пентеста</h4><p data-en="Industry-standard framework for scoping, intelligence gathering, threat modeling, vulnerability analysis, exploitation, and reporting." data-ru="Отраслевой стандарт по объёму, сбору информации, моделированию угроз, анализу уязвимостей, эксплуатации и отчётности.">Отраслевой стандарт по объёму, сбору информации, моделированию угроз, анализу уязвимостей, эксплуатации и отчётности.</p></div>
+<div class="standard-card"><div class="label">OWASP</div><h4 data-en="OWASP Testing Guide v4.2" data-ru="Руководство OWASP v4.2">Руководство OWASP v4.2</h4><p data-en="Comprehensive methodology for web application security testing covering authentication, authorization, session management, and input validation." data-ru="Полная методика проверки веб-приложений: вход, права, сессии и проверка вводимых данных.">Полная методика проверки веб-приложений: вход, права, сессии и проверка вводимых данных.</p></div>
+<div class="standard-card"><div class="label">NIST SP 800-115</div><h4 data-en="Technical Guide to Information Security Testing" data-ru="Техническое руководство по тестированию безопасности">Техническое руководство по тестированию безопасности</h4><p data-en="NIST guidelines for planning, executing, and reporting on information security testing and assessment activities." data-ru="Руководство NIST по планированию, проведению и отчётности в тестировании безопасности.">Руководство NIST по планированию, проведению и отчётности в тестировании безопасности.</p></div>
+</div>
+</section>
+</div>
+<!-- ========== REAL VULNERABILITIES ========== -->
+<div class="wrap">
+<section class="s-border reveal">
+<h2 data-en="Real Vulnerabilities " data-ru="Реальные уязвимости, ">Реальные уязвимости, <span class="accent" data-en="We've Found" data-ru="которые мы нашли">которые мы нашли</span></h2>
+<p class="section-sub" data-en="Not a generic checklist — concrete findings from real engagements, each verified with a working proof-of-concept." data-ru="Не общий список — конкретные находки из реальных проверок, каждая подтверждена работающим доказательством.">Не общий список — конкретные находки из реальных проверок, каждая подтверждена работающим доказательством.</p>
+<div class="real-vuln-grid">
+<div class="real-vuln">
+<div class="sev crit" data-en="Critical" data-ru="Критическая">Критическая</div>
+<div class="vt" data-en="Hardcoded demo login to a live casino lobby" data-ru="Жёстко зашитый демо-вход в боевое казино-лобби">Жёстко зашитый демо-вход в боевое казино-лобби</div>
+<p class="vd" data-en="Game entry and a $1M balance without a real account." data-ru="Вход в игру и баланс $1M без настоящей учётной записи.">Вход в игру и баланс $1M без настоящей учётной записи.</p>
+</div>
+<div class="real-vuln">
+<div class="sev crit" data-en="Critical" data-ru="Критическая">Критическая</div>
+<div class="vt" data-en="Provably-fair break — server seed disclosed before the round" data-ru="Разрыв честности — серверный сид раскрыт до раунда">Разрыв честности — серверный сид раскрыт до раунда</div>
+<p class="vd" data-en="A player could predict the crash point." data-ru="Игрок мог предсказать точку краха.">Игрок мог предсказать точку краха.</p>
+</div>
+<div class="real-vuln">
+<div class="sev crit" data-en="Critical" data-ru="Критическая">Критическая</div>
+<div class="vt" data-en="Deposit → withdrawal cancellation chain" data-ru="Цепочка пополнение → отмена вывода">Цепочка пополнение → отмена вывода</div>
+<p class="vd" data-en="Mass deposit forgery and withdrawal manipulation." data-ru="Массовая подделка пополнений и манипуляция выводом.">Массовая подделка пополнений и манипуляция выводом.</p>
+</div>
+<div class="real-vuln">
+<div class="sev crit" data-en="Critical" data-ru="Критическая">Критическая</div>
+<div class="vt" data-en="SQL injection into a core banking system" data-ru="Инъекция в базу ядра банка">Инъекция в базу ядра банка</div>
+<p class="vd" data-en="Direct access to customer accounts and transactions." data-ru="Прямой доступ к счетам клиентов и операциям.">Прямой доступ к счетам клиентов и операциям.</p>
+</div>
+<div class="real-vuln">
+<div class="sev crit" data-en="Critical" data-ru="Критическая">Критическая</div>
+<div class="vt" data-en="2FA bypass + IDOR on account statements" data-ru="Обход двухфакторки + доступ к чужим выпискам">Обход двухфакторки + доступ к чужим выпискам</div>
+<p class="vd" data-en="Any account's statements readable." data-ru="Выписки любого счёта доступны для чтения.">Выписки любого счёта доступны для чтения.</p>
+</div>
+<div class="real-vuln">
+<div class="sev crit" data-en="Critical" data-ru="Критическая">Критическая</div>
+<div class="vt" data-en="Money API with unverified signature" data-ru="Денежный API без проверки подписи">Денежный API без проверки подписи</div>
+<p class="vd" data-en="Card and loan commands executed without authentication." data-ru="Команды по картам и кредитам выполняются без входа.">Команды по картам и кредитам выполняются без входа.</p>
+</div>
+<div class="real-vuln">
+<div class="sev crit" data-en="Critical" data-ru="Критическая">Критическая</div>
+<div class="vt" data-en="Dev-server exposed on a production bank" data-ru="Dev-сервер раскрыт на боевом банке">Dev-сервер раскрыт на боевом банке</div>
+<p class="vd" data-en="Full frontend source, API map, and internal IPs." data-ru="Полный исходник фронтенда, карта API и внутренние IP.">Полный исходник фронтенда, карта API и внутренние IP.</p>
+</div>
+<div class="real-vuln">
+<div class="sev crit" data-en="Critical" data-ru="Критическая">Критическая</div>
+<div class="vt" data-en="Withdrawal race conditions (double-spend)" data-ru="Одновременные выводы (двойное списание)">Одновременные выводы (двойное списание)</div>
+<p class="vd" data-en="Parallel requests drain a balance twice." data-ru="Параллельные запросы списывают баланс дважды.">Параллельные запросы списывают баланс дважды.</p>
+</div>
+<div class="real-vuln">
+<div class="sev high" data-en="High" data-ru="Высокая">Высокая</div>
+<div class="vt" data-en="Hardcoded AES key in a client bundle" data-ru="Зашитый AES-ключ в клиентском бандле">Зашитый AES-ключ в клиентском бандле</div>
+<p class="vd" data-en="Decrypts feature flags and secrets." data-ru="Расшифровывает флаги функций и секреты.">Расшифровывает флаги функций и секреты.</p>
+</div>
+<div class="real-vuln">
+<div class="sev high" data-en="High" data-ru="Высокая">Высокая</div>
+<div class="vt" data-en="Cross-game JWT reuse" data-ru="Повторное использование токена между играми">Повторное использование токена между играми</div>
+<p class="vd" data-en="A token from one game opens another." data-ru="Токен одной игры открывает другую.">Токен одной игры открывает другую.</p>
+</div>
+<div class="real-vuln">
+<div class="sev high" data-en="High" data-ru="Высокая">Высокая</div>
+<div class="vt" data-en="CORS reflection on financial APIs" data-ru="Отражение источника в финансовых API">Отражение источника в финансовых API</div>
+<p class="vd" data-en="Cross-origin reads of user data." data-ru="Чтение данных пользователя с чужого сайта.">Чтение данных пользователя с чужого сайта.</p>
+</div>
+<div class="real-vuln">
+<div class="sev high" data-en="High" data-ru="Высокая">Высокая</div>
+<div class="vt" data-en="Private-key exposure on an exchange" data-ru="Утечка закрытых ключей биржи">Утечка закрытых ключей биржи</div>
+<p class="vd" data-en="Custody keys accessible to an attacker." data-ru="Ключи хранения доступны злоумышленнику.">Ключи хранения доступны злоумышленнику.</p>
+</div>
+<div class="real-vuln">
+<div class="sev med" data-en="Medium" data-ru="Средняя">Средняя</div>
+<div class="vt" data-en="CMS with 316,000 files without auth" data-ru="CMS с 316 000 файлов без входа">CMS с 316 000 файлов без входа</div>
+<p class="vd" data-en="Full content and configuration exposed." data-ru="Полный контент и конфигурация наружу.">Полный контент и конфигурация наружу.</p>
+</div>
+<div class="real-vuln">
+<div class="sev med" data-en="Medium" data-ru="Средняя">Средняя</div>
+<div class="vt" data-en="Bet placement with no upper amount bound" data-ru="Ставка без верхнего предела суммы">Ставка без верхнего предела суммы</div>
+<p class="vd" data-en="An amount of 10^15 passes validation." data-ru="Сумма 10^15 проходит проверку.">Сумма 10^15 проходит проверку.</p>
+</div>
+</div>
+</section>
+</div>
+<!-- ========== THE BUSINESS CASE FOR SECURITY ========== -->
+<div class="wrap">
+<section class="s-border reveal">
+<h2 data-en="The Business Case for " data-ru="Зачем бизнесу ">Зачем бизнесу <span class="accent" data-en="Security" data-ru="безопасность">безопасность</span></h2>
+<p class="section-sub" data-en="Prevention is always more cost-effective than recovery." data-ru="Предотвращение всегда дешевле, чем восстановление.">Предотвращение всегда дешевле, чем восстановление.</p>
+<div class="cost-grid">
+<div class="cost-card">
+<div class="title" data-en="Average Cost of a Data Breach" data-ru="Средняя цена утечки данных" style="color:var(--red)">Средняя цена утечки данных</div>
+<div class="big-num red">$4.45M</div>
+<ul>
+<li data-en="Regulatory fines and penalties" data-ru="Штрафы и санкции регуляторов">Штрафы и санкции регуляторов</li>
+<li data-en="Customer attrition and loss of trust" data-ru="Отток клиентов и потеря доверия">Отток клиентов и потеря доверия</li>
+<li data-en="Legal and litigation costs" data-ru="Судебные издержки">Судебные издержки</li>
+<li data-en="System recovery and remediation" data-ru="Восстановление систем и исправления">Восстановление систем и исправления</li>
+<li data-en="Reputational damage" data-ru="Ущерб репутации">Ущерб репутации</li>
+</ul>
+<p data-en="Source: IBM Cost of a Data Breach Report, 2023" data-ru="Источник: отчёт IBM о стоимости утечек, 2023" style="font-size:11px;color:var(--dim2);margin-top:8px;margin-bottom:0">Источник: отчёт IBM о стоимости утечек, 2023</p>
+</div>
+<div class="cost-card">
+<div class="title" data-en="Proactive Security Assessment" data-ru="Превентивная проверка безопасности" style="color:var(--green)">Превентивная проверка безопасности</div>
+<div class="big-num green" data-en="A Fraction" data-ru="Малая часть">Малая часть</div>
+<div class="detail" data-en="A comprehensive security assessment is a fraction of that cost. Identifying and remediating vulnerabilities before they are exploited is always more cost-effective than recovery. Prevention protects your organization, your customers, and your reputation." data-ru="Полная проверка безопасности стоит малую часть этой суммы. Найти и закрыть уязвимости до атаки всегда дешевле, чем восстанавливаться после. Предотвращение защищает вашу организацию, клиентов и репутацию.">Полная проверка безопасности стоит малую часть этой суммы. Найти и закрыть уязвимости до атаки всегда дешевле, чем восстанавливаться после. Предотвращение защищает вашу организацию, клиентов и репутацию.</div>
+</div>
+</div>
+</section>
+</div>
+<!-- ========== PRICING ========== -->
+<div class="wrap">
+<section class="s-border reveal" id="pricing">
+<h2 data-en="Pricing" data-ru="Цены">Цены</h2>
+<p class="section-sub" data-en="Transparent, fixed-scope pricing. Every engagement is tailored to your systems." data-ru="Прозрачные цены за фиксированный объём. Каждый проект подстраивается под ваши системы.">Прозрачные цены за фиксированный объём. Каждый проект подстраивается под ваши системы.</p>
+<div class="pricing-grid">
+<div class="pricing-card">
+<div class="pname" data-en="Express Check" data-ru="Быстрая проверка">Быстрая проверка</div>
+<div class="pprice" data-en="$3,000" data-ru="$3 000">$3 000</div>
+<div class="pperiod" data-en="from, per scope" data-ru="от, за объём">от, за объём</div>
+<ul>
+<li data-en="One web application or API" data-ru="Одно веб-приложение или API">Одно веб-приложение или API</li>
+<li data-en="Attack surface + top vulnerabilities" data-ru="Поверхность атаки + главные уязвимости">Поверхность атаки + главные уязвимости</li>
+<li data-en="~1 week delivery" data-ru="Срок ~1 неделя">Срок ~1 неделя</li>
+<li data-en="Executive report with priorities" data-ru="Отчёт для руководства с приоритетами">Отчёт для руководства с приоритетами</li>
+<li data-en="2 weeks support" data-ru="Поддержка 2 недели">Поддержка 2 недели</li>
+</ul>
+<a class="btn-hero ghost" data-en="Request Proposal" data-ru="Запросить предложение" href="mailto:devowlmind@gmail.com?subject=Express%20Check">Запросить предложение</a>
+</div>
+<div class="pricing-card popular">
+<div class="badge" data-en="Most Popular" data-ru="Популярный">Популярный</div>
+<div class="pname" data-en="Standard Audit" data-ru="Стандартный аудит">Стандартный аудит</div>
+<div class="pprice" data-en="$10,000" data-ru="$10 000">$10 000</div>
+<div class="pperiod" data-en="per engagement" data-ru="за проект">за проект</div>
+<ul>
+<li data-en="Web + API + mobile (up to 3 assets)" data-ru="Веб + API + мобильные (до 3 объектов)">Веб + API + мобильные (до 3 объектов)</li>
+<li data-en="All 22 vulnerability classes" data-ru="Все 22 класса уязвимостей">Все 22 класса уязвимостей</li>
+<li data-en="Video PoC for critical &amp; high" data-ru="Видео-доказательства критических и высоких">Видео-доказательства критических и высоких</li>
+<li data-en="2–3 weeks delivery" data-ru="Срок 2–3 недели">Срок 2–3 недели</li>
+<li data-en="30-day support + free re-scan" data-ru="Поддержка 30 дней + бесплатная перепроверка">Поддержка 30 дней + бесплатная перепроверка</li>
+</ul>
+<a class="btn-hero primary" data-en="Request Proposal" data-ru="Запросить предложение" href="mailto:devowlmind@gmail.com?subject=Standard%20Audit">Запросить предложение</a>
+</div>
+<div class="pricing-card">
+<div class="pname" data-en="Enterprise" data-ru="Комплексный">Комплексный</div>
+<div class="pprice" data-en="$25,000+" data-ru="$25 000+">$25 000+</div>
+<div class="pperiod" data-en="per full assessment" data-ru="за полную проверку">за полную проверку</div>
+<ul>
+<li data-en="Full infra + source code + cloud + network" data-ru="Вся инфраструктура + код + облако + сеть">Вся инфраструктура + код + облако + сеть</li>
+<li data-en="Business logic &amp; financial flows" data-ru="Бизнес-логика и денежные потоки">Бизнес-логика и денежные потоки</li>
+<li data-en="Compliance mapping (PCI, ISO, GOST)" data-ru="Привязка к стандартам (PCI, ISO, ГОСТ)">Привязка к стандартам (PCI, ISO, ГОСТ)</li>
+<li data-en="4–6 weeks delivery" data-ru="Срок 4–6 недель">Срок 4–6 недель</li>
+<li data-en="Dedicated team + 3 report formats" data-ru="Выделенная команда + 3 формата отчёта">Выделенная команда + 3 формата отчёта</li>
+</ul>
+<a class="btn-hero ghost" data-en="Request Proposal" data-ru="Запросить предложение" href="mailto:devowlmind@gmail.com?subject=Enterprise%20Assessment">Запросить предложение</a>
+</div>
+<div class="pricing-card">
+<div class="pname" data-en="Continuous Monitoring" data-ru="Постоянный мониторинг">Постоянный мониторинг</div>
+<div class="pprice" data-en="$1,500" data-ru="$1 500">$1 500</div>
+<div class="pperiod" data-en="per month, from" data-ru="в месяц, от">в месяц, от</div>
+<ul>
+<li data-en="24/7 attack-surface monitoring" data-ru="Мониторинг поверхности атаки 24/7">Мониторинг поверхности атаки 24/7</li>
+<li data-en="Monthly re-scans" data-ru="Ежемесячные перепроверки">Ежемесячные перепроверки</li>
+<li data-en="Real-time alerting" data-ru="Оповещения в реальном времени">Оповещения в реальном времени</li>
+</ul>
+<a class="btn-hero ghost" data-en="Request Proposal" data-ru="Запросить предложение" href="mailto:devowlmind@gmail.com?subject=Continuous%20Monitoring">Запросить предложение</a>
+</div>
+</div>
+<p data-en="All prices are starting points in USD. Payment available in rubles and crypto by agreement. Final pricing depends on scope and complexity." data-ru="Все цены — стартовые, в USD. Оплата в рублях и крипте — по договору. Итог зависит от объёма и сложности." style="font-size:13px;color:var(--dim2);text-align:center;margin-top:16px">Все цены — стартовые, в USD. Оплата в рублях и крипте — по договору. Итог зависит от объёма и сложности.</p>
+</section>
+</div>
+<!-- ========== FAQ ========== -->
+<div class="wrap">
+<section class="s-border reveal" id="faq">
+<h2 data-en="Frequently Asked " data-ru="Частые ">Частые <span class="accent" data-en="Questions" data-ru="вопросы">вопросы</span></h2>
+<p class="section-sub" data-en="Quick answers to what clients ask before starting." data-ru="Быстрые ответы на то, что спрашивают клиенты перед стартом.">Быстрые ответы на то, что спрашивают клиенты перед стартом.</p>
+<div class="faq-list">
+<div class="faq-item">
+<h4 data-en="How does the audit work?" data-ru="Как проходит проверка?">Как проходит проверка?</h4>
+<p data-en="We start with an NDA and a scoping call. Then we test your systems from multiple angles — attacker, auditor, and architect. Every finding is manually verified, and critical issues are reported to you immediately." data-ru="Начинаем с соглашения о неразглашении и созвона по объёму. Затем проверяем ваши системы с трёх сторон — как атакующий, аудитор и архитектор. Каждую находку проверяем вручную, критическое сообщаем сразу.">Начинаем с соглашения о неразглашении и созвона по объёму. Затем проверяем ваши системы с трёх сторон — как атакующий, аудитор и архитектор. Каждую находку проверяем вручную, критическое сообщаем сразу.</p>
+</div>
+<div class="faq-item">
+<h4 data-en="How long does it take?" data-ru="Сколько это занимает?">Сколько это занимает?</h4>
+<p data-en="An express check takes about a week, a standard audit 2–3 weeks, and a full enterprise assessment 4–6 weeks — depending on the number of systems." data-ru="Быстрая проверка — около недели, стандартный аудит — 2–3 недели, полная проверка — 4–6 недель, в зависимости от числа систем.">Быстрая проверка — около недели, стандартный аудит — 2–3 недели, полная проверка — 4–6 недель, в зависимости от числа систем.</p>
+</div>
+<div class="faq-item">
+<h4 data-en="What do I get at the end?" data-ru="Что я получу в итоге?">Что я получу в итоге?</h4>
+<p data-en="A report in three formats (executive, technical, compliance) with every vulnerability rated by severity, a video proof-of-concept for critical and high findings, and a code-level fix for each one." data-ru="Отчёт в трёх форматах (для руководства, технический, для соответствия) с оценкой каждой уязвимости, видео-доказательством критических и высоких, и исправлением на уровне кода для каждой.">Отчёт в трёх форматах (для руководства, технический, для соответствия) с оценкой каждой уязвимости, видео-доказательством критических и высоких, и исправлением на уровне кода для каждой.</p>
+</div>
+<div class="faq-item">
+<h4 data-en="Is my data safe? Do you sign an NDA?" data-ru="Мои данные в безопасности? Подписываете ли соглашение?">Мои данные в безопасности? Подписываете ли соглашение?</h4>
+<p data-en="Yes. We have a ready NDA, service agreement and data-handling procedure — we send them before the first call. All findings and data stay strictly confidential." data-ru="Да. У нас готовы NDA, договор и порядок обработки данных — пришлём до первого созвона. Все находки и данные остаются строго конфиденциальными.">Да. У нас готовы NDA, договор и порядок обработки данных — пришлём до первого созвона. Все находки и данные остаются строго конфиденциальными.</p>
+</div>
+<div class="faq-item">
+<h4 data-en="Will the testing break my systems?" data-ru="Проверка не сломает мою систему?">Проверка не сломает мою систему?</h4>
+<p data-en="No. Testing is controlled and non-destructive. We do not modify data, delete anything, or disrupt service. Critical findings are reported to you first, not exploited for impact." data-ru="Нет. Проверка контролируемая и не разрушающая. Мы не меняем данные, ничего не удаляем и не нарушаем работу. Критические находки сначала сообщаем вам, а не используем для удара.">Нет. Проверка контролируемая и не разрушающая. Мы не меняем данные, ничего не удаляем и не нарушаем работу. Критические находки сначала сообщаем вам, а не используем для удара.</p>
+</div>
+<div class="faq-item">
+<h4 data-en="Do you also fix the vulnerabilities?" data-ru="Вы ещё и исправляете уязвимости?">Вы ещё и исправляете уязвимости?</h4>
+<p data-en="We provide code-level remediation for every finding and 30 days of post-engagement support with a free re-scan of fixed items. We can also work alongside your developers." data-ru="К каждой находке даём исправление на уровне кода и 30 дней поддержки с бесплатной перепроверкой исправленного. Можем работать вместе с вашими разработчиками.">К каждой находке даём исправление на уровне кода и 30 дней поддержки с бесплатной перепроверкой исправленного. Можем работать вместе с вашими разработчиками.</p>
+</div>
+</div>
+</section>
+</div>
+<!-- ========== LIVE DEMO ========== -->
+<div class="wrap">
+<section class="s-border reveal" id="demo">
+<h2 data-en="Live Demo: " data-ru="Живой пример: ">Живой пример: <span class="accent" data-en="SQL Injection" data-ru="SQL-инъекция">SQL-инъекция</span></h2>
+<p class="section-sub" data-en="A real vulnerability we found in a banking login. Watch the video, or try both buttons yourself — then see the fix." data-ru="Реальная уязвимость, которую мы нашли в банковском входе. Посмотрите видео или попробуйте обе кнопки сами — и увидите, как закрыть дыру.">Реальная уязвимость, которую мы нашли в банковском входе. Посмотрите видео или попробуйте обе кнопки сами — и увидите, как закрыть дыру.</p>
+<video controls="" playsinline="" poster="/og-image.png" preload="metadata" style="width:100%;max-width:760px;display:block;margin:0 auto 24px;border-radius:16px;border:1px solid var(--border);background:#000">
+<source src="/demo.mp4" type="video/mp4">
+</source></video>
+<div class="demo-box">
+<div class="demo-form">
+<input id="demo-user" placeholder="username" type="text" value="admin"/>
+<input id="demo-pass" placeholder="password" type="text" value="' OR '1'='1"/>
+<div class="demo-btns">
+<button class="btn-hero primary" data-en="Login (vulnerable)" data-ru="Войти (уязвимо)" id="demo-vuln" type="button">Войти (уязвимо)</button>
+<button class="btn-hero ghost" data-en="Login (fixed)" data-ru="Войти (исправлено)" id="demo-fix" type="button">Войти (исправлено)</button>
+</div>
+<div class="demo-result" id="demo-result"></div>
+</div>
+<div class="demo-code">
+<div class="code-block vuln">
+<span class="tag" data-en="Vulnerable" data-ru="Уязвимо">Уязвимо</span>
+<code>query = "SELECT * FROM users WHERE user='" + u + "' AND pass='" + p + "'"</code>
+</div>
+<div class="code-block fix">
+<span class="tag" data-en="Fixed" data-ru="Исправлено">Исправлено</span>
+<code>query = "SELECT * FROM users WHERE user = ? AND pass = ?" <span data-en="(parameterized)" data-ru="(параметризованный)">(параметризованный)</span></code>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- ========== CTA ========== -->
+<div class="wrap">
+<section class="s-border reveal">
+<div class="express-box">
+<h3 data-en="Ready to Understand Your True Security Posture?" data-ru="Готовы понять свой настоящий уровень безопасности?">Готовы понять свой настоящий уровень безопасности?</h3>
+<div class="sub" data-en="Schedule a confidential consultation with our team. We'll discuss your security challenges and propose a tailored assessment plan." data-ru="Запишитесь на конфиденциальную консультацию. Обсудим ваши задачи и предложим персональный план проверки.">Запишитесь на конфиденциальную консультацию. Обсудим ваши задачи и предложим персональный план проверки.</div>
+<a class="btn-hero primary" data-en="Schedule a Consultation" data-ru="Записаться на консультацию" href="mailto:devowlmind@gmail.com?subject=Security%20Consultation%20Request" style="font-size:16px;padding:16px 40px;display:inline-block">Записаться на консультацию</a>
+<p data-en="Or reach out directly at " data-ru="Или напишите напрямую: " style="font-size:13px;color:var(--dim);margin-top:16px;margin-bottom:0">Или напишите напрямую: <a href="mailto:devowlmind@gmail.com" style="color:var(--accent2);font-weight:600">devowlmind@gmail.com</a></p>
+</div>
+</section>
+</div>
+<!-- ========== ABOUT ========== -->
+<div class="wrap">
+<section class="s-border reveal" id="about">
+<h2 data-en="About " data-ru="О ">О <span class="accent">OwlMind Security</span></h2>
+<p class="section-sub" data-en="AI-powered security research and consulting." data-ru="Исследование и консалтинг в области безопасности на базе ИИ.">Исследование и консалтинг в области безопасности на базе ИИ.</p>
+<div class="card" style="padding:32px;margin-bottom:24px">
+<p data-en="OwlMind Security is a specialized security research and consulting firm that combines proprietary AI-powered tools with deep manual expertise. Our methodology has been proven across banking, casinos, crypto, fintech, telecom, and technology sectors — consistently uncovering critical vulnerabilities that traditional assessments miss." data-ru="OwlMind Security — специализированная компания по исследованию и консалтингу, объединяющая собственные ИИ-инструменты с глубокой ручной экспертизой. Наша методика проверена в банках, казино, криптобиржах, финтехе, телекоме и технологиях — и стабильно находит критические уязвимости, которые пропускают обычные проверки." style="font-size:15px;line-height:1.8;margin-bottom:16px">OwlMind Security — специализированная компания по исследованию и консалтингу, объединяющая собственные ИИ-инструменты с глубокой ручной экспертизой. Наша методика проверена в банках, казино, криптобиржах, финтехе, телекоме и технологиях — и стабильно находит критические уязвимости, которые пропускают обычные проверки.</p>
+<p data-en="We operate with the depth of a research organization and the professionalism of a trusted advisory partner. Every finding is manually verified. Every report includes proof-of-concept. Every recommendation is code-level actionable." data-ru="Мы работаем с глубиной исследовательской организации и профессионализмом надёжного партнёра. Каждая находка проверена вручную. В каждом отчёте — доказательство. Каждая рекомендация — практичное исправление на уровне кода." style="font-size:15px;line-height:1.8;margin-bottom:0">Мы работаем с глубиной исследовательской организации и профессионализмом надёжного партнёра. Каждая находка проверена вручную. В каждом отчёте — доказательство. Каждая рекомендация — практичное исправление на уровне кода.</p>
+</div>
+</section>
+</div>
+<!-- ========== CONTACT ========== -->
+<div class="wrap">
+<section class="s-border reveal" id="contact">
+<h2 data-en="Contact " data-ru="Связаться ">Связаться <span class="accent" data-en="Us" data-ru="с нами">с нами</span></h2>
+<p class="section-sub" data-en="Ready to discuss your security needs? Our team responds within 24 hours." data-ru="Готовы обсудить задачи безопасности? Отвечаем в течение 24 часов.">Готовы обсудить задачи безопасности? Отвечаем в течение 24 часов.</p>
+<div class="contact-grid">
+<div>
+<div class="contact-info">
+<div class="contact-item">
+<div class="ico" style="color:var(--accent2);font-weight:700;font-family:'JetBrains Mono',monospace;font-size:14px">@</div>
+<div><strong data-en="Email" data-ru="Почта">Почта</strong><br/><a href="mailto:devowlmind@gmail.com">devowlmind@gmail.com</a></div>
+</div>
+<div class="contact-item">
+<div class="ico" style="color:var(--accent2);font-weight:700;font-family:'JetBrains Mono',monospace;font-size:14px">T</div>
+<div><strong>Telegram</strong><br/><a href="https://t.me/devowlmind" rel="noopener" target="_blank">@devowlmind</a></div>
+</div>
+<div class="contact-item">
+<div class="ico" style="color:var(--accent2);font-weight:700;font-family:'JetBrains Mono',monospace;font-size:14px">W</div>
+<div><strong>WhatsApp</strong><br/><a href="https://wa.me/8618500722205" rel="noopener" target="_blank">+86 185 0072 2205</a></div>
+</div>
+<div class="contact-item">
+<div class="ico" style="color:var(--accent2);font-weight:700;font-family:'JetBrains Mono',monospace;font-size:14px">&gt;</div>
+<div><strong data-en="Website" data-ru="Сайт">Сайт</strong><br/><a href="https://owlmind.dev">owlmind.dev</a></div>
+</div>
+</div>
+<div style="margin-top:24px;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:14px">
+<p data-en="Our team is available for initial consultations and scoping discussions." data-ru="Наша команда доступна для первичных консультаций и обсуждения объёма работ." style="font-size:13px;color:var(--dim);margin:0">Наша команда доступна для первичных консультаций и обсуждения объёма работ.</p>
+</div>
+</div>
+<form action="mailto:devowlmind@gmail.com" class="contact-form" method="POST" onsubmit="var n=this.name.value,e=this.email.value,c=this.company.value,m=this.message.value;location.href='mailto:devowlmind@gmail.com?subject='+encodeURIComponent('Заявка с сайта / Site request')+'&amp;body='+encodeURIComponent('Имя/Name: '+n+'\nEmail: '+e+'\nКомпания/Company: '+c+'\n\n'+m);return false;"><!-- Смени на https://formspree.io/f/ID когда будет форма Formspree -->
+<input data-en-ph="Your Name" data-ru-ph="Ваше имя" name="name" placeholder="Your Name" required="" type="text"/>
+<input data-en-ph="Email Address" data-ru-ph="Адрес почты" name="email" placeholder="Email Address" required="" type="email"/>
+<input data-en-ph="Company / Organization" data-ru-ph="Компания / организация" name="company" placeholder="Company / Organization" type="text"/>
+<textarea data-en-ph="How can we help? Tell us about your security needs..." data-ru-ph="Чем помочь? Расскажите о ваших задачах по безопасности..." name="message" placeholder="How can we help? Tell us about your security needs..." rows="4"></textarea>
+<button data-en="Send Message" data-ru="Отправить сообщение" type="submit">Отправить сообщение</button>
+</form>
+</div>
+</section>
+</div>
+<!-- ========== FOOTER ========== -->
+<footer>
+<div class="footer-inner">
+<div style="display:flex;align-items:center;gap:8px">
+<span style="font-weight:700;color:var(--dim2)">OwlMind Security</span>
+</div>
+<div class="footer-links">
+<a data-en="Services" data-ru="Услуги" href="#services">Услуги</a>
+<a data-en="Pricing" data-ru="Цены" href="#pricing">Цены</a>
+<a data-en="Industries" data-ru="Отрасли" href="#industries">Отрасли</a>
+<a data-en="Casino" data-ru="Казино" href="/ru/casino/">Казино</a>
+<a data-en="Crypto" data-ru="Крипто" href="/ru/crypto/">Крипто</a>
+<a data-en="Banking" data-ru="Банки" href="/ru/banking/">Банки</a>
+<a data-en="Case Study" data-ru="Кейс" href="#case-study">Кейс</a>
+<a data-en="Contact" data-ru="Контакты" href="#contact">Контакты</a>
+<a data-en="Privacy" data-ru="Конфиденциальность" href="/ru/privacy.html">Конфиденциальность</a>
+</div>
+<p>© 2026 OwlMind Security. <span data-en="All rights reserved." data-ru="Все права защищены.">Все права защищены.</span></p>
+</div>
+</footer>
+<div class="float-btns">
+<a class="float-btn tg" href="https://t.me/devowlmind" rel="noopener" target="_blank" title="Telegram">TG</a>
+<a class="float-btn wa" href="https://wa.me/8618500722205" rel="noopener" target="_blank" title="WhatsApp">WA</a>
+</div>
+
+<script>
+const ro=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',function(e){
+    const t=document.querySelector(this.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+
+// Live demo — SQL injection
+(function(){
+  var r=document.getElementById('demo-result');
+  if(!r) return;
+  var isRu=function(){return document.documentElement.getAttribute('lang')==='ru'};
+  var show=function(html){r.innerHTML=html};
+  document.getElementById('demo-vuln').addEventListener('click',function(){
+    show(isRu()?'<span style="color:var(--red)">⚠ Доступ получен — SQL-инъекция обошла вход</span>':'<span style="color:var(--red)">⚠ Access granted — SQL injection bypassed the login</span>');
+  });
+  document.getElementById('demo-fix').addEventListener('click',function(){
+    show(isRu()?'<span style="color:var(--green)">✓ Доступ запрещён — параметризованный запрос заблокировал инъекцию</span>':'<span style="color:var(--green)">✓ Access denied — the parameterized query blocked the injection</span>');
+  });
+})();
+</script>
+</body>
+</html>

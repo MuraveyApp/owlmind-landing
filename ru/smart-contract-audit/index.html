@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html class="dark" lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-en="Smart Contract Audit — OwlMind Security" data-ru="Аудит смарт-контрактов — OwlMind Security">Аудит смарт-контрактов — OwlMind Security</title>
+<meta content="Аудит смарт-контрактов на Solidity, Rust и Move. Находим reentrancy, flash-loan, переполнения и ошибки доступа до того, как они опустошат ваши средства — с рабочим доказательством." data-en="Smart contract audit for Solidity, Rust and Move. We find reentrancy, flash-loan, overflow and access-control flaws before they drain your funds — with working proof-of-concept." data-ru="Аудит смарт-контрактов на Solidity, Rust и Move. Находим reentrancy, flash-loan, переполнения и ошибки доступа до того, как они опустошат ваши средства — с рабочим доказательством." name="description"/>
+<meta content="index, follow" name="robots"/>
+
+<meta content="Аудит смарт-контрактов — OwlMind Security" property="og:title"/>
+<meta content="Аудит смарт-контрактов на Solidity, Rust и Move. Находим reentrancy, flash-loan, переполнения и ошибки доступа до того, как они опустошат ваши средства — с рабочим доказательством." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://owlmind.dev/ru/smart-contract-audit/" property="og:url"/>
+<meta content="https://owlmind.dev/og-image.png" property="og:image"/>
+<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🦉&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="/style.css" rel="stylesheet"/>
+<link href="https://owlmind.dev/ru/smart-contract-audit/" rel="canonical"/><link href="https://owlmind.dev/smart-contract-audit/" hreflang="en" rel="alternate"/><link href="https://owlmind.dev/ru/smart-contract-audit/" hreflang="ru" rel="alternate"/><link href="https://owlmind.dev/smart-contract-audit/" hreflang="x-default" rel="alternate"/></head>
+<body>
+<nav>
+<div class="nav-inner">
+<a class="logo" href="/ru/"><i>Owl</i>Mind</a>
+<div class="nav-links">
+<a class="hide-m" data-en="Industries" data-ru="Отрасли" href="/ru/#industries">Отрасли</a>
+<a data-en="Casino" data-ru="Казино" href="/ru/casino/">Казино</a>
+<a data-en="Crypto" data-ru="Крипто" href="/ru/crypto/">Крипто</a>
+<a data-en="Banking" data-ru="Банки" href="/ru/banking/">Банки</a>
+<a data-en="Pentest" data-ru="Пентест" href="/ru/pentest/">Пентест</a>
+<a class="btn-nav" data-en="Contact Us" data-ru="Связаться" href="mailto:devowlmind@gmail.com?subject=Smart%20Contract%20Audit">Связаться</a>
+<div aria-label="Language" class="lang-toggle" role="group">
+<a class="lang-link" data-lang="en" href="https://owlmind.dev/smart-contract-audit/">EN</a>
+<a class="lang-link" data-lang="ru" href="https://owlmind.dev/ru/smart-contract-audit/">RU</a>
+</div>
+</div>
+</div>
+</nav>
+<div class="sub-hero">
+<div class="hero-bg"></div>
+<div class="hero-grid"></div>
+<div class="hero-content">
+<div class="breadcrumb"><a data-en="Home" data-ru="Главная" href="/ru/">Главная</a>  /  <span data-en="Smart Contract Audit" data-ru="Аудит смарт-контрактов">Аудит смарт-контрактов</span></div>
+<h1><span data-en="Smart Contract" data-ru="Аудит смарт-">Аудит смарт-</span> <span class="gr" data-en="Audit" data-ru="контрактов">контрактов</span></h1>
+<p data-en="Find the bug that would drain your funds — before it does." data-ru="Найдите ошибку, которая опустошит ваши средства — до того, как это случится.">Найдите ошибку, которая опустошит ваши средства — до того, как это случится.</p>
+<div class="hero-btns"><a class="btn-hero primary" data-en="Get a Free Consultation" data-ru="Бесплатная консультация" href="mailto:devowlmind@gmail.com?subject=Smart%20Contract%20Audit">Бесплатная консультация</a></div>
+</div>
+</div>
+<div class="sub-section">
+<section>
+<h2 data-en="What We Find" data-ru="Что мы находим">Что мы находим</h2>
+<ul class="sub-list">
+<li><span>✓</span> <span data-en="Reentrancy" data-ru="Повторный вызов (reentrancy)">Повторный вызов (reentrancy)</span></li>
+<li><span>✓</span> <span data-en="Flash-loan attacks" data-ru="Атаки мгновенными займами">Атаки мгновенными займами</span></li>
+<li><span>✓</span> <span data-en="Integer overflow / underflow" data-ru="Переполнение чисел">Переполнение чисел</span></li>
+<li><span>✓</span> <span data-en="Access-control flaws" data-ru="Ошибки контроля доступа">Ошибки контроля доступа</span></li>
+<li><span>✓</span> <span data-en="Oracle / price manipulation" data-ru="Подмена цен через оракулы">Подмена цен через оракулы</span></li>
+<li><span>✓</span> <span data-en="Upgradeable-proxy issues" data-ru="Проблемы обновляемых прокси">Проблемы обновляемых прокси</span></li>
+</ul>
+</section>
+<section>
+<h2 data-en="Languages &amp; Chains" data-ru="Языки и сети">Языки и сети</h2>
+<p data-en="We audit smart contracts and their surrounding infrastructure across all major stacks." data-ru="Проверяем смарт-контракты и их инфраструктуру на всех основных стеках.">Проверяем смарт-контракты и их инфраструктуру на всех основных стеках.</p>
+<ul class="sub-list">
+<li><span>✓</span> <span data-en="Solidity (Ethereum, BSC, Arbitrum, Optimism, Base)" data-ru="Solidity (Ethereum, BSC, Arbitrum, Optimism, Base)">Solidity (Ethereum, BSC, Arbitrum, Optimism, Base)</span></li>
+<li><span>✓</span> <span data-en="Rust (Solana)" data-ru="Rust (Solana)">Rust (Solana)</span></li>
+<li><span>✓</span> <span data-en="Move (Aptos, Sui)" data-ru="Move (Aptos, Sui)">Move (Aptos, Sui)</span></li>
+<li><span>✓</span> <span data-en="Bridges, vaults, DEXes, staking, tokens" data-ru="Мосты, хранилища, DEX, стейкинг, токены">Мосты, хранилища, DEX, стейкинг, токены</span></li>
+</ul>
+</section>
+<section>
+<h2 data-en="What You Get" data-ru="Что вы получаете">Что вы получаете</h2>
+<div class="sub-outcome" data-en="A technical audit report with a working proof-of-concept for every critical finding and a code-level fix — the evidence investors and listing partners ask for before trusting your protocol." data-ru="Технический отчёт с работающим доказательством каждой критической находки и исправлением на уровне кода — то доказательство, которое инвесторы и листинг-партнёры спрашивают перед тем, как довериться вашему протоколу.">Технический отчёт с работающим доказательством каждой критической находки и исправлением на уровне кода — то доказательство, которое инвесторы и листинг-партнёры спрашивают перед тем, как довериться вашему протоколу.</div>
+</section>
+<section>
+<h2 data-en="FAQ" data-ru="Вопросы">Вопросы</h2>
+<div class="faq-item"><h4 data-en="How long does a smart contract audit take?" data-ru="Сколько длится аудит смарт-контракта?">Сколько длится аудит смарт-контракта?</h4><p data-en="1–2 weeks for a single contract, 3–5 weeks for a full protocol." data-ru="1–2 недели один контракт, 3–5 недель полный протокол.">1–2 недели один контракт, 3–5 недель полный протокол.</p></div>
+<div class="faq-item"><h4 data-en="Do you re-audit after fixes?" data-ru="Перепроверяете ли после исправлений?">Перепроверяете ли после исправлений?</h4><p data-en="Yes — every audit includes 30 days of support and a free re-scan of fixed items." data-ru="Да — каждый аудит включает 30 дней поддержки и бесплатную перепроверку исправленного.">Да — каждый аудит включает 30 дней поддержки и бесплатную перепроверку исправленного.</p></div>
+</section>
+<section class="s-border">
+<div class="express-box">
+<h3 data-en="Ready to Secure Your Protocol?" data-ru="Готовы защитить свой протокол?">Готовы защитить свой протокол?</h3>
+<div class="sub" data-en="Get a free consultation and a tailored proposal within 48 hours." data-ru="Бесплатная консультация и персональное предложение в течение 48 часов.">Бесплатная консультация и персональное предложение в течение 48 часов.</div>
+<a class="btn-hero primary" data-en="Get a Free Consultation" data-ru="Бесплатная консультация" href="mailto:devowlmind@gmail.com?subject=Smart%20Contract%20Audit" style="font-size:16px;padding:16px 40px;display:inline-block">Бесплатная консультация</a>
+</div>
+</section>
+</div>
+<footer>
+<div class="footer-inner">
+<div style="display:flex;align-items:center;gap:8px"><span style="font-weight:700;color:var(--dim2)">OwlMind Security</span></div>
+<div class="footer-links">
+<a data-en="Home" data-ru="Главная" href="/ru/">Главная</a>
+<a data-en="Casino" data-ru="Казино" href="/ru/casino/">Казино</a>
+<a data-en="Crypto" data-ru="Крипто" href="/ru/crypto/">Крипто</a>
+<a data-en="Banking" data-ru="Банки" href="/ru/banking/">Банки</a>
+<a data-en="Pentest" data-ru="Пентест" href="/ru/pentest/">Пентест</a>
+</div>
+<p>© 2026 OwlMind Security. <span data-en="All rights reserved." data-ru="Все права защищены.">Все права защищены.</span></p>
+</div>
+</footer>
+
+</body>
+</html>

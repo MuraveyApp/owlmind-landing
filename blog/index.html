@@ -17,6 +17,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
+<link rel="alternate" hreflang="ru" href="https://owlmind.dev/ru/blog/">
+<link rel="alternate" hreflang="x-default" href="https://owlmind.dev/blog/">
 </head>
 <body>
 
@@ -66,6 +68,38 @@
   <a class="industry-block" href="/blog/smart-contract-audit-guide/" style="text-decoration:none">
     <div class="head"><div class="industry-icon" style="background:linear-gradient(135deg,var(--accent),#9f7afa)">S</div><h4 data-en="Smart contract audit: what we check" data-ru="Аудит смарт-контрактов: что проверяем">Smart contract audit: what we check</h4></div>
     <p class="pain" data-en="The vulnerabilities we hunt, how the audit works, and what the report contains." data-ru="Какие уязвимости ищем, как проходит аудит и что в отчёте.">The vulnerabilities we hunt, how the audit works, and what the report contains.</p>
+  </a>
+  <a class="industry-block" href="/blog/sql-injection-core-banking/" style="text-decoration:none">
+    <div class="head"><div class="industry-icon" style="background:linear-gradient(135deg,var(--green),#6ee7b7)">S</div><h4 data-en="SQL injection in core banking" data-ru="SQL-инъекция в ядре банка">SQL injection in core banking</h4></div>
+    <p class="pain" data-en="How a banking SQLi reaches customer accounts, why scanners miss it, and how to close it." data-ru="Как банковская SQL-инъекция добирается до счетов, почему её пропускают сканеры и как закрыть.">How a banking SQLi reaches customer accounts, why scanners miss it, and how to close it.</p>
+  </a>
+  <a class="industry-block" href="/blog/provably-fair-casino-rng/" style="text-decoration:none">
+    <div class="head"><div class="industry-icon" style="background:linear-gradient(135deg,#ec4899,#f472b6)">C</div><h4 data-en="Provably fair is not always fair" data-ru="Provably fair не всегда честен">Provably fair is not always fair</h4></div>
+    <p class="pain" data-en="How a crash-game server seed leaks before the round and breaks fairness." data-ru="Как server seed краш-игры утекает до раунда и ломает честность.">How a crash-game server seed leaks before the round and breaks fairness.</p>
+  </a>
+  <a class="industry-block" href="/blog/withdrawal-race-conditions/" style="text-decoration:none">
+    <div class="head"><div class="industry-icon" style="background:linear-gradient(135deg,var(--gold),#f59e0b)">W</div><h4 data-en="Withdrawal race conditions" data-ru="Гонки на выводе средств">Withdrawal race conditions</h4></div>
+    <p class="pain" data-en="How two parallel withdrawals drain one balance — and how to close the race." data-ru="Как два параллельных вывода обнуляют один баланс — и как закрыть гонку.">How two parallel withdrawals drain one balance — and how to close the race.</p>
+  </a>
+  <a class="industry-block" href="/blog/hardcoded-credentials-production/" style="text-decoration:none">
+    <div class="head"><div class="industry-icon" style="background:linear-gradient(135deg,var(--accent),#9f7afa)">H</div><h4 data-en="Hardcoded credentials in production" data-ru="Захардкоженные креды в проде">Hardcoded credentials in production</h4></div>
+    <p class="pain" data-en="How a demo login reaches production and becomes the fastest path to compromise." data-ru="Как демо-логин попадает в прод и становится кратчайшим путём к взлому.">How a demo login reaches production and becomes the fastest path to compromise.</p>
+  </a>
+  <a class="industry-block" href="/blog/idor-account-takeover/" style="text-decoration:none">
+    <div class="head"><div class="industry-icon" style="background:linear-gradient(135deg,var(--green),#6ee7b7)">I</div><h4 data-en="IDOR and account takeover" data-ru="IDOR и перехват аккаунта">IDOR and account takeover</h4></div>
+    <p class="pain" data-en="How a predictable object id gives away another user's account, and how to test it." data-ru="Как предсказуемый id отдаёт чужой аккаунт и как это проверять.">How a predictable object id gives away another user's account, and how to test it.</p>
+  </a>
+  <a class="industry-block" href="/blog/otp-2fa-bypass/" style="text-decoration:none">
+    <div class="head"><div class="industry-icon" style="background:linear-gradient(135deg,#ec4899,#f472b6)">O</div><h4 data-en="OTP and 2FA bypass" data-ru="Обход OTP и 2FA">OTP and 2FA bypass</h4></div>
+    <p class="pain" data-en="How one-time codes get bypassed — reuse, rate limits, races and fallbacks." data-ru="Как обходят одноразовые коды — повтор, лимиты, гонки и запасные пути.">How one-time codes get bypassed — reuse, rate limits, races and fallbacks.</p>
+  </a>
+  <a class="industry-block" href="/blog/smart-contract-reentrancy/" style="text-decoration:none">
+    <div class="head"><div class="industry-icon" style="background:linear-gradient(135deg,var(--accent),#9f7afa)">R</div><h4 data-en="Reentrancy in smart contracts" data-ru="Реентранси в смарт-контрактах">Reentrancy in smart contracts</h4></div>
+    <p class="pain" data-en="How a contract drains a pool, the fix that prevents it, and what an audit covers." data-ru="Как контракт опустошает пул, исправление и что покрывает аудит.">How a contract drains a pool, the fix that prevents it, and what an audit covers.</p>
+  </a>
+  <a class="industry-block" href="/blog/cors-financial-api/" style="text-decoration:none">
+    <div class="head"><div class="industry-icon" style="background:linear-gradient(135deg,var(--gold),#f59e0b)">C</div><h4 data-en="CORS on financial APIs" data-ru="CORS на финансовых API">CORS on financial APIs</h4></div>
+    <p class="pain" data-en="How a permissive CORS policy lets any site read a user's financial data." data-ru="Как доверчивый CORS позволяет чужому сайту читать финансовые данные.">How a permissive CORS policy lets any site read a user's financial data.</p>
   </a>
 </div>
 </section>

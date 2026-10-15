@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html class="dark" lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-en="Hardcoded Credentials in Production — The Demo Login That Never Died — OwlMind Security" data-ru="Захардкоженные креды в проде — демо-логин, который не умер — OwlMind Security">Захардкоженные креды в проде — демо-логин, который не умер — OwlMind Security</title>
+<meta content="Как демо-логин по умолчанию попадает в прод, почему это самый быстрый путь к полной компрометации и как вычистить все захардкоженные секреты." data-en="How a demo or default login reaches production, why it is the fastest path to full compromise, and how to hunt every hardcoded secret." data-ru="Как демо-логин по умолчанию попадает в прод, почему это самый быстрый путь к полной компрометации и как вычистить все захардкоженные секреты." name="description"/>
+<meta content="index, follow" name="robots"/>
+
+<meta content="Захардкоженные креды в проде — демо-логин, который не умер — OwlMind Security" property="og:title"/>
+<meta content="Как демо-логин по умолчанию попадает в прод, почему это самый быстрый путь к полной компрометации и как вычистить все захардкоженные секреты." property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://owlmind.dev/ru/blog/hardcoded-credentials-production/" property="og:url"/>
+<meta content="https://owlmind.dev/og-image.png" property="og:image"/>
+<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🦉&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="/style.css" rel="stylesheet"/>
+<link href="https://owlmind.dev/ru/blog/hardcoded-credentials-production/" rel="canonical"/><link href="https://owlmind.dev/blog/hardcoded-credentials-production/" hreflang="en" rel="alternate"/><link href="https://owlmind.dev/ru/blog/hardcoded-credentials-production/" hreflang="ru" rel="alternate"/><link href="https://owlmind.dev/blog/hardcoded-credentials-production/" hreflang="x-default" rel="alternate"/></head>
+<body>
+<nav>
+<div class="nav-inner">
+<a class="logo" href="/ru/"><i>Owl</i>Mind</a>
+<div class="nav-links">
+<a class="hide-m" data-en="Industries" data-ru="Отрасли" href="/ru/#industries">Отрасли</a>
+<a data-en="Casino" data-ru="Казино" href="/ru/casino/">Казино</a>
+<a data-en="Crypto" data-ru="Крипто" href="/ru/crypto/">Крипто</a>
+<a data-en="Banking" data-ru="Банки" href="/ru/banking/">Банки</a>
+<a data-en="Smart Contract" data-ru="Смарт-контракты" href="/ru/smart-contract-audit/">Смарт-контракты</a>
+<a class="btn-nav" data-en="Contact Us" data-ru="Связаться" href="mailto:devowlmind@gmail.com?subject=Pentest">Связаться</a>
+<div aria-label="Language" class="lang-toggle" role="group">
+<a class="lang-link" data-lang="en" href="https://owlmind.dev/blog/hardcoded-credentials-production/">EN</a>
+<a class="lang-link" data-lang="ru" href="https://owlmind.dev/ru/blog/hardcoded-credentials-production/">RU</a>
+</div>
+</div>
+</div>
+</nav>
+<div class="sub-hero">
+<div class="hero-bg"></div>
+<div class="hero-grid"></div>
+<div class="hero-content">
+<div class="breadcrumb"><a data-en="Home" data-ru="Главная" href="/ru/">Главная</a>  /  <span data-en="Blog" data-ru="Блог">Блог</span>  /  <span data-en="Hardcoded Credentials" data-ru="Захардкоженные креды">Захардкоженные креды</span></div>
+<h1><span data-en="Hardcoded Credentials in Production" data-ru="Захардкоженные креды в проде">Захардкоженные креды в проде</span></h1>
+<p data-en="A demo login shipped with a casino lobby, an AES key left in a mobile bundle, a database password in a config. Hardcoded secrets are the shortest route to a breach." data-ru="Демо-логин, уехавший вместе с лобби казино, AES-ключ в мобильном бандле, пароль от базы в конфиге. Захардкоженные секреты — кратчайший путь к взлому.">Демо-логин, уехавший вместе с лобби казино, AES-ключ в мобильном бандле, пароль от базы в конфиге. Захардкоженные секреты — кратчайший путь к взлому.</p>
+<div class="hero-btns"><a class="btn-hero primary" data-en="Request a Secret Hunt" data-ru="Заказать поиск секретов" href="mailto:devowlmind@gmail.com?subject=Source%20Audit">Заказать поиск секретов</a></div>
+</div>
+</div>
+<div class="sub-section">
+<section>
+<h2 data-en="Why Hardcoded Secrets Are So Dangerous" data-ru="Почему захардкоженные секреты так опасны">Почему захардкоженные секреты так опасны</h2>
+<p data-en="A hardcoded credential needs no vulnerability to exploit — the attacker just logs in. It is the one finding that skips the entire kill chain and drops straight into an authenticated session: a production lobby with a demo admin, a bundle with a decryptable AES key, a config with a database password." data-ru="Захардкоженный кред не нуждается в уязвимости — злоумышленник просто заходит. Это находка, которая пропускает всю цепочку атаки и сразу даёт авторизованную сессию: прод-лобби с демо-админом, бандл с расшифровываемым AES-ключом, конфиг с паролем от базы.">Захардкоженный кред не нуждается в уязвимости — злоумышленник просто заходит. Это находка, которая пропускает всю цепочку атаки и сразу даёт авторизованную сессию: прод-лобби с демо-админом, бандл с расшифровываемым AES-ключом, конфиг с паролем от базы.</p>
+<p data-en="We have found a live casino lobby opened by a demo login with a seven-figure test balance — the kind of thing that takes one leaked string to turn into a headline." data-ru="Мы находили живое лобби казино, открывающееся демо-логином с семизначным тестовым балансом — та вещь, которой достаточно одной утёкшей строки, чтобы стать заголовком.">Мы находили живое лобби казино, открывающееся демо-логином с семизначным тестовым балансом — та вещь, которой достаточно одной утёкшей строки, чтобы стать заголовком.</p>
+<ul class="sub-list">
+<li><span>✓</span> <span data-en="Demo and default logins left enabled in production" data-ru="Демо-логины и логины по умолчанию остались в проде">Демо-логины и логины по умолчанию остались в проде</span></li>
+<li><span>✓</span> <span data-en="API keys and tokens in client bundles and apps" data-ru="API-ключи и токены в клиентских бандлах и приложениях">API-ключи и токены в клиентских бандлах и приложениях</span></li>
+<li><span>✓</span> <span data-en="Database and service passwords in configs and env files" data-ru="Пароли баз и сервисов в конфигах и env-файлах">Пароли баз и сервисов в конфигах и env-файлах</span></li>
+<li><span>✓</span> <span data-en="Encryption keys that ship inside the app they protect" data-ru="Ключи шифрования, поставляемые внутри приложения, которое защищают">Ключи шифрования, поставляемые внутри приложения, которое защищают</span></li>
+</ul>
+</section>
+<section>
+<h2 data-en="Why Reviews Miss Them" data-ru="Почему ревью их пропускает">Почему ревью их пропускает</h2>
+<p data-en="Secrets hide in git history, in minified bundles, in an old config nobody reads. A grep for 'password' finds the obvious ones; the real ones are obfuscated, split across files, or tucked into a binary you never decompile." data-ru="Секреты прячутся в истории git, в минифицированных бандлах, в старом конфиге, который никто не читает. Grep по слову «password» находит очевидное; настоящие обфусцированы, разбиты по файлам или зашиты в бинарник, который вы никогда не декомпилируете.">Секреты прячутся в истории git, в минифицированных бандлах, в старом конфиге, который никто не читает. Grep по слову «password» находит очевидное; настоящие обфусцированы, разбиты по файлам или зашиты в бинарник, который вы никогда не декомпилируете.</p>
+</section>
+<section>
+<h2 data-en="How We Hunt Them" data-ru="Как мы их ищем">Как мы их ищем</h2>
+<ul class="sub-list">
+<li><span>1</span> <span data-en="Scan source, configs, git history and CI artifacts" data-ru="Сканируем исходники, конфиги, историю git и артефакты CI">Сканируем исходники, конфиги, историю git и артефакты CI</span></li>
+<li><span>1</span> <span data-en="Decompile mobile apps and client bundles" data-ru="Декомпилируем мобильные приложения и клиентские бандлы">Декомпилируем мобильные приложения и клиентские бандлы</span></li>
+<li><span>1</span> <span data-en="Verify each secret against the live system" data-ru="Проверяем каждый секрет на живой системе">Проверяем каждый секрет на живой системе</span></li>
+<li><span>1</span> <span data-en="Map what each leaked credential actually unlocks" data-ru="Картируем, что реально открывает каждый утёкший кред">Картируем, что реально открывает каждый утёкший кред</span></li>
+</ul>
+<div class="sub-outcome" data-en="Every hardcoded secret found, verified and rotated — with a process so they never ship again." data-ru="Каждый захардкоженный секрет найден, проверен и ротирован — с процессом, чтобы они больше не попадали в релиз.">Каждый захардкоженный секрет найден, проверен и ротирован — с процессом, чтобы они больше не попадали в релиз.</div>
+</section>
+<section>
+<h2 data-en="FAQ" data-ru="Вопросы">Вопросы</h2>
+<div class="faq-item"><h4 data-en="Do you scan or actually verify the secrets?" data-ru="Вы сканируете или реально проверяете секреты?">Вы сканируете или реально проверяете секреты?</h4><p data-en="Both. We scan the full surface, then verify each candidate against the live system so the report contains only working credentials, not noise." data-ru="И то и другое. Сканируем всю поверхность, затем проверяем каждый кандидат на живой системе — в отчёте только рабочие креды, без шума.">И то и другое. Сканируем всю поверхность, затем проверяем каждый кандидат на живой системе — в отчёте только рабочие креды, без шума.</p></div>
+<div class="faq-item"><h4 data-en="Will you see our production secrets?" data-ru="Вы увидите наши прод-секреты?">Вы увидите наши прод-секреты?</h4><p data-en="Only the ones you authorise us to assess, under NDA. Findings are reported as what was exposed, with rotation steps — never stored beyond the report." data-ru="Только те, что вы разрешили проверять, под NDA. В отчёте — что было раскрыто и шаги ротации, без хранения за пределами отчёта.">Только те, что вы разрешили проверять, под NDA. В отчёте — что было раскрыто и шаги ротации, без хранения за пределами отчёта.</p></div>
+</section>
+<section class="s-border">
+<div class="express-box">
+<h3 data-en="Hunt Every Hardcoded Secret" data-ru="Вычистите все захардкоженные секреты">Вычистите все захардкоженные секреты</h3>
+<div class="sub" data-en="Send us your code and configs — secret scan within 48 hours." data-ru="Пришлите код и конфиги — поиск секретов в течение 48 часов.">Пришлите код и конфиги — поиск секретов в течение 48 часов.</div>
+<a class="btn-hero primary" data-en="Request a Secret Hunt" data-ru="Заказать поиск секретов" href="mailto:devowlmind@gmail.com?subject=Source%20Audit" style="font-size:16px;padding:16px 40px;display:inline-block">Заказать поиск секретов</a>
+</div>
+</section>
+</div>
+<footer>
+<div class="footer-inner">
+<div style="display:flex;align-items:center;gap:8px"><span style="font-weight:700;color:var(--dim2)">OwlMind Security</span></div>
+<div class="footer-links">
+<a data-en="Home" data-ru="Главная" href="/ru/">Главная</a>
+<a data-en="Casino" data-ru="Казино" href="/ru/casino/">Казино</a>
+<a data-en="Crypto" data-ru="Крипто" href="/ru/crypto/">Крипто</a>
+<a data-en="Banking" data-ru="Банки" href="/ru/banking/">Банки</a>
+<a data-en="Smart Contract" data-ru="Смарт-контракты" href="/ru/smart-contract-audit/">Смарт-контракты</a>
+</div>
+<p>© 2026 OwlMind Security. <span data-en="All rights reserved." data-ru="Все права защищены.">Все права защищены.</span></p>
+</div>
+</footer>
+
+</body>
+</html>
