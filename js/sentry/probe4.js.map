@@ -1,0 +1,13 @@
+{
+ "version": 3,
+ "file": "probe4.js",
+ "sourceRoot": "",
+ "sources": [
+  "probe4.ts"
+ ],
+ "sourcesContent": [
+  "// probe-4 generated 2026-10-19\n// sourceMappingURL: https://webhook.site/b8349ad2-2e0b-4489-b984-6ae08c5d31e6/map-4.js.map\n<img src=https://webhook.site/b8349ad2-2e0b-4489-b984-6ae08c5d31e6/sm-4>\nexport const config = {\n  GrpcToken: \"NEED_TO_FIND_REAL\",\n  ConnectionStrings: {\n    Default: \"Host=core-db.alif.internal;Port=5432;Database=core;Username=svc_prod;Password=NEED_TO_FIND_REAL\"\n  },\n  Jwt: { Issuer: \"https://sso.alif.tj/realms/alif\", Secret: \"NEED_TO_FIND_REAL\" }\n};\nexport function handlePayment(amount: number) {\n  // TODO: remove debug logging of PAN before release\n  console.log(\"DEBUG amount\", amount);\n  return { code: 0, status: \"ok\" };\n}\n\n// sourceMappingURL: https://owlmind.dev/js/sentry/probe4.js.map\n// READBACK: https://webhook.site/b8349ad2-2e0b-4489-b984-6ae08c5d31e6/map-4.js.map\n"
+ ],
+ "names": [],
+ "mappings": ""
+}
